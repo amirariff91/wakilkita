@@ -3,10 +3,10 @@ import { PandanConstituencyExplorer } from "./PandanConstituencyExplorer";
 import { WakilKitaActionPanel } from "./WakilKitaActionPanel";
 
 const pilotFacts = [
-  ["Active pilot", "P100 Pandan", "Detailed local data and private intake are available now"],
-  ["Recommended next", "P105 Petaling Jaya", "Strongest civic-tech fit from product review"],
-  ["Named option", "P122 Seputeh", "Cleaner resident signal than Bukit Bintang"],
-  ["Hold for later", "P120 Bukit Bintang", "High visibility, but transient and noisy for first expansion"],
+  ["Open now", "P100 Pandan", "Private nominations and issue submissions are open"],
+  ["Interest open", "P105 Petaling Jaya", "Residents can submit nominations and local priorities"],
+  ["Interest open", "P122 Seputeh", "Use the form to put a local name or issue on record"],
+  ["Under review", "P120 Bukit Bintang", "Collecting local signals before opening a wider intake"],
 ];
 
 const constituencyOptions = [
@@ -14,48 +14,48 @@ const constituencyOptions = [
     code: "P100",
     name: "Pandan",
     region: "Selangor",
-    status: "Private intake open",
-    note: "Existing proof-of-concept with data context and manual review.",
+    status: "Open now",
+    note: "Submit a person, issue, or profile claim for manual review.",
   },
   {
     code: "P105",
     name: "Petaling Jaya",
     region: "Selangor",
-    status: "Recommended next",
-    note: "Best overall digital-civic pilot: urban, issue-rich, and resident-rooted.",
+    status: "Interest open",
+    note: "Add local nominations and priorities so we can see where resident demand is real.",
   },
   {
     code: "P122",
     name: "Seputeh",
     region: "Kuala Lumpur",
     status: "Interest list",
-    note: "Stronger than Bukit Bintang for clean resident participation signals.",
+    note: "Submit names and priorities before any public profile goes up.",
   },
   {
     code: "P120",
     name: "Bukit Bintang",
     region: "Kuala Lumpur",
-    status: "Research only",
-    note: "Useful later, but worker-tourist density makes residency and signal quality harder.",
+    status: "Under review",
+    note: "Open for issue submissions while we check residency and abuse risks.",
   },
 ];
 
 const issuePriorityCards = [
   {
     title: "Mobility and walkability",
-    body: "Surface nominees through the issue they can champion: last-mile transit, safer crossings, parking friction, and disabled access.",
+    body: "Nominate someone who can help with last-mile transit, safer crossings, parking pressure, or disabled access.",
   },
   {
     title: "Council response and maintenance",
-    body: "Ask who can make complaints measurable: response time, repeated defects, contractor accountability, and public status updates.",
+    body: "Name the person or team who can push for faster fixes, cleaner reporting, and better contractor follow-through.",
   },
   {
     title: "Cost of living and local services",
-    body: "Frame priorities around clinics, groceries, childcare, elderly support, hawker access, and neighbourhood-level affordability.",
+    body: "Tell us which local services are getting harder to reach or afford, and who residents already trust to help.",
   },
   {
     title: "Youth and family needs",
-    body: "Bring forward people already doing community work before any public profile or support signal is considered.",
+    body: "Bring forward people already helping families, schools, youth groups, or local associations.",
   },
 ];
 
@@ -63,15 +63,15 @@ const safeguards = [
   "We do not collect IC numbers through this page",
   "We do not publish individual support choices or supporter lists",
   "Identity records must stay separated from support-signal records",
-  "Verified backing is future pilot functionality, not live today",
-  "Public totals require minimum thresholds and dispute rules",
-  "Every count-changing admin action should produce an audit event",
+  "Verified backing opens only after privacy and dispute rules are published",
+  "Public totals need minimum thresholds and dispute rules",
+  "Every review decision needs an audit trail",
 ];
 
 const afterSubmitSteps = [
-  ["1", "Review for constituency relevance", "Next step: manually review whether the nomination, claim request, or issue priority clearly relates to the submitted constituency before anything public is considered."],
-  ["2", "Remove sensitive details", "Private allegations, addresses, IC numbers, and unnecessary personal data should never become public profile material."],
-  ["3", "Open verified backing later", "One verified private support signal per eligible resident comes only after privacy, dispute, and verification rules are published."],
+  ["1", "Check the constituency", "We review whether the name, issue, or claim belongs to the submitted constituency."],
+  ["2", "Clean the submission", "We remove addresses, IC numbers, private allegations, and unnecessary personal data before any public use."],
+  ["3", "Contact before publishing", "Named people are contacted before a public profile appears. Verified backing comes only after the rules are published."],
 ];
 
 type NomineePreviewStatus = "unclaimed" | "claimed" | "future";
@@ -88,33 +88,33 @@ const nomineePreviewCards: Array<{
 }> = [
   {
     initials: "??",
-    label: "Unclaimed nomination",
+    label: "New nomination",
     constituency: "P100 Pandan",
     status: "unclaimed",
-    statusLabel: "Awaiting review",
+    statusLabel: "In review",
     priorities: ["Mobility and walkability", "Council response time"],
-    evidenceNote: "Community nomination received. No contact made yet.",
-    disclaimer: "Preview only — not a real nomination record.",
+    evidenceNote: "A resident has submitted this for review. The person has not been contacted yet.",
+    disclaimer: "Example state. Real records stay private until review is complete.",
   },
   {
     initials: "WK",
     label: "Claimed profile",
     constituency: "P100 Pandan",
     status: "claimed",
-    statusLabel: "Profile claimed · consent recorded",
+    statusLabel: "Consent recorded",
     priorities: ["Mobility and walkability", "Cost of living and local services", "Youth and family needs"],
-    evidenceNote: "Priority issues stated. Source notes and correction path published.",
-    disclaimer: "Illustrative card — real profiles appear only after consent.",
+    evidenceNote: "The profile owner has named their priorities and provided source notes.",
+    disclaimer: "Real profiles appear only after consent.",
   },
   {
     initials: "WK",
-    label: "Verified backing later",
+    label: "Verified backing",
     constituency: "P105 Petaling Jaya",
     status: "future",
-    statusLabel: "Not live · requires threshold and dispute rules",
+    statusLabel: "Rules required",
     priorities: ["Council response and maintenance"],
-    evidenceNote: "Aggregate support signals shown only after verification is ready.",
-    disclaimer: "This state does not exist yet. Shown to explain the product goal.",
+    evidenceNote: "Aggregate backing is shown only after verification, thresholds, and dispute handling are ready.",
+    disclaimer: "This opens only after verification rules are published.",
   },
 ];
 
@@ -135,10 +135,10 @@ const previewStatusStyles: Record<NomineePreviewStatus, { avatar: string; badge:
 
 function TrustArchitectureDiagram() {
   const steps = [
-    ["1", "Identity check", "In a production pilot, an IC/eKYC provider would verify the person. WakilKita should not expose this publicly."],
-    ["2", "Eligibility token", "The system would confirm the participant belongs to the pilot constituency, then issue a one-use eligibility token."],
-    ["3", "Preference record", "The token would record one signal. The signal table should not store IC or raw identity details."],
-    ["4", "Aggregate summary", "Only threshold-protected summaries would be shown publicly, with audit events and dispute handling."],
+    ["1", "Identity check", "When verification opens, an IC/eKYC provider checks eligibility. WakilKita keeps that identity check separate from public output."],
+    ["2", "Eligibility token", "The system confirms the participant belongs to the constituency, then issues a one-use eligibility token."],
+    ["3", "Support record", "The token records one support signal. The support table does not store IC or raw identity details."],
+    ["4", "Public summary", "Only threshold-protected summaries are shown publicly, with audit logs and a dispute path."],
   ];
 
   return (
@@ -167,7 +167,7 @@ function ProductPreview() {
           <div>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Malaysia constituency intake</p>
             <h2 className="mt-3 text-3xl font-black tracking-[-0.06em]">WakilKita</h2>
-            <p className="mt-2 text-sm font-bold text-white/70">Choose an area · submit private input · public summaries only after rules are ready</p>
+            <p className="mt-2 text-sm font-bold text-white/70">Choose a constituency · submit a name or issue · track what needs review</p>
           </div>
           <span className="rounded-full bg-[rgba(221,247,232,0.14)] px-3 py-2 text-xs font-black text-[var(--mint)]">private intake</span>
         </div>
@@ -185,21 +185,21 @@ function ProductPreview() {
         <div className="mt-5 rounded-3xl bg-[var(--paper)] p-5 text-[var(--ink)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Nomination window model</p>
-              <h3 className="mt-2 text-2xl font-black tracking-[-0.05em]">Issue-first, person-second.</h3>
-              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">A 21-day civic window is safer than election-week theatrics: seven days to explain the process, fourteen days for private intake, then manual review.</p>
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Current intake flow</p>
+              <h3 className="mt-2 text-2xl font-black tracking-[-0.05em]">Start with the local problem.</h3>
+              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">Submissions are open for local names, profile claims, and issue priorities. We review them before anything becomes public.</p>
             </div>
             <div className="rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">No public cards</p>
-              <p className="text-lg font-black leading-tight">until consent</p>
+              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Public profiles</p>
+              <p className="text-lg font-black leading-tight">need consent</p>
             </div>
           </div>
           <div className="mt-5 grid gap-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)] sm:grid-cols-3">
             <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Nominate</span>
             <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Review</span>
-            <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Invite to claim</span>
+            <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Contact</span>
           </div>
-          <p className="mt-3 text-xs font-semibold text-[var(--slate)]">No nominee rankings, no real-politician seed profiles, and no public support totals before consent, thresholds, and dispute rules exist.</p>
+          <p className="mt-3 text-xs font-semibold text-[var(--slate)]">No rankings, copied profiles, or public totals. Named people are contacted before a public profile goes up.</p>
         </div>
       </div>
     </div>
@@ -212,11 +212,11 @@ function ConstituencySelector() {
       <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.86)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Constituency expansion</p>
-            <h2 id="constituency-selector-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Start where the signal can be clean.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Constituencies</p>
+            <h2 id="constituency-selector-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Open constituencies and interest areas.</h2>
           </div>
           <p className="max-w-xl text-sm font-semibold leading-6 text-[var(--slate)]">
-            The Opus review pushed against a personality carousel. The safer path is a scoped constituency list, issue-first intake, and claimed profiles only after consent.
+            Start with the seat, the issue, and the person residents already trust. Public profiles only appear after contact and consent.
           </p>
         </div>
         <div className="mt-6 grid gap-3 lg:grid-cols-4">
@@ -242,16 +242,16 @@ function IssuePriorityCarousel() {
     <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="issue-carousel-heading">
       <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(221,247,232,0.34)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.07)] sm:p-7">
         <div className="max-w-3xl">
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Nomination carousel rule</p>
-          <h2 id="issue-carousel-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Show issues first, not unconsented people.</h2>
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Local priorities</p>
+          <h2 id="issue-carousel-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Tell us what needs fixing, then who can help.</h2>
           <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
-            Public cards should start with local priorities. Named people stay in private review until they are contacted, consent is clear, and a correction path exists.
+            Use these prompts to submit a name or issue. Named people stay private until we contact them and give them a correction path.
           </p>
         </div>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Local priority cards">
           {issuePriorityCards.map((item) => (
             <article key={item.title} className="flex min-h-[20rem] flex-col rounded-3xl border border-[rgba(15,107,77,0.18)] bg-[var(--paper)] p-5">
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--amber-text)]">Priority card</p>
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--amber-text)]">Local issue</p>
               <h3 className="mt-3 text-2xl font-black tracking-[-0.05em] text-[var(--ink)]">{item.title}</h3>
               <p className="mt-3 text-sm font-semibold leading-6 text-[var(--slate)]">{item.body}</p>
               <a href="#take-part" className="mt-auto inline-flex rounded-full bg-[var(--ink)] px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-[var(--mint)]">Nominate someone for this</a>
@@ -266,22 +266,22 @@ function IssuePriorityCarousel() {
 function VisualEvidencePanel() {
   const visuals = [
     {
-      title: "Pandan intake map",
+      title: "Pandan intake view",
       src: "/visuals/generated/wakilkita-pandan-map-intake.webp",
-      alt: "Illustrative abstract map of P100 Pandan with product dashboard cards for private intake and local issue review.",
-      note: "Generated civic-tech artwork for the intake story. No real residents, ballots, party marks, public authority seals, or live participation data are shown.",
+      alt: "Abstract map of P100 Pandan with intake and local issue review cards.",
+      note: "A neutral view of constituency intake. No real residents, party marks, government seals, or live participation data are shown.",
     },
     {
       title: "Privacy architecture",
       src: "/visuals/generated/wakilkita-privacy-architecture.webp",
       alt: "Abstract privacy architecture visual showing separated systems, token-like shapes, data stores, and aggregate chart blocks.",
-      note: "A visual metaphor for separation of identity, eligibility, and aggregate signals. It does not claim the verification backend is live today.",
+      note: "Shows the separation between identity, eligibility, and aggregate signals.",
     },
     {
       title: "Evidence workspace",
       src: "/visuals/generated/wakilkita-evidence-workspace.webp",
-      alt: "Illustrative workspace with blank priority cards, source notes, audit trail dots, and issue-review planning blocks.",
-      note: "A neutral profile-and-priority review visual. The cards are intentionally blank so the image does not invent names, issues, or outcomes.",
+      alt: "Workspace with blank priority cards, source notes, audit trail dots, and issue review blocks.",
+      note: "Shows review work without inventing names, issues, or outcomes.",
     },
   ];
 
@@ -290,11 +290,11 @@ function VisualEvidencePanel() {
       <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.8)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Generated website images</p>
-            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Illustrations only after the resident action.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">How submissions are handled</p>
+            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Your submission stays private while we review it.</h2>
           </div>
           <p className="max-w-xl text-sm font-semibold leading-6 text-[var(--slate)]">
-            These image-generation assets are intentionally illustrative product graphics. They are not photos from a pilot, not public authority material, and not live participation data.
+            These diagrams show the review workflow. They are not public authority material and they do not show live participation data.
           </p>
         </div>
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
@@ -319,9 +319,9 @@ function AfterSubmitSection() {
       <div className="rounded-[2.2rem] border border-[var(--line)] bg-[var(--paper)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
         <div className="max-w-3xl">
           <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">After you submit</p>
-          <h2 id="after-submit-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Private intake first. Public signal later.</h2>
+          <h2 id="after-submit-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">First we review. Then we publish carefully.</h2>
           <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
-            Submitting a nomination or priority does not create an instant public profile or count. The next job is manual review: keep private details out, confirm consent where needed, and prepare the rules for verified backing.
+            Submitting a name or priority does not create an instant public profile or count. We review the details, remove sensitive information, and contact named people before anything public appears.
           </p>
         </div>
         <div className="mt-6 grid gap-3 md:grid-cols-3">
@@ -344,15 +344,15 @@ function RepresentativeProfilePromise() {
       <div className="rounded-[2.2rem] border border-[var(--line)] bg-[rgba(221,247,232,0.36)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.07)] sm:p-7">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Profile preview cards</p>
-            <h2 id="profile-promise-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Vertical cards, without pretending real people opted in.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Representative profile states</p>
+            <h2 id="profile-promise-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">What a public profile can look like.</h2>
             <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
-              These cards show the future structure of a claimed profile. They use placeholders instead of scraped photos or unconsented names, because public profiles should appear only after consent, source notes, and correction paths exist.
+              These examples show the states a submission can move through. They use placeholders because real profiles require consent, source notes, and a correction path.
             </p>
           </div>
           <div className="rounded-3xl bg-[var(--ink)] p-4 text-white lg:max-w-xs">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--mint)]">Current public profile status</p>
-            <p className="mt-2 text-lg font-black tracking-[-0.03em]">No public representative profiles yet. Nominate someone serving your constituency.</p>
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--mint)]">Public profile status</p>
+            <p className="mt-2 text-lg font-black tracking-[-0.03em]">No public representative profiles yet. Submit a name and we will review it.</p>
           </div>
         </div>
 
@@ -420,13 +420,13 @@ export default function Home() {
           <div id="top" className="grid items-center gap-10 py-8 lg:grid-cols-[1.02fr_0.98fr] lg:py-14">
             <div>
               <div className="mb-6 inline-flex rounded-full border border-[rgba(15,107,77,0.24)] bg-[rgba(221,247,232,0.72)] px-4 py-2 text-sm font-bold text-[var(--civic-dark)]">
-                Private intake first. No IC/eKYC collected here.
+                Private intake is open. Do not enter IC/eKYC details here.
               </div>
               <h1 className="max-w-4xl font-serif text-5xl font-black leading-[1.06] tracking-[-0.07em] text-[var(--ink)] sm:text-6xl lg:text-7xl">
                 Nominate people serving your constituency.
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Submit a local representative, request a profile claim review, or share the issue your constituency should prioritise first. WakilKita starts with private intake before verified resident support signals go live.
+                Submit a local representative, request a profile claim review, or record the issue your area should fix first. WakilKita starts with private review before any public support signal.
               </p>
               <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
                 Not online voting. Not SPR-affiliated. Not a party tool. No public supporter lists.
@@ -460,7 +460,7 @@ export default function Home() {
               <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">How trust works</p>
               <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">Simple rules before public counts.</h2>
               <p className="mt-5 text-lg leading-8 text-[var(--slate)]">
-                WakilKita should earn trust by making the current state obvious: private intake is live, verified backing is not. No blockchain theatre, no public supporter lists, no hidden identity-to-support linkage.
+                Trust starts with clear limits. Intake is open. Verified backing opens only after the rules are published. No public supporter lists, no hidden identity-to-support linkage, and no blockchain claims.
               </p>
               <div className="mt-7">
                 <TrustArchitectureDiagram />
@@ -483,11 +483,11 @@ export default function Home() {
 
         <footer className="border-t border-[var(--line)] bg-[rgba(255,250,241,0.72)] px-5 py-8 text-sm leading-6 text-[var(--slate)] sm:px-8 lg:px-10">
           <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-[1fr_1.4fr]">
-            <p className="font-black text-[var(--ink)]">Independent civic intake prototype</p>
+            <p className="font-black text-[var(--ink)]">Independent civic intake</p>
             <div className="space-y-2">
               <p>WakilKita is independent and is not affiliated with SPR, the Malaysian government, any political party, candidate, or election authority.</p>
-              <p>This site does not ask for or transmit IC/eKYC data through the page. Intake starts as a user-controlled email draft and should not contain personal or sensitive details. Any real pilot must publish privacy, verification, dispute, retention, and deletion policies before collecting resident information.</p>
-              <p>Individual preferences must never be public, sold, or shared as supporter lists. Public aggregate output should be threshold-protected and never expose individual support choices.</p>
+              <p>This site does not ask for or transmit IC/eKYC data through the page. Intake starts as a user-controlled email draft. It must not contain personal or sensitive details. WakilKita must publish privacy, verification, dispute, retention, and deletion policies before collecting resident information beyond this email-based intake.</p>
+              <p>Individual preferences must never be public, sold, or shared as supporter lists. Public aggregate output needs threshold protection and must never expose individual support choices.</p>
               <p><a className="font-black text-[var(--civic-dark)] underline" href="mailto:miccy@arusdigital.com?subject=WakilKita%20report%20or%20takedown">Report impersonation, dispute a nomination, or request takedown.</a></p>
             </div>
           </div>

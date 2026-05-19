@@ -14,7 +14,7 @@ const tabs: { key: TabKey; label: string }[] = [
 
 const headlineMetrics = [
   { label: "Population", value: "228,800", note: "DOSM parliamentary constituency table, 2022" },
-  { label: "Registered electors", value: "148,730", note: "Public electoral baseline used for pilot sizing" },
+  { label: "Registered electors", value: "148,730", note: "Public electoral baseline used for intake planning" },
   { label: "Elector / population ratio", value: "65.0%", note: "148,730 ÷ 228,800" },
   { label: "Citizenship coverage", value: "93.1%", note: "213,100 citizens; 15,700 non-citizens" },
 ];
@@ -94,9 +94,9 @@ export function PandanConstituencyExplorer() {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Pandan data context</p>
-            <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">What Pandan nominees should answer with evidence.</h2>
+            <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">What Pandan nominees need to answer with evidence.</h2>
             <p className="mt-4 max-w-3xl text-base font-semibold leading-7 text-[var(--slate)] sm:text-lg">
-              Public datasets can frame the first questions for any representative profile: who lives here, what services are nearby, which gaps remain, and what proof should be published before residents are asked for support.
+              Public datasets set the first questions for any representative profile: who lives here, what services are nearby, which gaps remain, and what proof residents need before they give support.
             </p>
           </div>
           <span className="w-fit rounded-full bg-[var(--mint)] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Not live participation data</span>
@@ -151,7 +151,7 @@ export function PandanConstituencyExplorer() {
               ))}
               <div className="rounded-3xl bg-[rgba(15,107,77,0.09)] p-5 sm:col-span-2">
                 <p className="text-base font-black leading-7 text-[var(--ink)]">
-                  Product rule: show age/race elector percentages only when the source exists. Until then, WakilKita should visibly mark them as missing data, not fill the gap with estimates.
+                  Rule: show age/race elector percentages only when the source exists. Until then, WakilKita marks them as missing data instead of filling the gap with estimates.
                 </p>
               </div>
             </div>
@@ -192,7 +192,7 @@ export function PandanConstituencyExplorer() {
                 <p className="mt-3 rounded-full bg-white/8 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--mint)]">Planning heuristic — not a resident count</p>
                 <p className="mt-4 text-base font-semibold leading-7 text-white/72">{activeIssue.evidence}</p>
                 <p className="mt-5 rounded-3xl border border-white/10 bg-white/8 p-4 text-sm font-bold leading-6 text-white/68">
-                  Representative profiles should be forced to answer: what will you fix first, which neighbourhoods are affected, what public dataset supports it, and how will residents judge progress?
+                  Representative profiles need to answer four things: what will you fix first, which neighbourhoods are affected, what public dataset supports it, and how residents can judge progress?
                 </p>
               </div>
             </div>

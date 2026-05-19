@@ -102,17 +102,17 @@ export function WakilKitaActionPanel() {
               Nominate a representative, request a profile claim review, or submit a priority for your constituency.
             </h2>
             <p className="mt-4 text-base leading-7 text-white/72 sm:text-lg">
-              This is the first usable flow: residents and community teams can send structured input without creating premature public profiles or aggregate summaries. Submissions open as an email draft; this page does not send anything to a WakilKita server. After you press submit, a copy may be saved in this browser.
+              Use this form to send a nomination, profile claim, or local issue for review. It opens an email draft and does not send anything to a WakilKita server. After you press submit, a copy may be saved in this browser.
             </p>
             <div className="mt-6 rounded-3xl border border-[rgba(255,250,241,0.2)] bg-[rgba(255,250,241,0.08)] p-4 text-sm font-bold leading-6 text-white/72">
-              Do not send IC numbers, home addresses, private allegations, or sensitive identity details. Verification and eligibility checks must be handled only after published privacy and dispute policies exist.
+              Do not send IC numbers, home addresses, private allegations, or sensitive identity details. Verification will only open after privacy and dispute policies are published.
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {["Nominate", "Claim", "Prioritise"].map((item) => (
                 <div key={item} className="rounded-3xl bg-white/8 p-4 ring-1 ring-white/10">
                   <p className="text-lg font-black tracking-[-0.04em] text-[var(--mint)]">{item}</p>
                   <p className="mt-1 text-xs font-semibold leading-5 text-white/58">
-                    {item === "Nominate" ? "Suggest a local profile" : item === "Claim" ? "Request ownership review" : "Submit an issue signal"}
+                    {item === "Nominate" ? "Suggest a local profile" : item === "Claim" ? "Request ownership review" : "Submit a local issue"}
                   </p>
                 </div>
               ))}
@@ -164,7 +164,7 @@ export function WakilKitaActionPanel() {
               placeholder="e.g. Community organiser for local flood response"
               className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
-            <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Required. Use a public role or profile name. Avoid IC, phone numbers, and addresses. Only request a profile claim for yourself or a team you are authorised to represent; claims are not approved automatically.</p>
+            <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Use a public role or profile name. Do not enter IC, phone numbers, or addresses. Only request a profile claim for yourself or a team you are authorised to represent.</p>
 
             <label className="mt-4 block text-sm font-black" htmlFor="priority-area">
               Which local priority does this relate to?
@@ -191,10 +191,10 @@ export function WakilKitaActionPanel() {
               required
               aria-describedby="reason-help"
               rows={5}
-              placeholder="Give the public reason, affected area, and what a representative should do first."
+              placeholder="Give the public reason, affected area, and what a representative can do first."
               className="mt-2 w-full resize-none rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
-            <p id="reason-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Required. Minimum 13 characters. Keep it factual and safe for public review.</p>
+            <p id="reason-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Required. Minimum 13 characters. Keep it factual and safe to review.</p>
 
             <label className="mt-4 block text-sm font-black" htmlFor="contact">
               Optional reply contact
@@ -223,7 +223,7 @@ export function WakilKitaActionPanel() {
 
             {saved && (
               <p className="mt-3 rounded-2xl bg-[rgba(15,107,77,0.08)] px-4 py-3 text-sm font-bold leading-6 text-[var(--civic-dark)]" aria-live="polite">
-                Draft saved in this browser and email composer opened. If you are on a shared device, clear this draft/browser storage after sending. If your email app did not open, email {CONTACT_EMAIL} with the same details.
+                Draft saved in this browser and your email composer opened. If you are on a shared device, clear this draft/browser storage after sending. If your email app did not open, email {CONTACT_EMAIL} with the same details.
               </p>
             )}
           </form>
