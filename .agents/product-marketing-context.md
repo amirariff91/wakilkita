@@ -3,20 +3,20 @@
 *Last updated: 2026-05-19*
 
 ## Product Overview
-**One-liner:** WakilKita is an independent constituency intake platform for representative nominations and local issue priorities.
-**What it does:** Residents submit a person, profile claim, or local issue for manual review. Public profiles appear only after contact, consent, source notes, and a correction path. Verified backing and public aggregate summaries require published privacy, verification, threshold, dispute, retention, and deletion rules first.
-**Product category:** Civic tech, constituency engagement, public accountability infrastructure.
-**Product type:** Web app / civic intake platform.
-**Business model:** Not defined yet; current goal is trusted public use and partner learning, not monetisation.
+**One-liner:** WakilKita is an independent private intake page for P105 Petaling Jaya nominations and local issue priorities.
+**What it does:** Residents submit a public name/role, profile correction/removal request, or local issue for manual review via email draft. Nothing is uploaded by the page, nothing becomes public automatically, and named people are contacted before any public profile is considered.
+**Product category:** Civic tech, constituency engagement, public accountability intake.
+**Product type:** Web app / civic intake page.
+**Business model:** Not defined yet; current goal is trusted PJ resident use and partner learning, not monetisation.
 
 ## Target Audience
-**Primary users:** Residents, neighbourhood groups, community organisers, NGOs, journalists, civic researchers, and representative teams.
-**Primary use case:** Record who residents trust locally and what constituency issues need attention, without pretending it is an official election or public vote.
+**Primary users:** P105 Petaling Jaya residents, neighbourhood groups, community organisers, NGOs, journalists, civic researchers, and representative teams.
+**Primary use case:** Record local nominations and issue priorities without pretending it is an official election, public vote, or government process.
 **Jobs to be done:**
-- Nominate a local representative or community profile for review.
-- Submit a local issue priority with a public reason.
-- Request to claim a representative profile.
-- Understand constituency context from public datasets.
+- Submit a local nomination or public role for review.
+- Submit a Petaling Jaya issue priority with a factual reason.
+- Request correction, removal, or claim review for a representative profile.
+- Understand what happens before any profile becomes public.
 
 ## Problems & Pain Points
 **Core problem:** Residents often know who is doing useful local work, but that knowledge is scattered across chats, complaints, social media, and informal networks.
@@ -25,35 +25,35 @@
 
 ## Differentiation
 **Key differentiators:**
-- Constituency first, person second.
-- Private intake before public display.
-- Consent before public profiles.
-- No public supporter lists.
-- Public datasets used to frame local priorities.
+- Petaling Jaya first, not broad national theatre.
+- Email-only private intake before any public display.
+- Consent and correction path before public profiles.
+- No IC/eKYC collection through the page.
+- No votes, public supporter lists, live counts, or official-result language.
 - Clear disclaimer: not SPR, not online voting, not a party tool.
 
 ## Objections
 | Objection | Response |
 |-----------|----------|
-| Is this voting? | No. It is a non-binding civic intake and preference signal, not an election or official result. |
-| Can it be abused? | Intake stays private during review. Verified backing only opens after identity separation, thresholds, dispute rules, and audit logs are in place. |
+| Is this voting? | No. It is private civic intake for review, not an election, official result, or public support count. |
+| Can it be abused? | Submissions stay private during review. Unsafe, defamatory, or private submissions can be rejected. Named people are contacted before public profile consideration. |
 | Why no real profile photos yet? | Real public profiles require consent, source notes, and a correction/takedown path. |
 | Why email intake? | Email keeps the first live flow simple while avoiding premature collection of IC/eKYC data. |
 
 ## Customer Language
-**Words to use:** nominate, representative, constituency, local issue, private intake, review, consent, verified backing, support signal, correction path, public summary.
-**Words to avoid:** vote, ballot, online voting, official, SPR replacement, campaign, candidate leaderboard, public supporter list, MVP, prototype, pilot, preview, product review, proposal.
+**Words to use:** Petaling Jaya, P105, private intake, nomination, local issue, manual review, consent, correction path, removal request, email draft, no IC/eKYC here.
+**Words to avoid:** vote, ballot, online voting, official, SPR replacement, campaign, candidate leaderboard, public supporter list, MVP, prototype, pilot, preview, demo, product review, proposal, verified backing, support signal.
 
 ## Brand Voice
 **Tone:** Serious, civic, calm, practical.
-**Style:** Plain language, real-world use case, no pitch-deck phrasing.
-**Personality:** Trustworthy, careful, direct, public-infrastructure minded.
+**Style:** Plain language, current operational truth, no pitch-deck phrasing.
+**Personality:** Trustworthy, careful, direct, public-interest minded.
 
 ## Proof Points
-**Current proof:** Live email-based intake, P100 Pandan data context, constituency options for P105 Petaling Jaya, P122 Seputeh, and P120 Bukit Bintang.
-**Guardrails:** No IC/eKYC collected through the page, no public profiles without consent, no public support totals before methodology and thresholds are published.
+**Current proof:** Live email-based intake for P105 Petaling Jaya with visible safety boundaries and takedown/dispute contact.
+**Guardrails:** No IC/eKYC collected through the page, no public profiles without consent, no public support totals, no generated profile cards or Pandan data on the public page.
 
 ## Goals
-**Business goal:** Build trust and learn which constituencies have enough resident demand to justify a verified backing flow.
-**Conversion action:** Submit a nomination, profile claim, or issue priority through the intake form.
+**Business goal:** Build trust and learn whether P105 Petaling Jaya has enough resident demand to justify deeper verification and profile workflows.
+**Conversion action:** Submit a nomination, profile claim/correction, or issue priority through the email intake form.
 **Current metrics:** Not yet instrumented.

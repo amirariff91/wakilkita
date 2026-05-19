@@ -8,11 +8,11 @@ const CONTACT_EMAIL = "miccy@arusdigital.com";
 const STORAGE_KEY = "wakilkita_intake_v1";
 
 const defaultIssues = [
-  "High-density urban services",
-  "Public transport and walkability",
-  "Clinic, grocery, ATM and public facility access",
-  "Youth, family and working-age needs",
-  "Council response and maintenance",
+  "Council follow-up",
+  "Walkability and crossings",
+  "Transit and access",
+  "Local facilities",
+  "Cost pressure",
   "Other local priority",
 ];
 
@@ -25,7 +25,7 @@ function buildMailto(subject: string, body: string) {
 }
 
 export function WakilKitaActionPanel() {
-  const [constituency, setConstituency] = useState("P100 Pandan");
+  const [constituency, setConstituency] = useState("P105 Petaling Jaya");
   const [intakeType, setIntakeType] = useState<IntakeType>("Nominate a representative");
   const [personName, setPersonName] = useState("");
   const [issue, setIssue] = useState(defaultIssues[0]);
@@ -92,37 +92,27 @@ export function WakilKitaActionPanel() {
 
   return (
     <section id="take-part" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-      <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(7,22,19,0.96)] p-5 text-white shadow-[0_30px_100px_rgba(7,22,19,0.22)] sm:p-7 lg:p-9">
-        <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
+      <div className="border border-[var(--line)] bg-white p-5 text-[var(--ink)] shadow-[0_1px_3px_rgba(0,0,0,0.08)] sm:p-7 lg:p-8">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <p className="inline-flex rounded-full bg-[var(--mint)] px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--civic-dark)]">
+            <p className="inline-flex rounded-full bg-[var(--soft)] px-3 py-2 text-xs font-bold tracking-[0.08em] text-[var(--civic)]">
               Private intake · constituency-based
             </p>
-            <h2 className="mt-5 font-serif text-4xl font-black tracking-[-0.06em] sm:text-5xl">
-              Nominate a representative, request a profile claim review, or submit a priority for your constituency.
+            <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
+              Send a P105 Petaling Jaya nomination or local issue for manual review.
             </h2>
-            <p className="mt-4 text-base leading-7 text-white/72 sm:text-lg">
+            <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
               Use this form to send a nomination, profile claim, or local issue for review. It opens an email draft and does not send anything to a WakilKita server. After you press submit, a copy may be saved in this browser.
             </p>
-            <div className="mt-6 rounded-3xl border border-[rgba(255,250,241,0.2)] bg-[rgba(255,250,241,0.08)] p-4 text-sm font-bold leading-6 text-white/72">
-              Do not send IC numbers, home addresses, private allegations, or sensitive identity details. Verification will only open after privacy and dispute policies are published.
-            </div>
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              {["Nominate", "Claim", "Prioritise"].map((item) => (
-                <div key={item} className="rounded-3xl bg-white/8 p-4 ring-1 ring-white/10">
-                  <p className="text-lg font-black tracking-[-0.04em] text-[var(--mint)]">{item}</p>
-                  <p className="mt-1 text-xs font-semibold leading-5 text-white/58">
-                    {item === "Nominate" ? "Suggest a local profile" : item === "Claim" ? "Request ownership review" : "Submit a local issue"}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-6 border-l-2 border-[var(--accent)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
+              Do not send IC numbers, home addresses, private allegations, or sensitive identity details. WakilKita is not collecting votes, IC numbers, eKYC data, or supporter lists.
             </div>
           </div>
 
-          <form onSubmit={submitIntake} className="rounded-[2rem] bg-[var(--paper)] p-5 text-[var(--ink)] sm:p-6">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Constituency intake form</p>
+          <form onSubmit={submitIntake} className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Petaling Jaya intake form</p>
 
-            <label className="mt-5 block text-sm font-black" htmlFor="constituency">
+            <label className="mt-5 block text-sm font-bold" htmlFor="constituency">
               Your constituency <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
@@ -132,27 +122,27 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="constituency-help"
-              placeholder="e.g. P100 Pandan, P105 Petaling Jaya, P122 Seputeh"
-              className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+              placeholder="e.g. P105 Petaling Jaya"
+              className="mt-2 w-full rounded-md border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="constituency-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Use the parliamentary code if you know it. If unsure, use the area name and we will review it manually.</p>
 
-            <label className="mt-4 block text-sm font-black" htmlFor="intake-type">
+            <label className="mt-4 block text-sm font-bold" htmlFor="intake-type">
               What do you want to do?
             </label>
             <select
               id="intake-type"
               value={intakeType}
               onChange={(event) => setIntakeType(event.target.value as IntakeType)}
-              className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
+              className="mt-2 w-full rounded-md border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
             >
               <option>Nominate a representative</option>
               <option>Request to claim a representative profile</option>
               <option>Submit a constituency issue priority</option>
             </select>
 
-            <label className="mt-4 block text-sm font-black" htmlFor="person-name">
-              Representative/profile name or issue area <span className="text-[var(--amber-text)]">*</span>
+            <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
+              Who or what are you submitting? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="person-name"
@@ -161,26 +151,26 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="person-name-help"
-              placeholder="e.g. Community organiser for local flood response"
-              className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+              placeholder="Name, public role, or issue"
+              className="mt-2 w-full rounded-md border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Use a public role or profile name. Do not enter IC, phone numbers, or addresses. Only request a profile claim for yourself or a team you are authorised to represent.</p>
 
-            <label className="mt-4 block text-sm font-black" htmlFor="priority-area">
+            <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
               Which local priority does this relate to?
             </label>
             <select
               id="priority-area"
               value={issue}
               onChange={(event) => setIssue(event.target.value)}
-              className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
+              className="mt-2 w-full rounded-md border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
             >
               {defaultIssues.map((item) => (
                 <option key={item}>{item}</option>
               ))}
             </select>
 
-            <label className="mt-4 block text-sm font-black" htmlFor="reason">
+            <label className="mt-4 block text-sm font-bold" htmlFor="reason">
               Why should residents consider this? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
@@ -192,11 +182,11 @@ export function WakilKitaActionPanel() {
               aria-describedby="reason-help"
               rows={5}
               placeholder="Give the public reason, affected area, and what a representative can do first."
-              className="mt-2 w-full resize-none rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+              className="mt-2 w-full resize-none rounded-md border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="reason-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Required. Minimum 13 characters. Keep it factual and safe to review.</p>
 
-            <label className="mt-4 block text-sm font-black" htmlFor="contact">
+            <label className="mt-4 block text-sm font-bold" htmlFor="contact">
               Optional reply contact
             </label>
             <input
@@ -205,16 +195,16 @@ export function WakilKitaActionPanel() {
               onChange={(event) => setContact(event.target.value)}
               maxLength={120}
               placeholder="Email or public handle only"
-              className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+              className="mt-2 w-full rounded-md border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
 
             <button
               type="submit"
               disabled={!isReady}
               aria-describedby="submit-readiness"
-              className="mt-5 w-full rounded-full bg-[var(--civic)] px-5 py-3 text-sm font-black uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:bg-[rgba(15,107,77,0.42)]"
+              className="mt-5 w-full rounded-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(15,107,77,0.42)]"
             >
-              Prepare private intake email
+              Prepare email submission
             </button>
 
             <p id="submit-readiness" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]" aria-live="polite">
@@ -222,7 +212,7 @@ export function WakilKitaActionPanel() {
             </p>
 
             {saved && (
-              <p className="mt-3 rounded-2xl bg-[rgba(15,107,77,0.08)] px-4 py-3 text-sm font-bold leading-6 text-[var(--civic-dark)]" aria-live="polite">
+              <p className="mt-3 rounded-md bg-[rgba(15,107,77,0.08)] px-4 py-3 text-sm font-bold leading-6 text-[var(--civic-dark)]" aria-live="polite">
                 Draft saved in this browser and your email composer opened. If you are on a shared device, clear this draft/browser storage after sending. If your email app did not open, email {CONTACT_EMAIL} with the same details.
               </p>
             )}

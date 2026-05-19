@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="WakilKita P105 Petaling Jaya civic intake">
+  <rect width="1200" height="630" fill="#f8f8f6"/>
+  <rect x="64" y="64" width="1072" height="502" fill="#ffffff" stroke="#d8d8d2" stroke-width="2"/>
+  <text x="104" y="150" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#263a4f">WakilKita</text>
+  <text x="104" y="250" font-family="Arial, sans-serif" font-size="74" font-weight="700" fill="#111111">P105 Petaling Jaya</text>
+  <text x="104" y="330" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#111111">private civic intake</text>
+  <text x="104" y="420" font-family="Arial, sans-serif" font-size="28" fill="#4d5650">Local nominations and issue priorities. Not SPR-affiliated. Not online voting.</text>
+  <rect x="104" y="480" width="320" height="54" fill="#263a4f"/>
+  <text x="128" y="516" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Start private intake</text>
+</svg>
