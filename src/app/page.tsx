@@ -2,11 +2,61 @@ import Image from "next/image";
 import { PandanConstituencyExplorer } from "./PandanConstituencyExplorer";
 import { WakilKitaActionPanel } from "./WakilKitaActionPanel";
 
-const pandanFacts = [
-  ["Population", "228,800", "DOSM P.100 Pandan, 2022"],
-  ["Registered electors", "148,730", "Public electoral baseline"],
-  ["Density", "11,371/km²", "3rd highest among 222 parliamentary seats"],
-  ["Area", "20 km²", "Highly compact urban seat"],
+const pilotFacts = [
+  ["Active pilot", "P100 Pandan", "Detailed local data and private intake are available now"],
+  ["Recommended next", "P105 Petaling Jaya", "Strongest civic-tech fit from product review"],
+  ["Named option", "P122 Seputeh", "Cleaner resident signal than Bukit Bintang"],
+  ["Hold for later", "P120 Bukit Bintang", "High visibility, but transient and noisy for first expansion"],
+];
+
+const constituencyOptions = [
+  {
+    code: "P100",
+    name: "Pandan",
+    region: "Selangor",
+    status: "Private intake open",
+    note: "Existing proof-of-concept with data context and manual review.",
+  },
+  {
+    code: "P105",
+    name: "Petaling Jaya",
+    region: "Selangor",
+    status: "Recommended next",
+    note: "Best overall digital-civic pilot: urban, issue-rich, and resident-rooted.",
+  },
+  {
+    code: "P122",
+    name: "Seputeh",
+    region: "Kuala Lumpur",
+    status: "Interest list",
+    note: "Stronger than Bukit Bintang for clean resident participation signals.",
+  },
+  {
+    code: "P120",
+    name: "Bukit Bintang",
+    region: "Kuala Lumpur",
+    status: "Research only",
+    note: "Useful later, but worker-tourist density makes residency and signal quality harder.",
+  },
+];
+
+const issuePriorityCards = [
+  {
+    title: "Mobility and walkability",
+    body: "Surface nominees through the issue they can champion: last-mile transit, safer crossings, parking friction, and disabled access.",
+  },
+  {
+    title: "Council response and maintenance",
+    body: "Ask who can make complaints measurable: response time, repeated defects, contractor accountability, and public status updates.",
+  },
+  {
+    title: "Cost of living and local services",
+    body: "Frame priorities around clinics, groceries, childcare, elderly support, hawker access, and neighbourhood-level affordability.",
+  },
+  {
+    title: "Youth and family needs",
+    body: "Bring forward people already doing community work before any public profile or support signal is considered.",
+  },
 ];
 
 const safeguards = [
@@ -19,7 +69,7 @@ const safeguards = [
 ];
 
 const afterSubmitSteps = [
-  ["1", "Review for Pandan relevance", "Next step: manually review whether the nomination, claim request, or issue priority clearly relates to P100 Pandan before anything public is considered."],
+  ["1", "Review for constituency relevance", "Next step: manually review whether the nomination, claim request, or issue priority clearly relates to the submitted constituency before anything public is considered."],
   ["2", "Remove sensitive details", "Private allegations, addresses, IC numbers, and unnecessary personal data should never become public profile material."],
   ["3", "Open verified backing later", "One verified private support signal per eligible resident comes only after privacy, dispute, and verification rules are published."],
 ];
@@ -34,9 +84,9 @@ const profilePromise = [
 function TrustArchitectureDiagram() {
   const steps = [
     ["1", "Identity check", "In a production pilot, an IC/eKYC provider would verify the person. WakilKita should not expose this publicly."],
-    ["2", "Eligibility token", "The system would confirm the participant belongs to P100 Pandan, then issue a one-use eligibility token."],
+    ["2", "Eligibility token", "The system would confirm the participant belongs to the pilot constituency, then issue a one-use eligibility token."],
     ["3", "Preference record", "The token would record one signal. The signal table should not store IC or raw identity details."],
-    ["4", "Aggregate result", "Only threshold-protected totals would be shown publicly, with audit events and dispute handling."],
+    ["4", "Aggregate summary", "Only threshold-protected summaries would be shown publicly, with audit events and dispute handling."],
   ];
 
   return (
@@ -63,15 +113,15 @@ function ProductPreview() {
       <div className="rounded-[1.6rem] bg-[var(--ink)] p-5 text-white">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Pandan private intake</p>
-            <h2 className="mt-3 text-3xl font-black tracking-[-0.06em]">P100 Pandan</h2>
-            <p className="mt-2 text-sm font-bold text-white/70">P100 Pandan, Selangor · compact urban constituency · intake open</p>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Malaysia constituency intake</p>
+            <h2 className="mt-3 text-3xl font-black tracking-[-0.06em]">WakilKita</h2>
+            <p className="mt-2 text-sm font-bold text-white/70">Choose an area · submit private input · public summaries only after rules are ready</p>
           </div>
           <span className="rounded-full bg-[rgba(221,247,232,0.14)] px-3 py-2 text-xs font-black text-[var(--mint)]">private intake</span>
         </div>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {pandanFacts.map(([label, value, source]) => (
+          {pilotFacts.map(([label, value, source]) => (
             <div key={label} className="rounded-2xl bg-white/8 p-4 ring-1 ring-white/10">
               <p className="text-[11px] font-black uppercase tracking-[0.14em] text-white/50">{label}</p>
               <p className="mt-2 text-2xl font-black tracking-[-0.04em]">{value}</p>
@@ -83,24 +133,81 @@ function ProductPreview() {
         <div className="mt-5 rounded-3xl bg-[var(--paper)] p-5 text-[var(--ink)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Priority intake</p>
-              <h3 className="mt-2 text-2xl font-black tracking-[-0.05em]">Community service profile</h3>
-              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">Profile and issue submissions start as private intake. Nothing becomes public without manual review, consent checks where needed, and dispute handling.</p>
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Nomination window model</p>
+              <h3 className="mt-2 text-2xl font-black tracking-[-0.05em]">Issue-first, person-second.</h3>
+              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">A 21-day civic window is safer than election-week theatrics: seven days to explain the process, fourteen days for private intake, then manual review.</p>
             </div>
             <div className="rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Status</p>
-              <p className="text-lg font-black leading-tight">Private intake draft</p>
+              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">No public cards</p>
+              <p className="text-lg font-black leading-tight">until consent</p>
             </div>
           </div>
           <div className="mt-5 grid gap-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)] sm:grid-cols-3">
             <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Nominate</span>
-            <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Claim</span>
-            <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Prioritise</span>
+            <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Review</span>
+            <span className="rounded-full bg-[rgba(15,107,77,0.08)] px-3 py-2 text-center">Invite to claim</span>
           </div>
-          <p className="mt-3 text-xs font-semibold text-[var(--slate)]">Public totals require verification, minimum thresholds, dispute handling, and published privacy rules.</p>
+          <p className="mt-3 text-xs font-semibold text-[var(--slate)]">No nominee rankings, no real-politician seed profiles, and no public support totals before consent, thresholds, and dispute rules exist.</p>
         </div>
       </div>
     </div>
+  );
+}
+
+function ConstituencySelector() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="constituency-selector-heading">
+      <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.86)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Constituency expansion</p>
+            <h2 id="constituency-selector-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Start where the signal can be clean.</h2>
+          </div>
+          <p className="max-w-xl text-sm font-semibold leading-6 text-[var(--slate)]">
+            The Opus review pushed against a personality carousel. The safer path is a scoped constituency list, issue-first intake, and claimed profiles only after consent.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-3 lg:grid-cols-4">
+          {constituencyOptions.map((item) => (
+            <article key={item.code} className="rounded-3xl border border-[var(--line)] bg-white/72 p-5">
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--amber-text)]">{item.code}</p>
+                <span className="rounded-full bg-[rgba(15,107,77,0.09)] px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-[var(--civic-dark)]">{item.status}</span>
+              </div>
+              <h3 className="mt-4 text-2xl font-black tracking-[-0.05em] text-[var(--ink)]">{item.name}</h3>
+              <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic)]">{item.region}</p>
+              <p className="mt-3 text-sm font-semibold leading-6 text-[var(--slate)]">{item.note}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IssuePriorityCarousel() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="issue-carousel-heading">
+      <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(221,247,232,0.34)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.07)] sm:p-7">
+        <div className="max-w-3xl">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Nomination carousel rule</p>
+          <h2 id="issue-carousel-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Show issues first, not unconsented people.</h2>
+          <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
+            Public cards should start with local priorities. Named people stay in private review until they are contacted, consent is clear, and a correction path exists.
+          </p>
+        </div>
+        <div className="mt-6 flex gap-4 overflow-x-auto pb-2" aria-label="Local priority cards">
+          {issuePriorityCards.map((item) => (
+            <article key={item.title} className="min-w-[18rem] max-w-sm rounded-3xl border border-[rgba(15,107,77,0.18)] bg-[var(--paper)] p-5 sm:min-w-[22rem]">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--amber-text)]">Priority card</p>
+              <h3 className="mt-3 text-2xl font-black tracking-[-0.05em] text-[var(--ink)]">{item.title}</h3>
+              <p className="mt-3 text-sm font-semibold leading-6 text-[var(--slate)]">{item.body}</p>
+              <a href="#take-part" className="mt-5 inline-flex rounded-full bg-[var(--ink)] px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-[var(--mint)]">Nominate someone for this</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -191,7 +298,7 @@ function RepresentativeProfilePromise() {
           </p>
           <div className="mt-5 rounded-3xl bg-[var(--ink)] p-4 text-white">
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--mint)]">Current public profile status</p>
-            <p className="mt-2 text-lg font-black tracking-[-0.03em]">No public representative profiles yet. Nominate someone serving Pandan.</p>
+            <p className="mt-2 text-lg font-black tracking-[-0.03em]">No public representative profiles yet. Nominate someone serving your constituency.</p>
           </div>
         </div>
         <div className="grid content-start gap-3 sm:grid-cols-2">
@@ -219,7 +326,7 @@ export default function Home() {
               <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--ink)] text-sm font-black text-[var(--mint)]">WK</span>
               <span>
                 <span className="block text-base font-black tracking-[-0.03em] text-[var(--ink)]">WakilKita</span>
-                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[var(--civic)]">P100 Pandan intake</span>
+                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[var(--civic)]">Constituency intake</span>
               </span>
             </a>
             <div className="hidden items-center gap-6 text-sm font-semibold text-[var(--slate)] md:flex">
@@ -236,13 +343,13 @@ export default function Home() {
           <div id="top" className="grid items-center gap-10 py-8 lg:grid-cols-[1.02fr_0.98fr] lg:py-14">
             <div>
               <div className="mb-6 inline-flex rounded-full border border-[rgba(15,107,77,0.24)] bg-[rgba(221,247,232,0.72)] px-4 py-2 text-sm font-bold text-[var(--civic-dark)]">
-                P100 Pandan only. Private intake first. No IC/eKYC collected here.
+                Private intake first. No IC/eKYC collected here.
               </div>
               <h1 className="max-w-4xl font-serif text-5xl font-black leading-[1.06] tracking-[-0.07em] text-[var(--ink)] sm:text-6xl lg:text-7xl">
-                Nominate people serving P100 Pandan.
+                Nominate people serving your constituency.
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Submit a local representative, request a profile claim review, or share the issue Pandan should prioritise first. WakilKita starts with private intake before verified resident support signals go live.
+                Submit a local representative, request a profile claim review, or share the issue your constituency should prioritise first. WakilKita starts with private intake before verified resident support signals go live.
               </p>
               <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
                 Not online voting. Not SPR-affiliated. Not a party tool. No public supporter lists.
@@ -260,7 +367,11 @@ export default function Home() {
           </div>
         </section>
 
+        <ConstituencySelector />
+
         <WakilKitaActionPanel />
+
+        <IssuePriorityCarousel />
 
         <AfterSubmitSection />
 
@@ -295,12 +406,12 @@ export default function Home() {
 
         <footer className="border-t border-[var(--line)] bg-[rgba(255,250,241,0.72)] px-5 py-8 text-sm leading-6 text-[var(--slate)] sm:px-8 lg:px-10">
           <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-[1fr_1.4fr]">
-            <p className="font-black text-[var(--ink)]">Independent Pandan civic prototype</p>
+            <p className="font-black text-[var(--ink)]">Independent civic intake prototype</p>
             <div className="space-y-2">
               <p>WakilKita is independent and is not affiliated with SPR, the Malaysian government, any political party, candidate, or election authority.</p>
-              <p>This site does not ask for or transmit IC/eKYC data through the page. Intake starts as a user-controlled email draft and should not contain personal or sensitive details. Any real Pandan pilot must publish privacy, verification, dispute, retention, and deletion policies before collecting resident information.</p>
+              <p>This site does not ask for or transmit IC/eKYC data through the page. Intake starts as a user-controlled email draft and should not contain personal or sensitive details. Any real pilot must publish privacy, verification, dispute, retention, and deletion policies before collecting resident information.</p>
               <p>Individual preferences must never be public, sold, or shared as supporter lists. Public aggregate output should be threshold-protected and never expose individual support choices.</p>
-              <p><a className="font-black text-[var(--civic-dark)] underline" href="mailto:miccy@arusdigital.com?subject=WakilKita%20Pandan%20report%20or%20takedown">Report impersonation, dispute a nomination, or request takedown.</a></p>
+              <p><a className="font-black text-[var(--civic-dark)] underline" href="mailto:miccy@arusdigital.com?subject=WakilKita%20report%20or%20takedown">Report impersonation, dispute a nomination, or request takedown.</a></p>
             </div>
           </div>
         </footer>
