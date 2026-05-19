@@ -317,7 +317,7 @@ export function WakilKitaDemo() {
                 Try the preference signal without collecting real identity data.
               </h2>
               <p className="mt-4 text-base leading-7 text-white/72 sm:text-lg">
-                This sandbox lets you pick a constituency, create a local demo verification pass, nominate a rep profile, and support one preferred profile. Nothing is sent to a server.
+                This sandbox lets you pick a constituency, create a local demo verification pass, nominate a rep profile, and record one demo preference signal. Nothing is sent to a server.
               </p>
             </div>
             <button
@@ -331,6 +331,9 @@ export function WakilKitaDemo() {
 
           <div className="mt-7 rounded-3xl border border-[rgba(221,247,232,0.24)] bg-[rgba(221,247,232,0.12)] p-4 text-sm font-bold leading-6 text-[var(--mint)]">
             DEMO MODE: all changes stay in this browser&apos;s localStorage. This is not an official vote, not SPR, not real civic data, and not proof of identity.
+          </div>
+          <div className="mt-3 rounded-3xl border border-[rgba(255,250,241,0.2)] bg-[rgba(255,250,241,0.08)] p-4 text-sm font-bold leading-6 text-white/72">
+            Independent civic prototype. Not affiliated with SPR, government, parties, candidates, or election authorities.
           </div>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-[0.82fr_1.18fr]">
@@ -363,7 +366,7 @@ export function WakilKitaDemo() {
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">2 · Demo verification</p>
                 <h3 className="mt-3 text-2xl font-black tracking-[-0.05em]">Local pass for {selectedSeat.code}</h3>
                 <p className="mt-2 text-sm leading-6 text-[var(--slate)]">
-                  Real eKYC is intentionally not in this demo. Click once to simulate the point where a verified constituent would be allowed to support one profile.
+                  Real eKYC is intentionally not in this demo. Click once to simulate the point where a verified constituent would be allowed to record one preference signal.
                 </p>
                 <button
                   type="button"
@@ -416,7 +419,7 @@ export function WakilKitaDemo() {
               <div className="rounded-3xl bg-[var(--paper)] p-5 text-[var(--ink)]">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
-                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">4 · Support one profile</p>
+                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">4 · Demo preference signal</p>
                     <h3 className="mt-2 text-3xl font-black tracking-[-0.06em]">
                       {selectedSeat.code} {selectedSeat.name}
                     </h3>
@@ -455,7 +458,7 @@ export function WakilKitaDemo() {
                               <p className="mt-2 text-sm leading-6 text-[var(--slate)]">{nominee.plan}</p>
                             </div>
                             <div className="shrink-0 rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
-                              <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[var(--civic-dark)]">Signal</p>
+                              <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[var(--civic-dark)]">Demo signal</p>
                               <p className="text-2xl font-black">{percent}%</p>
                             </div>
                           </div>
@@ -472,7 +475,7 @@ export function WakilKitaDemo() {
                               disabled={!selectedState.demoPassCreated || locked}
                               className="rounded-full bg-[var(--ink)] px-5 py-3 text-sm font-black uppercase tracking-[0.1em] text-[var(--mint)] disabled:cursor-not-allowed disabled:bg-[rgba(7,22,19,0.34)]"
                             >
-                              {supported ? "Supported" : locked ? "Signal used" : selectedState.demoPassCreated ? "Support" : "Need demo pass"}
+                              {supported ? "Recorded" : locked ? "Signal used" : selectedState.demoPassCreated ? "Record demo signal" : "Create demo eligibility pass"}
                             </button>
                           </div>
                         </div>

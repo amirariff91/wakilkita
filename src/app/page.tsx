@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { WakilKitaDemo } from "./WakilKitaDemo";
 
 const constituencies = [
@@ -26,7 +28,7 @@ const constituencies = [
 
 const safeguards = [
   "One verified constituent account per identity check",
-  "Constituency eligibility checked before support is counted",
+  "Constituency eligibility checked before a signal is counted",
   "Identity records separated from support records",
   "Public results show aggregate participant signal only",
   "Every count-changing action is designed to produce an audit event",
@@ -44,10 +46,16 @@ const roadmap = [
   "Private pilot in 1–3 constituencies",
   "Verified resident signup and constituency matching",
   "Nominate, claim, and verify rep profiles",
-  "Support one preferred local rep with privacy protection",
+  "Record one demo preference signal with privacy protection",
   "Open-data constituency issue dashboard",
   "Rep priority plan tied to evidence and resident concerns",
 ];
+
+const visualAssets = {
+  hero: "/visuals/wakilkita-hero-civic.webp",
+  trust: "/visuals/wakilkita-trust-privacy.webp",
+  evidence: "/visuals/wakilkita-evidence-map.webp",
+};
 
 export default function Home() {
   return (
@@ -90,11 +98,11 @@ export default function Home() {
             <div className="mb-6 inline-flex rounded-full border border-[rgba(15,107,77,0.24)] bg-[rgba(221,247,232,0.72)] px-4 py-2 text-sm font-bold text-[var(--civic-dark)]">
               Not online voting. Not SPR. Not a party tool. A non-binding preference signal.
             </div>
-            <h1 className="max-w-4xl font-serif text-5xl font-black leading-[1.02] tracking-[-0.07em] text-[var(--ink)] sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl font-serif text-5xl font-black leading-[1.06] tracking-[-0.07em] text-[var(--ink)] sm:text-6xl lg:text-7xl">
               Let verified constituents signal their preferred local representative.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-              WakilKita is being designed to help Malaysians nominate and support one preferred local rep in their own constituency, backed by planned identity checks, privacy-preserving tallying, and constituency-level issue data.
+              WakilKita is being designed to help Malaysians nominate local rep profiles and record one verified preference signal in their own constituency, backed by planned identity checks, privacy-preserving tallying, and constituency-level issue data.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
@@ -112,48 +120,61 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative rounded-[2rem] border border-[var(--line)] bg-[rgba(255,250,241,0.88)] p-4 shadow-[0_30px_100px_rgba(7,22,19,0.16)]">
-            <div className="rounded-[1.5rem] bg-[var(--ink)] p-5 text-white">
-              <div className="flex items-center justify-between gap-4">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[var(--line)] bg-[rgba(255,250,241,0.9)] p-3 shadow-[0_30px_100px_rgba(7,22,19,0.16)]">
+            <div className="relative overflow-hidden rounded-[1.65rem] bg-[var(--ink)]">
+              <Image
+                src={visualAssets.hero}
+                alt="Illustration of residents reviewing local issues with a privacy shield and constituency map motif"
+                className="aspect-[16/9] h-auto w-full object-cover"
+                width={1672}
+                height={941}
+                priority
+                sizes="(min-width: 1024px) 46vw, 100vw"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(7,22,19,0.92)] via-[rgba(7,22,19,0.58)] to-transparent p-5 text-white">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--mint)]">Illustrative pilot model</p>
+                <div className="mt-3 flex flex-wrap items-end justify-between gap-3">
+                  <h2 className="text-2xl font-black tracking-[-0.04em]">P105 Petaling Jaya</h2>
+                  <span className="rounded-full bg-[rgba(221,247,232,0.16)] px-3 py-2 text-xs font-bold text-[var(--mint)]">
+                    demo — not live
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-3 rounded-2xl bg-[rgba(217,154,30,0.12)] px-4 py-3 text-xs font-black leading-5 text-[var(--amber-text)]">
+              AI-generated illustrative scene. Not an actual pilot event, not official civic data.
+            </p>
+
+            <div className="mt-3 grid grid-cols-1 gap-3 rounded-[1.5rem] bg-[var(--ink)] p-4 text-white sm:grid-cols-3">
+              {[
+                ["Demo verified", "1,284"],
+                ["Demo nominees", "9"],
+                ["Disputes", "0 open"],
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-2xl bg-white/8 p-4 ring-1 ring-white/10">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/56">{label}</p>
+                  <p className="mt-2 text-xl font-black tracking-[-0.03em]">{value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-3 rounded-[1.5rem] bg-[var(--paper)] p-5 text-[var(--ink)] ring-1 ring-[var(--line)]">
+              <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--mint)]">Illustrative pilot model</p>
-                  <h2 className="mt-2 text-2xl font-black tracking-[-0.04em]">P105 Petaling Jaya</h2>
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Sample participant signal</p>
+                  <h3 className="mt-2 text-3xl font-black tracking-[-0.06em]">Illustrative nominee</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--slate)]">Example profile showing how a local representative plan could be tied to transit reliability, flood mitigation, and transparent service KPIs.</p>
                 </div>
-                <div className="rounded-full bg-[rgba(221,247,232,0.14)] px-3 py-2 text-xs font-bold text-[var(--mint)]">
-                  demo — not live
+                <div className="rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
+                  <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Demo signal</p>
+                  <p className="text-2xl font-black">38%</p>
                 </div>
               </div>
-
-              <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {[
-                  ["Verified", "1,284"],
-                  ["Nominated", "9"],
-                  ["Disputes", "0 open"],
-                ].map(([label, value]) => (
-                  <div key={label} className="rounded-2xl bg-white/8 p-4 ring-1 ring-white/10">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/56">{label}</p>
-                    <p className="mt-2 text-xl font-black tracking-[-0.03em]">{value}</p>
-                  </div>
-                ))}
+              <div className="mt-5 h-3 overflow-hidden rounded-full bg-[rgba(7,22,19,0.1)]">
+                <div className="h-full w-[38%] rounded-full bg-[var(--civic)]" />
               </div>
-
-              <div className="mt-5 rounded-3xl bg-[var(--paper)] p-5 text-[var(--ink)]">
-                <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Sample participant signal</p>
-                    <h3 className="mt-2 text-3xl font-black tracking-[-0.06em]">Illustrative nominee</h3>
-                    <p className="mt-2 text-sm leading-6 text-[var(--slate)]">Example profile showing how a local representative plan could be tied to transit reliability, flood mitigation, and transparent service KPIs.</p>
-                  </div>
-                  <div className="rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
-                    <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Support</p>
-                    <p className="text-2xl font-black">38%</p>
-                  </div>
-                </div>
-                <div className="mt-5 h-3 overflow-hidden rounded-full bg-[rgba(7,22,19,0.1)]">
-                  <div className="h-full w-[38%] rounded-full bg-[var(--civic)]" />
-                </div>
-                <p className="mt-3 text-xs font-semibold text-[var(--slate)]">Illustrative demo only. Aggregate public results would appear only after privacy thresholds are met.</p>
-              </div>
+              <p className="mt-3 text-xs font-semibold text-[var(--slate)]">Illustrative demo only. Aggregate public results would appear only after privacy thresholds are met.</p>
             </div>
           </div>
         </div>
@@ -169,6 +190,20 @@ export default function Home() {
             <p className="mt-5 text-lg leading-8 text-[var(--slate)]">
               WakilKita should win because the planned count is hard to abuse and easy to explain. No blockchain theatre. No public preference exposure. Just boring, auditable civic infrastructure.
             </p>
+            <figure className="mt-7 overflow-hidden rounded-[1.8rem] border border-[var(--line)] bg-[var(--paper)] p-2 shadow-[0_20px_70px_rgba(7,22,19,0.1)]">
+              <Image
+                src={visualAssets.trust}
+                alt="Illustration of identity verification separated from aggregate participant signals"
+                className="aspect-[16/9] h-auto w-full rounded-[1.35rem] object-cover"
+                width={1672}
+                height={941}
+                loading="eager"
+                sizes="(min-width: 1024px) 36vw, 100vw"
+              />
+              <figcaption className="px-3 py-3 text-xs font-bold leading-5 text-[var(--slate)]">
+                Visual principle: identity proves eligibility, but public results remain aggregate-only.
+              </figcaption>
+            </figure>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {safeguards.map((item, index) => (
@@ -212,9 +247,22 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="rounded-[2rem] bg-[var(--ink)] p-6 text-white shadow-[0_24px_90px_rgba(7,22,19,0.2)]">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--mint)]">Evidence board</p>
-          <h2 className="mt-3 text-3xl font-black tracking-[-0.05em]">Example issue ranking from public data and resident priority</h2>
+        <div className="rounded-[2rem] bg-[var(--ink)] p-4 text-white shadow-[0_24px_90px_rgba(7,22,19,0.2)] sm:p-6">
+          <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/6">
+            <Image
+              src={visualAssets.evidence}
+              alt="Illustration of a constituency evidence map with flood, transit, clinic, and school issue signals"
+              className="aspect-[16/9] h-auto w-full object-cover"
+              width={1672}
+              height={941}
+              loading="eager"
+              sizes="(min-width: 1024px) 44vw, 100vw"
+            />
+          </div>
+          <div className="mt-6">
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--mint)]">Evidence board</p>
+            <h2 className="mt-3 text-3xl font-black tracking-[-0.05em]">Example issue ranking from public data and resident priority</h2>
+          </div>
           <div className="mt-6 space-y-4">
             {issues.map((issue) => (
               <div key={issue.label}>
