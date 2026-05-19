@@ -1,3 +1,5 @@
+import { WakilKitaDemo } from "./WakilKitaDemo";
+
 const constituencies = [
   {
     code: "P105",
@@ -72,6 +74,7 @@ export default function Home() {
           <div className="hidden items-center gap-6 text-sm font-semibold text-[var(--slate)] md:flex">
             <a href="#trust">Trust model</a>
             <a href="#constituency">Constituencies</a>
+            <a href="#demo">Demo</a>
             <a href="#pilot">Pilot</a>
           </div>
           <a
@@ -228,6 +231,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <WakilKitaDemo />
 
       <section id="pilot" className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-10">
         <div className="rounded-[2.4rem] border border-[var(--line)] bg-[var(--paper)] p-6 shadow-[0_30px_100px_rgba(7,22,19,0.12)] sm:p-8 lg:p-10">
