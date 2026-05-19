@@ -1,29 +1,30 @@
 import { WakilKitaActionPanel } from "./WakilKitaActionPanel";
-import { WakilKitaMark, P105LineMotif } from "./WakilKitaMark";
+import { CivicFooter, CivicNav } from "./civic-content";
+import { P105LineMotif } from "./WakilKitaMark";
 
 const boundaryChips = [
-  "Not an official election",
-  "Not affiliated with SPR",
-  "Independent from political parties",
+  "Private civic intake",
+  "Independent from public bodies",
+  "Independent of parties",
   "Review queue",
-  "No IC/eKYC in public submissions",
+  "IC/eKYC separate from public data",
 ];
 
 const intakeFacts = [
   {
     label: "Open now",
     value: "P105 Petaling Jaya",
-    note: "Nominations, endorsements, and local priorities are open",
+    note: "Nomination, endorsement, and local issue submissions are open",
   },
   {
     label: "Accepting",
-    value: "Nominate or endorse",
-    note: "Name the person you trust and give a clear public reason",
+    value: "Nominations + endorsements",
+    note: "Submit one trusted person, one issue, and a factual reason",
   },
   {
     label: "Routed to",
-    value: "Review queue",
-    note: "Every submission is reviewed before anything is shown publicly",
+    value: "Review dashboard",
+    note: "Each submission appears in a private review queue before any public use",
   },
 ];
 
@@ -31,37 +32,37 @@ const reviewSteps = [
   {
     n: "1",
     title: "Record the submission",
-    body: "Your nomination, endorsement, or issue enters the review queue immediately.",
+    body: "Your nomination, endorsement, or issue is saved into the dashboard queue for review. No email handoff is used.",
   },
   {
     n: "2",
     title: "Check constituency scope",
-    body: "We check that the name, issue, or claim belongs to P105 Petaling Jaya.",
+    body: "We confirm the name, issue, or claim belongs to P105 Petaling Jaya.",
   },
   {
     n: "3",
     title: "Remove unsafe or private details",
-    body: "IC numbers, addresses, private allegations, and unnecessary personal details are removed before public review.",
+    body: "Addresses, IC numbers, private allegations, and unnecessary personal data are removed before any public use.",
   },
   {
     n: "4",
     title: "Contact before public profile",
-    body: "Named people may be contacted for consent, correction, or removal before any public profile appears.",
+    body: "Named people are contacted and may request correction or removal before any public profile is considered.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "Contact details stay private",
-    body: "Your reply contact is used only for follow-up. It is not published or shown in the public tally.",
+    heading: "Contact details stay private during review",
+    body: "Your reply contact is used only to follow up on your submission. It is not published, not shared with named persons, and not visible publicly.",
   },
   {
-    heading: "Review first, public later",
-    body: "Submissions go through review before they can appear publicly. Only approved, consent-safe information is shown.",
+    heading: "Dashboard first, public later",
+    body: "Submissions appear in a review dashboard first. Public pages should show only approved, consent-safe information.",
   },
   {
-    heading: "No supporter lists sold or shared",
-    body: "WakilKita does not sell, share, or transfer submission records to parties, candidates, employers, representative offices, or campaigns.",
+    heading: "No participant lists sold or shared",
+    body: "WakilKita does not sell, share, or transfer submission records to parties, employers, representative offices, or campaign teams.",
   },
   {
     heading: "No public totals in this phase",
@@ -80,7 +81,7 @@ function IntakeDeskPanel() {
           P105 Petaling Jaya intake
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">
-          Before you send
+          Before you submit
         </h2>
       </div>
       <div className="divide-y divide-[var(--line)]">
@@ -98,7 +99,7 @@ function IntakeDeskPanel() {
       </div>
       <div className="border-t border-[var(--line)] px-6 py-4">
         <p className="text-sm leading-6 text-[var(--slate)]">
-          After you submit, it enters review. It must pass consent and privacy checks before anything public appears.
+          When you submit, the item appears in the dashboard queue. It still needs review, consent checks, and privacy screening before anything public appears.
         </p>
       </div>
       <div className="px-6 pb-4 text-[var(--civic)]">
@@ -110,16 +111,16 @@ function IntakeDeskPanel() {
 
 function WhatIsSection() {
   const isItems = [
-    "A P105 nomination and local-priority intake, manually reviewed",
-    "A way to nominate or endorse a local person you trust",
-    "Independent from parties, candidates, government, and SPR",
+    "P105 civic nomination and issue intake, manually reviewed",
+    "A way to nominate, endorse, claim, or submit a local priority",
+    "Independent from parties, public bodies, and representative offices",
     "Review first — nothing public without checks",
   ];
 
   const isNotItems = [
-    "Not an official election",
+    "Not a public authority service",
     "Not public IC/eKYC collection",
-    "Not a public supporter list, ranking, or count",
+    "Not a public participant list, rank list, or count",
   ];
 
   return (
@@ -133,13 +134,13 @@ function WhatIsSection() {
             id="what-is-heading"
             className="text-xl font-bold tracking-[-0.03em] text-[var(--ink)]"
           >
-            What WakilKita is — and what it is not
+            What WakilKita is — and is not
           </h2>
         </div>
         <div className="grid divide-y divide-[var(--line)] sm:grid-cols-2 sm:divide-x sm:divide-y-0">
           <div className="px-6 py-6">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              What it is
+              What this is
             </p>
             <ul className="space-y-3">
               {isItems.map((item) => (
@@ -155,7 +156,7 @@ function WhatIsSection() {
           </div>
           <div className="px-6 py-6">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.08em] text-[var(--slate)]">
-              What it is not
+              What this is not
             </p>
             <ul className="space-y-3">
               {isNotItems.map((item) => (
@@ -193,10 +194,10 @@ function ReviewJourneySection() {
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            First review. Then public action.
+            First we review. Then we act carefully.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            A submission does not create an instant public profile or count. Details are reviewed, sensitive information is removed, and named people may be contacted before anything public appears.
+            Submitting does not create an instant public profile or count. We review details, remove sensitive information, and contact named people before anything public appears.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -233,16 +234,16 @@ function PrivacyModelSection() {
     >
       <div className="mx-auto max-w-4xl px-5 sm:px-8 lg:px-10">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-          Trust rules
+          Privacy model
         </p>
         <h2
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          Clear rules before anything goes public.
+          Plain rules before anything public.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          Trust starts with simple rules: manual review, no IC/eKYC in public submissions, no public supporter lists, and no public counts until verification is ready.
+          Trust starts with simple rules: manual review, no IC/eKYC in public submissions, no public participant lists, and no public counts until verification is ready.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -265,33 +266,7 @@ export default function Home() {
       </a>
       <main id="main-content" tabIndex={-1} className="min-h-screen overflow-hidden">
         <section className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-5 py-6 sm:px-8 lg:px-10">
-          <nav className="flex items-center justify-between border-b border-[var(--line)] bg-white px-4 py-3">
-            <a href="#top" className="flex items-center gap-3" aria-label="WakilKita home">
-              <span className="grid h-10 w-10 shrink-0 place-items-center bg-[var(--ink)] text-[var(--mint)]">
-                <WakilKitaMark size={28} />
-              </span>
-              <span>
-                <span className="block text-base font-bold tracking-[-0.03em] text-[var(--ink)]">
-                  WakilKita
-                </span>
-                <span className="block text-xs font-semibold text-[var(--civic)]">
-                  P105 Petaling Jaya
-                </span>
-              </span>
-            </a>
-            <div className="hidden items-center gap-6 text-sm font-semibold text-[var(--slate)] md:flex">
-              <a href="#take-part">Nominate</a>
-              <a href="/dashboard">Review queue</a>
-              <a href="#how-it-works">How review works</a>
-              <a href="#trust">Trust rules</a>
-            </div>
-            <a
-              href="#take-part"
-              className="bg-[var(--civic)] px-4 py-2 text-sm font-bold text-white transition hover:bg-[var(--civic-dark)]"
-            >
-              Nominate
-            </a>
-          </nav>
+          <CivicNav />
 
           <div
             id="top"
@@ -309,23 +284,23 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Let Petaling Jaya voters name the local people they trust.
+                Nominate or endorse a Petaling Jaya representative. Every submission is reviewed before anything public appears.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                For P105 residents: nominate or endorse a local person you believe should represent the area. Every submission is reviewed before anything appears publicly.
+                For P105 residents: submit a trusted local name, endorsement, profile claim, or local priority. The entry appears in a dashboard first; nothing becomes public without review and consent.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#take-part"
                   className="bg-[var(--ink)] px-6 py-4 text-center text-sm font-bold text-[var(--mint)] shadow-[0_1px_3px_rgba(0,0,0,0.12)]"
                 >
-                  Nominate a local rep
+                  Start nomination
                 </a>
                 <a
-                  href="/dashboard"
+                  href="/petaling-jaya/aduan"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  View review queue
+                  Read aduan guide
                 </a>
               </div>
             </div>
@@ -341,36 +316,7 @@ export default function Home() {
 
         <PrivacyModelSection />
 
-        <footer className="border-t border-[var(--line)] bg-[rgba(255,250,241,0.72)] px-5 py-10 text-sm leading-6 text-[var(--slate)] sm:px-8 lg:px-10">
-          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[1fr_1.4fr]">
-            <div>
-              <p className="font-bold text-[var(--ink)]">Independent civic nomination</p>
-              <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · Review queue</p>
-            </div>
-            <div className="space-y-3">
-              <p>
-                WakilKita is independent and is not affiliated with SPR, the Malaysian government, any political party, candidate, or election authority.
-              </p>
-              <p>
-                This site does not collect IC/eKYC data in the nomination form. Please do not submit private or sensitive details.
-              </p>
-              <p>
-                Before any public tally is opened, WakilKita will publish clear privacy, verification, dispute, retention, and deletion rules. Individual preferences must never be sold or shared as supporter lists.
-              </p>
-              <p>
-                No public counts, rankings, or supporter lists are shown during this intake phase.
-              </p>
-              <p>
-                <a
-                  className="font-bold text-[var(--civic-dark)] underline"
-                  href="mailto:miccy@arusdigital.com?subject=WakilKita%20report%20or%20takedown"
-                >
-                  Report impersonation, dispute a nomination, or request takedown.
-                </a>
-              </p>
-            </div>
-          </div>
-        </footer>
+        <CivicFooter />
       </main>
     </>
   );
