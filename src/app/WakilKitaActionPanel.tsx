@@ -2,22 +2,10 @@
 
 import { FormEvent, useMemo, useState } from "react";
 
-type IntakeType =
-  | "Nominate a representative"
-  | "Request to claim a representative profile"
-  | "Submit a constituency issue priority";
+type IntakeType = "Nominate a local representative" | "Support platform launch" | "Report correction or safety issue";
 
 const CONTACT_EMAIL = "miccy@arusdigital.com";
-const STORAGE_KEY = "wakilkita_intake_v1";
-
-const defaultIssues = [
-  "Council follow-up",
-  "Walkability and crossings",
-  "Transit and access",
-  "Local facilities",
-  "Cost pressure",
-  "Other local priority",
-];
+const STORAGE_KEY = "wakilkita_nomination_v2";
 
 function cleanText(value: string, maxLength: number) {
   return value.replace(/[<>&"']/g, "").replace(/\s+/g, " ").trim().slice(0, maxLength);
@@ -35,10 +23,9 @@ function formatMissingFields(fields: string[]): string {
 }
 
 export function WakilKitaActionPanel() {
-  const [constituency, setConstituency] = useState("P105 Petaling Jaya");
-  const [intakeType, setIntakeType] = useState<IntakeType>("Nominate a representative");
+  const [constituency, setConstituency] = useState("");
+  const [intakeType, setIntakeType] = useState<IntakeType>("Nominate a local representative");
   const [personName, setPersonName] = useState("");
-  const [issue, setIssue] = useState(defaultIssues[0]);
   const [reason, setReason] = useState("");
   const [contact, setContact] = useState("");
   const [saved, setSaved] = useState(false);
@@ -53,8 +40,8 @@ export function WakilKitaActionPanel() {
 
   const missingFields = useMemo(() => {
     const fields = [
-      cleanText(constituency, 80).length > 2 ? null : "your constituency",
-      cleanText(personName, 80).length > 2 ? null : "a name or issue area",
+      cleanText(constituency, 80).length > 2 ? null : "your parliamentary constituency",
+      cleanText(personName, 80).length > 2 ? null : "the nominee name",
       cleanText(reason, 420).length > 12 ? null : "a short reason",
     ].filter(Boolean) as string[];
     return formatMissingFields(fields);
@@ -76,8 +63,7 @@ export function WakilKitaActionPanel() {
     const payload = {
       intakeType,
       constituency: safeConstituency,
-      nameOrRole: safeName,
-      priorityArea: issue,
+      nominee: safeName,
       reason: safeReason,
       replyContact: safeContact || "Not provided",
       submittedAt: new Date().toISOString(),
@@ -88,23 +74,22 @@ export function WakilKitaActionPanel() {
 
     const subject = `WakilKita: ${intakeType}`;
     const body = [
-      "WakilKita constituency intake",
+      "WakilKita nomination intake",
       "",
       `Request type: ${payload.intakeType}`,
-      `Constituency: ${payload.constituency}`,
-      `Nominee / profile / role: ${payload.nameOrRole}`,
-      `Priority area: ${payload.priorityArea}`,
+      `Parliamentary constituency: ${payload.constituency}`,
+      `Nominee / local representative: ${payload.nominee}`,
       "",
-      "Why this matters:",
+      "Why this person should be considered:",
       payload.reason,
       "",
       `Reply contact: ${payload.replyContact}`,
       "",
-      "Notes:",
-      "- This is not a public authority process or binding civic decision.",
-      "- Please do not include IC numbers, addresses, private allegations, or sensitive personal data.",
-      "- WakilKita is independent and not SPR-affiliated.",
-      "- A named person may be contacted before any public profile is considered and may request removal.",
+      "Declaration:",
+      "- I understand this is not an official SPR election or online voting process.",
+      "- I understand this is a public nomination/support signal initiative.",
+      "- I did not include IC numbers, home addresses, private allegations, or sensitive personal data.",
+      "- I understand nominations may be reviewed before any public profile or tally appears.",
     ].join("\n");
 
     window.location.href = buildMailto(subject, body);
@@ -115,30 +100,27 @@ export function WakilKitaActionPanel() {
       <div className="border border-[var(--line)] bg-white p-5 text-[var(--ink)] shadow-[0_1px_3px_rgba(0,0,0,0.08)] sm:p-7 lg:p-8">
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <p className="inline-flex bg-[var(--soft)] px-3 py-2 text-xs font-bold tracking-[0.08em] text-[var(--civic)]">
-              Private intake · constituency-based
+            <p className="inline-flex bg-[var(--soft)] px-3 py-2 text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
+              Pencalonan rakyat
             </p>
-            <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Send a P105 Petaling Jaya nomination or local issue for manual review.
+            <h2 className="mt-5 text-3xl font-bold tracking-[-0.04em] sm:text-4xl">
+              Sudah ada wakil tempatan yang anda percaya?
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              Use this form to send a nomination, profile claim, or local issue for review. It opens an email draft and does not send anything to a WakilKita server. After you press submit, a copy may be saved in this browser.
+              Calonkan mereka untuk kawasan Parlimen anda. Pencalonan setiap kawasan dibuka selama 7 hari, kemudian sokongan awam boleh dipaparkan melalui live tally selepas semakan.
             </p>
             <div className="mt-6 border-l-2 border-[var(--accent)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Do not send IC numbers, home addresses, private allegations, or sensitive identity details. WakilKita is not collecting IC numbers, eKYC data, or supporter lists.
+              Jangan masukkan nombor IC, alamat rumah, tuduhan peribadi, atau maklumat sensitif. Ini bukan pilihan raya rasmi SPR dan bukan proses undi online rasmi.
             </div>
           </div>
 
-          <form
-            onSubmit={submitIntake}
-            className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6"
-          >
+          <form onSubmit={submitIntake} className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6">
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              Petaling Jaya intake form
+              Nomination form
             </p>
 
             <label className="mt-5 block text-sm font-bold" htmlFor="constituency">
-              Your constituency <span className="text-[var(--amber-text)]">*</span>
+              Parliamentary constituency <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="constituency"
@@ -147,7 +129,7 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="constituency-help"
-              placeholder="e.g. P105 Petaling Jaya"
+              placeholder="e.g. P105 Petaling Jaya, P122 Seputeh"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="constituency-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
@@ -163,13 +145,13 @@ export function WakilKitaActionPanel() {
               onChange={(event) => setIntakeType(event.target.value as IntakeType)}
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
             >
-              <option>Nominate a representative</option>
-              <option>Request to claim a representative profile</option>
-              <option>Submit a constituency issue priority</option>
+              <option>Nominate a local representative</option>
+              <option>Support platform launch</option>
+              <option>Report correction or safety issue</option>
             </select>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
-              Who or what are you submitting? <span className="text-[var(--amber-text)]">*</span>
+              Nominee / local representative name <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="person-name"
@@ -178,29 +160,15 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="person-name-help"
-              placeholder="Name, public role, or issue"
+              placeholder="Name of the person you want to nominate"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Use a public role or profile name. Do not enter IC, phone numbers, or addresses. Only request a profile claim for yourself or a team you are authorised to represent.
+              Submit someone you know as a real local figure. Public profile/tally only happens after review.
             </p>
 
-            <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
-              Which local priority does this relate to?
-            </label>
-            <select
-              id="priority-area"
-              value={issue}
-              onChange={(event) => setIssue(event.target.value)}
-              className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
-            >
-              {defaultIssues.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </select>
-
             <label className="mt-4 block text-sm font-bold" htmlFor="reason">
-              Why should residents consider this? <span className="text-[var(--amber-text)]">*</span>
+              Why do you want this person to represent your area? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
               id="reason"
@@ -210,21 +178,15 @@ export function WakilKitaActionPanel() {
               required
               aria-describedby="reason-help reason-count"
               rows={5}
-              placeholder="Give the public reason, affected area, and what a representative can do first."
+              placeholder="Tell us what they have done, where they are active, and why voters should consider them."
               className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <div className="mt-1.5 flex items-center justify-between gap-4">
               <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                Required. Keep it factual and safe to review.
+                Keep it factual, public, and safe to review.
               </p>
-              <p
-                id="reason-count"
-                className="shrink-0 text-xs font-semibold tabular-nums text-[var(--slate)]"
-                aria-live="off"
-              >
-                {reasonMinReached && (
-                  <span className="mr-2 text-[var(--civic)]">Minimum reached ·</span>
-                )}
+              <p id="reason-count" className="shrink-0 text-xs font-semibold tabular-nums text-[var(--slate)]" aria-live="off">
+                {reasonMinReached && <span className="mr-2 text-[var(--civic)]">Minimum reached ·</span>}
                 {reasonLength} / 420
               </p>
             </div>
@@ -242,11 +204,7 @@ export function WakilKitaActionPanel() {
             />
 
             <div className="mt-5 border border-[var(--line)] bg-white px-4 py-3">
-              <p
-                id="submit-readiness"
-                className="text-xs font-semibold leading-5 text-[var(--slate)]"
-                aria-live="polite"
-              >
+              <p id="submit-readiness" className="text-xs font-semibold leading-5 text-[var(--slate)]" aria-live="polite">
                 {isReady
                   ? "Ready to open your email draft. You can review it before sending."
                   : missingFields
@@ -261,25 +219,19 @@ export function WakilKitaActionPanel() {
               aria-describedby="submit-readiness"
               className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
             >
-              Prepare email submission
+              Prepare nomination email
             </button>
 
-            <div
-              className={`mt-4 border border-[var(--line)] bg-[rgba(38,58,79,0.05)] p-4 ${saved ? "" : "sr-only"}`}
-              aria-live="polite"
-            >
+            <div className={`mt-4 border border-[var(--line)] bg-[rgba(38,58,79,0.05)] p-4 ${saved ? "" : "sr-only"}`} aria-live="polite">
               {saved && (
                 <>
                   <p className="text-sm font-bold text-[var(--civic-dark)]">Email draft prepared</p>
                   <ul className="mt-2 space-y-1.5 text-sm leading-6 text-[var(--slate)]">
                     <li>A draft copy was saved in this browser.</li>
-                    <li>On a shared device, clear browser storage after sending.</li>
+                    <li>Review it before sending.</li>
                     <li>
                       If your email app did not open, email{" "}
-                      <a
-                        href={`mailto:${CONTACT_EMAIL}`}
-                        className="font-bold text-[var(--civic-dark)] underline"
-                      >
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold text-[var(--civic-dark)] underline">
                         {CONTACT_EMAIL}
                       </a>{" "}
                       with the same details.
