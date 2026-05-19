@@ -107,16 +107,22 @@ function ProductPreview() {
 function VisualEvidencePanel() {
   const visuals = [
     {
-      title: "Pandan data workbench visual",
-      src: "/visuals/pandan-dashboard.svg",
-      alt: "Illustrative WakilKita dashboard showing Pandan baseline data, issue priorities, source-needed labels, and trust notes.",
-      note: "A product visual for Pandan data review. It avoids fake citizens, ballot imagery, party symbols, and official-looking seals.",
+      title: "Pandan intake map",
+      src: "/visuals/generated/wakilkita-pandan-map-intake.webp",
+      alt: "Illustrative abstract map of P100 Pandan with product dashboard cards for private intake and local issue review.",
+      note: "Generated civic-tech artwork for the intake story. No real residents, ballots, party marks, public authority seals, or live participation data are shown.",
     },
     {
-      title: "Privacy flow visual",
-      src: "/visuals/trust-flow.svg",
-      alt: "Diagram showing identity check, eligibility token, preference record, and aggregate public output kept separate.",
-      note: "A safer visual than civic crowd scenes: it explains identity separation without implying a live backend or public authority process.",
+      title: "Privacy architecture",
+      src: "/visuals/generated/wakilkita-privacy-architecture.webp",
+      alt: "Abstract privacy architecture visual showing separated systems, token-like shapes, data stores, and aggregate chart blocks.",
+      note: "A visual metaphor for separation of identity, eligibility, and aggregate signals. It does not claim the verification backend is live today.",
+    },
+    {
+      title: "Evidence workspace",
+      src: "/visuals/generated/wakilkita-evidence-workspace.webp",
+      alt: "Illustrative workspace with blank priority cards, source notes, audit trail dots, and issue-review planning blocks.",
+      note: "A neutral profile-and-priority review visual. The cards are intentionally blank so the image does not invent names, issues, or outcomes.",
     },
   ];
 
@@ -125,14 +131,14 @@ function VisualEvidencePanel() {
       <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.8)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Trust model visuals</p>
-            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Diagrams only after the resident action.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Generated website images</p>
+            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Illustrations only after the resident action.</h2>
           </div>
           <p className="max-w-xl text-sm font-semibold leading-6 text-[var(--slate)]">
-            These generated assets are intentionally illustrative product graphics. They are not photos from a pilot, not public authority material, and not live participation data.
+            These image-generation assets are intentionally illustrative product graphics. They are not photos from a pilot, not public authority material, and not live participation data.
           </p>
         </div>
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
+        <div className="mt-6 grid gap-4 lg:grid-cols-3">
           {visuals.map((visual) => (
             <figure key={visual.src} className="overflow-hidden rounded-[2rem] border border-[var(--line)] bg-white/72">
               <Image src={visual.src} alt={visual.alt} width={1440} height={960} loading="lazy" className="aspect-[3/2] w-full object-cover" />
