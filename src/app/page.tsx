@@ -10,21 +10,25 @@ const pandanFacts = [
 ];
 
 const safeguards = [
-  "Production pilot would allow one Pandan resident account per identity check",
-  "Constituency eligibility would be checked before a signal is counted",
-  "Identity records must stay separated from preference records",
-  "Public output must show aggregate participant signal only",
-  "Every count-changing action should produce an audit event",
-  "Dispute, impersonation, candidate-claim and takedown workflow from day one",
+  "We do not collect IC numbers through this page",
+  "We do not publish individual support choices or supporter lists",
+  "Identity records must stay separated from support-signal records",
+  "Verified backing is future pilot functionality, not live today",
+  "Public totals require minimum thresholds and dispute rules",
+  "Every count-changing admin action should produce an audit event",
 ];
 
-const pilotScope = [
-  "P100 Pandan only — no national rollout claim",
-  "Structured intake now; real eKYC only after policy review",
-  "Nominate, claim and verify community representative profiles",
-  "Collect non-binding preference signals only after verification is ready",
-  "Pandan issue board tied to OpenDOSM and resident priorities",
-  "Public results only after privacy thresholds are met",
+const afterSubmitSteps = [
+  ["1", "Review for Pandan relevance", "Next step: manually review whether the nomination, claim request, or issue priority clearly relates to P100 Pandan before anything public is considered."],
+  ["2", "Remove sensitive details", "Private allegations, addresses, IC numbers, and unnecessary personal data should never become public profile material."],
+  ["3", "Open verified backing later", "One verified private support signal per eligible resident comes only after privacy, dispute, and verification rules are published."],
+];
+
+const profilePromise = [
+  "Public service profile with clear claimed/unclaimed status",
+  "Priority issues the representative says they will address",
+  "Evidence of community work, source notes, and correction path",
+  "Aggregate participant support only when verification and thresholds are ready",
 ];
 
 function TrustArchitectureDiagram() {
@@ -59,7 +63,7 @@ function ProductPreview() {
       <div className="rounded-[1.6rem] bg-[var(--ink)] p-5 text-white">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Pandan pilot MVP</p>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Pandan private intake</p>
             <h2 className="mt-3 text-3xl font-black tracking-[-0.06em]">P100 Pandan</h2>
             <p className="mt-2 text-sm font-bold text-white/70">P100 Pandan, Selangor · compact urban constituency · intake open</p>
           </div>
@@ -81,7 +85,7 @@ function ProductPreview() {
             <div>
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">Priority intake</p>
               <h3 className="mt-2 text-2xl font-black tracking-[-0.05em]">Community service profile</h3>
-              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">Public profile and issue submissions are collected privately first, then reviewed before anything becomes visible.</p>
+              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">Profile and issue submissions start as private intake. Nothing becomes public without manual review, consent checks where needed, and dispute handling.</p>
             </div>
             <div className="rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
               <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Status</p>
@@ -106,13 +110,13 @@ function VisualEvidencePanel() {
       title: "Pandan data workbench visual",
       src: "/visuals/pandan-dashboard.svg",
       alt: "Illustrative WakilKita dashboard showing Pandan baseline data, issue priorities, source-needed labels, and trust notes.",
-      note: "A product visual for the constituency workbench. It avoids fake citizens, ballot imagery, party symbols, and official-looking seals.",
+      note: "A product visual for Pandan data review. It avoids fake citizens, ballot imagery, party symbols, and official-looking seals.",
     },
     {
       title: "Privacy flow visual",
       src: "/visuals/trust-flow.svg",
       alt: "Diagram showing identity check, eligibility token, preference record, and aggregate public output kept separate.",
-      note: "A safer visual than civic crowd scenes: it explains identity separation without implying a live backend or official election process.",
+      note: "A safer visual than civic crowd scenes: it explains identity separation without implying a live backend or public authority process.",
     },
   ];
 
@@ -121,11 +125,11 @@ function VisualEvidencePanel() {
       <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.8)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Generated site visuals</p>
-            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Use product diagrams, not political theatre.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Trust model visuals</p>
+            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Diagrams only after the resident action.</h2>
           </div>
           <p className="max-w-xl text-sm font-semibold leading-6 text-[var(--slate)]">
-            These generated assets are intentionally illustrative product graphics. They are not photos from a pilot, not official election material, and not live participation data.
+            These generated assets are intentionally illustrative product graphics. They are not photos from a pilot, not public authority material, and not live participation data.
           </p>
         </div>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
@@ -137,6 +141,58 @@ function VisualEvidencePanel() {
                 <p className="mt-1 text-sm font-semibold leading-6 text-[var(--slate)]">{visual.note}</p>
               </figcaption>
             </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AfterSubmitSection() {
+  return (
+    <section id="how-it-works" className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="after-submit-heading">
+      <div className="rounded-[2.2rem] border border-[var(--line)] bg-[var(--paper)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
+        <div className="max-w-3xl">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">After you submit</p>
+          <h2 id="after-submit-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Private intake first. Public signal later.</h2>
+          <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
+            Submitting a nomination or priority does not create an instant public profile or count. The next job is manual review: keep private details out, confirm consent where needed, and prepare the rules for verified backing.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-3 md:grid-cols-3">
+          {afterSubmitSteps.map(([num, title, body]) => (
+            <article key={title} className="rounded-3xl border border-[var(--line)] bg-white/72 p-5">
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--ink)] text-sm font-black text-[var(--mint)]">{num}</span>
+              <h3 className="mt-4 text-xl font-black tracking-[-0.04em] text-[var(--ink)]">{title}</h3>
+              <p className="mt-2 text-sm font-semibold leading-6 text-[var(--slate)]">{body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RepresentativeProfilePromise() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="profile-promise-heading">
+      <div className="grid gap-5 rounded-[2.2rem] border border-[var(--line)] bg-[rgba(221,247,232,0.36)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.07)] sm:p-7 lg:grid-cols-[0.86fr_1.14fr]">
+        <div>
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Representative profiles</p>
+          <h2 id="profile-promise-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">What a nomination can become.</h2>
+          <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
+            A WakilKita representative is a community-nominated person who may agree to be listed with local priorities, public evidence, and later aggregate verified backing. It does not mean candidacy, party endorsement, or an official role.
+          </p>
+          <div className="mt-5 rounded-3xl bg-[var(--ink)] p-4 text-white">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--mint)]">Current public profile status</p>
+            <p className="mt-2 text-lg font-black tracking-[-0.03em]">No public representative profiles yet. Nominate someone serving Pandan.</p>
+          </div>
+        </div>
+        <div className="grid content-start gap-3 sm:grid-cols-2">
+          {profilePromise.map((item) => (
+            <div key={item} className="rounded-3xl border border-[rgba(15,107,77,0.18)] bg-[var(--paper)] p-5">
+              <p className="text-base font-black leading-6 text-[var(--ink)]">{item}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -157,37 +213,40 @@ export default function Home() {
               <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--ink)] text-sm font-black text-[var(--mint)]">WK</span>
               <span>
                 <span className="block text-base font-black tracking-[-0.03em] text-[var(--ink)]">WakilKita</span>
-                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[var(--civic)]">Pandan pilot MVP</span>
+                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[var(--civic)]">P100 Pandan intake</span>
               </span>
             </a>
             <div className="hidden items-center gap-6 text-sm font-semibold text-[var(--slate)] md:flex">
-              <a href="#trust">Trust model</a>
-              <a href="#constituency">Pandan data</a>
-              <a href="#take-part">Take part</a>
-              <a href="#pilot">Pilot</a>
+              <a href="#take-part">Nominate</a>
+              <a href="#take-part">Submit priority</a>
+              <a href="#how-it-works">How it works</a>
+              <a href="#trust">Trust & privacy</a>
             </div>
-            <a href="mailto:miccy@arusdigital.com?subject=Review%20WakilKita%20Pandan%20pilot" className="rounded-full bg-[var(--civic)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_30px_rgba(15,107,77,0.26)] transition hover:bg-[var(--civic-dark)]">
-              Request review
+            <a href="#take-part" className="rounded-full bg-[var(--civic)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_30px_rgba(15,107,77,0.26)] transition hover:bg-[var(--civic-dark)]">
+              Nominate someone
             </a>
           </nav>
 
           <div id="top" className="grid items-center gap-10 py-8 lg:grid-cols-[1.02fr_0.98fr] lg:py-14">
             <div>
               <div className="mb-6 inline-flex rounded-full border border-[rgba(15,107,77,0.24)] bg-[rgba(221,247,232,0.72)] px-4 py-2 text-sm font-bold text-[var(--civic-dark)]">
-                P100 Pandan pilot only. Not online voting. Not SPR-affiliated. Not a party tool.
+                P100 Pandan only. Private intake first. No IC/eKYC collected here.
               </div>
               <h1 className="max-w-4xl font-serif text-5xl font-black leading-[1.06] tracking-[-0.07em] text-[var(--ink)] sm:text-6xl lg:text-7xl">
-                A working civic preference MVP for Pandan.
+                Nominate people serving P100 Pandan.
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                WakilKita now starts with one constituency: P100 Pandan. Residents and community teams can nominate representative profiles, claim profile ownership, and submit issue priorities without sending IC or eKYC data through the site.
+                Submit a local representative, request a profile claim review, or share the issue Pandan should prioritise first. WakilKita starts with private intake before verified resident support signals go live.
+              </p>
+              <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
+                Not online voting. Not SPR-affiliated. Not a party tool. No public supporter lists.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href="#take-part" className="rounded-full bg-[var(--ink)] px-6 py-4 text-center text-sm font-black uppercase tracking-[0.12em] text-[var(--mint)] shadow-[0_20px_60px_rgba(7,22,19,0.22)]">
-                  Start Pandan intake
+                  Nominate someone
                 </a>
-                <a href="#constituency" className="rounded-full border border-[var(--line)] bg-[rgba(255,250,241,0.7)] px-6 py-4 text-center text-sm font-black uppercase tracking-[0.12em] text-[var(--ink)]">
-                  Review Pandan data
+                <a href="#take-part" className="rounded-full border border-[var(--line)] bg-[rgba(255,250,241,0.7)] px-6 py-4 text-center text-sm font-black uppercase tracking-[0.12em] text-[var(--ink)]">
+                  Submit a priority
                 </a>
               </div>
             </div>
@@ -195,15 +254,19 @@ export default function Home() {
           </div>
         </section>
 
-        <VisualEvidencePanel />
+        <WakilKitaActionPanel />
+
+        <AfterSubmitSection />
+
+        <RepresentativeProfilePromise />
 
         <section id="trust" className="border-y border-[var(--line)] bg-[rgba(255,250,241,0.58)] py-16">
           <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:px-10">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Trust before turnout</p>
-              <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">Boring, auditable, explainable.</h2>
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">How trust works</p>
+              <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">Simple rules before public counts.</h2>
               <p className="mt-5 text-lg leading-8 text-[var(--slate)]">
-                The MVP should win trust by being narrower, clearer, and less theatrical. No AI civic scenes, no blockchain theatre, no public supporter lists. Just a transparent Pandan pilot model with identity separation and aggregate-only output.
+                WakilKita should earn trust by making the current state obvious: private intake is live, verified backing is not. No blockchain theatre, no public supporter lists, no hidden identity-to-support linkage.
               </p>
               <div className="mt-7">
                 <TrustArchitectureDiagram />
@@ -222,45 +285,15 @@ export default function Home() {
 
         <PandanConstituencyExplorer />
 
-        <WakilKitaActionPanel />
-
-        <section id="pilot" className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-10">
-          <div className="rounded-[2.4rem] border border-[var(--line)] bg-[var(--paper)] p-6 shadow-[0_30px_100px_rgba(7,22,19,0.12)] sm:p-8 lg:p-10">
-            <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">MVP pilot scope</p>
-                <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">Start small enough to be trusted.</h2>
-                <p className="mt-5 text-lg leading-8 text-[var(--slate)]">
-                  The useful first product is not a national platform. It is a Pandan-only pilot designed to test identity separation, resident eligibility, representative nominations, dispute workflow, and evidence-led priorities.
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {pilotScope.map((item) => (
-                  <div key={item} className="rounded-3xl bg-[rgba(15,107,77,0.08)] p-5">
-                    <p className="text-base font-black leading-6 text-[var(--ink)]">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="mt-8 rounded-3xl bg-[var(--ink)] p-5 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Positioning rule</p>
-                <p className="mt-2 text-xl font-black tracking-[-0.03em]">One eligible Pandan resident would record one local preference signal in a real pilot. It is non-binding and not an official vote, candidacy decision, or election result.</p>
-              </div>
-              <a href="mailto:miccy@arusdigital.com?subject=Pilot%20WakilKita%20Pandan" className="mt-5 inline-flex rounded-full bg-[var(--mint)] px-5 py-3 text-sm font-black uppercase tracking-[0.12em] text-[var(--civic-dark)] sm:mt-0">
-                Request pilot review
-              </a>
-            </div>
-          </div>
-        </section>
+        <VisualEvidencePanel />
 
         <footer className="border-t border-[var(--line)] bg-[rgba(255,250,241,0.72)] px-5 py-8 text-sm leading-6 text-[var(--slate)] sm:px-8 lg:px-10">
           <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-[1fr_1.4fr]">
             <p className="font-black text-[var(--ink)]">Independent Pandan civic prototype</p>
             <div className="space-y-2">
               <p>WakilKita is independent and is not affiliated with SPR, the Malaysian government, any political party, candidate, or election authority.</p>
-              <p>This MVP does not ask for or transmit IC/eKYC data through the site. Intake starts as a user-controlled email draft and should not contain personal or sensitive details. Any real Pandan pilot must publish privacy, verification, dispute, retention, and deletion policies before collecting resident information.</p>
-              <p>Individual preferences must never be public, sold, or shared as supporter lists. Public results should be aggregate-only and threshold-protected.</p>
+              <p>This site does not ask for or transmit IC/eKYC data through the page. Intake starts as a user-controlled email draft and should not contain personal or sensitive details. Any real Pandan pilot must publish privacy, verification, dispute, retention, and deletion policies before collecting resident information.</p>
+              <p>Individual preferences must never be public, sold, or shared as supporter lists. Public aggregate output should be threshold-protected and never expose individual support choices.</p>
               <p><a className="font-black text-[var(--civic-dark)] underline" href="mailto:miccy@arusdigital.com?subject=WakilKita%20Pandan%20report%20or%20takedown">Report impersonation, dispute a nomination, or request takedown.</a></p>
             </div>
           </div>

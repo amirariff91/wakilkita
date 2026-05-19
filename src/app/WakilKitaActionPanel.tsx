@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 
-type IntakeType = "Nominate a representative" | "Claim a representative profile" | "Submit a Pandan issue priority";
+type IntakeType = "Nominate a representative" | "Request to claim a representative profile" | "Submit a Pandan issue priority";
 
 const CONTACT_EMAIL = "miccy@arusdigital.com";
 const STORAGE_KEY = "wakilkita_pandan_intake_v1";
@@ -35,6 +35,11 @@ export function WakilKitaActionPanel() {
   const isReady = useMemo(() => {
     return cleanText(personName, 80).length > 2 && cleanText(reason, 420).length > 12;
   }, [personName, reason]);
+
+  const missingFields = [
+    cleanText(personName, 80).length > 2 ? null : "a representative/profile name or issue area",
+    cleanText(reason, 420).length > 12 ? null : "a short public reason",
+  ].filter(Boolean).join(" and ");
 
   function submitIntake(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -73,7 +78,7 @@ export function WakilKitaActionPanel() {
       `Reply contact: ${payload.replyContact}`,
       "",
       "Notes:",
-      "- This is not an official vote or election process.",
+      "- This is not a public authority process or binding civic decision.",
       "- Please do not include IC numbers, addresses, private allegations, or sensitive personal data.",
       "- WakilKita is independent and not SPR-affiliated.",
     ].join("\n");
@@ -90,10 +95,10 @@ export function WakilKitaActionPanel() {
               Pandan intake · private by default
             </p>
             <h2 className="mt-5 font-serif text-4xl font-black tracking-[-0.06em] sm:text-5xl">
-              Nominate, claim, or submit a priority for P100 Pandan.
+              Nominate a representative, request a profile claim review, or submit a priority for P100 Pandan.
             </h2>
             <p className="mt-4 text-base leading-7 text-white/72 sm:text-lg">
-              This is the first usable flow: residents and community teams can send structured input without creating premature public results. Submissions open as an email draft so nothing is silently collected in the background.
+              This is the first usable flow: residents and community teams can send structured input without creating premature public profiles or aggregate summaries. Submissions open as an email draft; this page does not send anything to a WakilKita server. After you press submit, a copy may be saved in this browser.
             </p>
             <div className="mt-6 rounded-3xl border border-[rgba(255,250,241,0.2)] bg-[rgba(255,250,241,0.08)] p-4 text-sm font-bold leading-6 text-white/72">
               Do not send IC numbers, home addresses, private allegations, or sensitive identity details. Verification and eligibility checks must be handled only after published privacy and dispute policies exist.
@@ -103,7 +108,7 @@ export function WakilKitaActionPanel() {
                 <div key={item} className="rounded-3xl bg-white/8 p-4 ring-1 ring-white/10">
                   <p className="text-lg font-black tracking-[-0.04em] text-[var(--mint)]">{item}</p>
                   <p className="mt-1 text-xs font-semibold leading-5 text-white/58">
-                    {item === "Nominate" ? "Suggest a local profile" : item === "Claim" ? "Start profile ownership" : "Submit an issue signal"}
+                    {item === "Nominate" ? "Suggest a local profile" : item === "Claim" ? "Request ownership review" : "Submit an issue signal"}
                   </p>
                 </div>
               ))}
@@ -123,25 +128,27 @@ export function WakilKitaActionPanel() {
               className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
             >
               <option>Nominate a representative</option>
-              <option>Claim a representative profile</option>
+              <option>Request to claim a representative profile</option>
               <option>Submit a Pandan issue priority</option>
             </select>
 
             <label className="mt-4 block text-sm font-black" htmlFor="person-name">
-              Nominee, profile, or role name
+              Representative/profile name or issue area <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="person-name"
               value={personName}
               onChange={(event) => setPersonName(event.target.value)}
               maxLength={80}
+              required
+              aria-describedby="person-name-help"
               placeholder="e.g. Community organiser for Pandan Indah"
               className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
-            <p className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Use a public role or profile name. Avoid IC, phone numbers, and addresses.</p>
+            <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Required. Use a public role or profile name. Avoid IC, phone numbers, and addresses. Only request a profile claim for yourself or a team you are authorised to represent; claims are not approved automatically.</p>
 
             <label className="mt-4 block text-sm font-black" htmlFor="priority-area">
-              Priority area
+              Which Pandan priority does this relate to?
             </label>
             <select
               id="priority-area"
@@ -155,17 +162,20 @@ export function WakilKitaActionPanel() {
             </select>
 
             <label className="mt-4 block text-sm font-black" htmlFor="reason">
-              Why should this be prioritised?
+              Why should residents consider this? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
               id="reason"
               value={reason}
               onChange={(event) => setReason(event.target.value)}
               maxLength={420}
+              required
+              aria-describedby="reason-help"
               rows={5}
               placeholder="Give the public reason, affected area, and what a representative should do first."
               className="mt-2 w-full resize-none rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
+            <p id="reason-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Required. Minimum 13 characters. Keep it factual and safe for public review.</p>
 
             <label className="mt-4 block text-sm font-black" htmlFor="contact">
               Optional reply contact
@@ -182,14 +192,19 @@ export function WakilKitaActionPanel() {
             <button
               type="submit"
               disabled={!isReady}
+              aria-describedby="submit-readiness"
               className="mt-5 w-full rounded-full bg-[var(--civic)] px-5 py-3 text-sm font-black uppercase tracking-[0.12em] text-white disabled:cursor-not-allowed disabled:bg-[rgba(15,107,77,0.42)]"
             >
-              Prepare secure email intake
+              Prepare private intake email
             </button>
+
+            <p id="submit-readiness" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]" aria-live="polite">
+              {isReady ? "Ready to prepare your email draft." : `Add ${missingFields} to prepare the email draft.`}
+            </p>
 
             {saved && (
               <p className="mt-3 rounded-2xl bg-[rgba(15,107,77,0.08)] px-4 py-3 text-sm font-bold leading-6 text-[var(--civic-dark)]" aria-live="polite">
-                Draft saved locally and email composer opened. If your email app did not open, email {CONTACT_EMAIL} with the same details.
+                Draft saved in this browser and email composer opened. If you are on a shared device, clear this draft/browser storage after sending. If your email app did not open, email {CONTACT_EMAIL} with the same details.
               </p>
             )}
           </form>

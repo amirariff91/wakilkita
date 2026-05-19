@@ -27,7 +27,7 @@ const profileBreakdown = [
 ];
 
 const electorateChecks = [
-  { label: "Registered electors vs total population", value: "65.0%", detail: "Useful first health-check for participation ceilings and turnout interpretation." },
+  { label: "Registered electors vs total population", value: "65.0%", detail: "Useful first health-check for participation ceilings and resident eligibility planning." },
   { label: "Registered electors vs citizens", value: "69.8%", detail: "Better proxy than total population, but still not an age/race breakdown." },
   { label: "Age-group elector split", value: "Source needed", detail: "Do not invent this. Requires SPR/open electoral roll aggregate by P100 + age band." },
   { label: "Race/ethnicity elector split", value: "Source needed", detail: "Current DOSM P100 table exposes citizen/non-citizen, not Malay/Chinese/Indian/Other by constituency." },
@@ -93,10 +93,10 @@ export function PandanConstituencyExplorer() {
       <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.92)] p-5 shadow-[0_30px_100px_rgba(7,22,19,0.11)] sm:p-7 lg:p-9">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Pandan constituency intelligence</p>
-            <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">Make the whole page about P100 Pandan.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Pandan data context</p>
+            <h2 className="mt-4 font-serif text-4xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-5xl">What Pandan nominees should answer with evidence.</h2>
             <p className="mt-4 max-w-3xl text-base font-semibold leading-7 text-[var(--slate)] sm:text-lg">
-              This section turns WakilKita from a generic civic landing page into a constituency workbench: what is known, what is missing, and what a nominated representative must answer with evidence.
+              Public datasets can frame the first questions for any representative profile: who lives here, what services are nearby, which gaps remain, and what proof should be published before residents are asked for support.
             </p>
           </div>
           <span className="w-fit rounded-full bg-[var(--mint)] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Not live participation data</span>
@@ -174,10 +174,11 @@ export function PandanConstituencyExplorer() {
                     key={issue.label}
                     onClick={() => setSelectedIssue(issue.label)}
                     className={`w-full rounded-3xl border p-4 text-left transition ${selectedIssue === issue.label ? "border-[var(--civic)] bg-[rgba(15,107,77,0.1)]" : "border-[var(--line)] bg-white/68 hover:bg-white"}`}
+                    aria-pressed={selectedIssue === issue.label}
                   >
                     <div className="flex items-center justify-between gap-4">
                       <span className="font-black text-[var(--ink)]">{issue.label}</span>
-                      <span className="font-black text-[var(--civic-dark)]">{issue.score}/100</span>
+                      <span className="font-black text-[var(--civic-dark)]">Planning note</span>
                     </div>
                     <div className="mt-3 h-3 overflow-hidden rounded-full bg-[rgba(15,107,77,0.1)]">
                       <div className="h-full rounded-full bg-[var(--civic)]" style={{ width: `${issue.score}%` }} />
@@ -188,6 +189,7 @@ export function PandanConstituencyExplorer() {
               <div className="rounded-[2rem] bg-[var(--ink)] p-6 text-white">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--mint)]">Selected priority</p>
                 <h3 className="mt-3 text-3xl font-black tracking-[-0.05em]">{activeIssue.label}</h3>
+                <p className="mt-3 rounded-full bg-white/8 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--mint)]">Planning heuristic — not a resident count</p>
                 <p className="mt-4 text-base font-semibold leading-7 text-white/72">{activeIssue.evidence}</p>
                 <p className="mt-5 rounded-3xl border border-white/10 bg-white/8 p-4 text-sm font-bold leading-6 text-white/68">
                   Representative profiles should be forced to answer: what will you fix first, which neighbourhoods are affected, what public dataset supports it, and how will residents judge progress?
