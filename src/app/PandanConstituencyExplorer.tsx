@@ -99,7 +99,7 @@ export function PandanConstituencyExplorer() {
               Public datasets set the first questions for any representative profile: who lives here, what services are nearby, which gaps remain, and what proof residents need before they give support.
             </p>
           </div>
-          <span className="w-fit rounded-full bg-[var(--mint)] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Not live participation data</span>
+          <span className="w-fit rounded-full bg-[var(--mint)] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Reference data only</span>
         </div>
 
         <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
