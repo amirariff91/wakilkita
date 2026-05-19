@@ -1,12 +1,12 @@
 # WakilKita
 
-Verified civic mandate platform MVP.
+Non-binding civic preference signal MVP.
 
 WakilKita is not online voting, not SPR, and not a political party platform. It is a public preference and endorsement signal where one eligible resident can support one local preferred rep in their own constituency.
 
 ## MVP thesis
 
-Before party machinery decides, residents should be able to show who they actually want to represent them — with verification, privacy, and constituency-level issue data.
+A prototype for residents to signal a preferred local representative with verification, privacy, and constituency-level issue data designed in from the start.
 
 ## What this prototype includes
 
@@ -21,7 +21,7 @@ Before party machinery decides, residents should be able to show who they actual
 
 - Do not call it official voting.
 - Do not expose individual political preference.
-- Do not store more IC/eKYC data than necessary.
+- Do not collect IC/eKYC data until privacy, verification, deletion, and retention rules are published.
 - Separate identity records from support records.
 - Keep auditability and dispute handling in the first release.
 

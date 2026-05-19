@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WakilKita — Verified civic mandate platform",
+  title: "WakilKita — Non-binding civic preference signal",
   description:
-    "A trust-first platform for Malaysians to nominate, support, and compare local representatives using verified constituency signals and public data.",
+    "A trust-first Malaysian civic prototype for constituents to nominate, support, and compare local representatives using planned verification and public-data issue signals.",
 };
 
 export default function RootLayout({

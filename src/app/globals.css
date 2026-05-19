@@ -3,6 +3,8 @@
 :root {
   --background: #f7f0e4;
   --foreground: #071613;
+  --font-display: Georgia, Cambria, "Times New Roman", serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --ink: #071613;
   --civic: #0f6b4d;
   --civic-dark: #084733;
@@ -10,6 +12,7 @@
   --parchment: #f7f0e4;
   --paper: #fffaf1;
   --amber: #d99a1e;
+  --amber-text: #8a5a00;
   --slate: #33413d;
   --line: rgba(7, 22, 19, 0.14);
 }
@@ -39,7 +42,7 @@ body {
     linear-gradient(135deg, rgba(7, 22, 19, 0.05) 0 1px, transparent 1px 18px),
     var(--background);
   color: var(--foreground);
-  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  font-family: var(--font-body);
 }
 
 ::selection {
@@ -50,4 +53,44 @@ body {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--amber-text);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 50;
+  transform: translateY(-150%);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--mint);
+  font-weight: 900;
+  padding: 0.75rem 1rem;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
