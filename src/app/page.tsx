@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PandanConstituencyExplorer } from "./PandanConstituencyExplorer";
 import { WakilKitaActionPanel } from "./WakilKitaActionPanel";
 
@@ -62,7 +63,7 @@ function ProductPreview() {
             <h2 className="mt-3 text-3xl font-black tracking-[-0.06em]">P100 Pandan</h2>
             <p className="mt-2 text-sm font-bold text-white/70">P100 Pandan, Selangor · compact urban constituency · intake open</p>
           </div>
-          <span className="rounded-full bg-[rgba(221,247,232,0.14)] px-3 py-2 text-xs font-black text-[var(--mint)]">pilot intake</span>
+          <span className="rounded-full bg-[rgba(221,247,232,0.14)] px-3 py-2 text-xs font-black text-[var(--mint)]">private intake</span>
         </div>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -84,7 +85,7 @@ function ProductPreview() {
             </div>
             <div className="rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
               <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[var(--civic-dark)]">Status</p>
-              <p className="text-2xl font-black">Open</p>
+              <p className="text-lg font-black leading-tight">Private intake draft</p>
             </div>
           </div>
           <div className="mt-5 grid gap-2 text-xs font-black uppercase tracking-[0.14em] text-[var(--civic-dark)] sm:grid-cols-3">
@@ -96,6 +97,50 @@ function ProductPreview() {
         </div>
       </div>
     </div>
+  );
+}
+
+function VisualEvidencePanel() {
+  const visuals = [
+    {
+      title: "Pandan data workbench visual",
+      src: "/visuals/pandan-dashboard.svg",
+      alt: "Illustrative WakilKita dashboard showing Pandan baseline data, issue priorities, source-needed labels, and trust notes.",
+      note: "A product visual for the constituency workbench. It avoids fake citizens, ballot imagery, party symbols, and official-looking seals.",
+    },
+    {
+      title: "Privacy flow visual",
+      src: "/visuals/trust-flow.svg",
+      alt: "Diagram showing identity check, eligibility token, preference record, and aggregate public output kept separate.",
+      note: "A safer visual than civic crowd scenes: it explains identity separation without implying a live backend or official election process.",
+    },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="visual-evidence-heading">
+      <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(255,250,241,0.8)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.08)] sm:p-7">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Generated site visuals</p>
+            <h2 id="visual-evidence-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Use product diagrams, not political theatre.</h2>
+          </div>
+          <p className="max-w-xl text-sm font-semibold leading-6 text-[var(--slate)]">
+            These generated assets are intentionally illustrative product graphics. They are not photos from a pilot, not official election material, and not live participation data.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-4 lg:grid-cols-2">
+          {visuals.map((visual) => (
+            <figure key={visual.src} className="overflow-hidden rounded-[2rem] border border-[var(--line)] bg-white/72">
+              <Image src={visual.src} alt={visual.alt} width={1440} height={960} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+              <figcaption className="border-t border-[var(--line)] p-4">
+                <p className="font-black text-[var(--ink)]">{visual.title}</p>
+                <p className="mt-1 text-sm font-semibold leading-6 text-[var(--slate)]">{visual.note}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -121,8 +166,8 @@ export default function Home() {
               <a href="#take-part">Take part</a>
               <a href="#pilot">Pilot</a>
             </div>
-            <a href="mailto:miccy@arusdigital.com?subject=Join%20WakilKita%20Pandan%20pilot" className="rounded-full bg-[var(--civic)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_30px_rgba(15,107,77,0.26)] transition hover:bg-[var(--civic-dark)]">
-              Join pilot
+            <a href="mailto:miccy@arusdigital.com?subject=Review%20WakilKita%20Pandan%20pilot" className="rounded-full bg-[var(--civic)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_30px_rgba(15,107,77,0.26)] transition hover:bg-[var(--civic-dark)]">
+              Request review
             </a>
           </nav>
 
@@ -149,6 +194,8 @@ export default function Home() {
             <ProductPreview />
           </div>
         </section>
+
+        <VisualEvidencePanel />
 
         <section id="trust" className="border-y border-[var(--line)] bg-[rgba(255,250,241,0.58)] py-16">
           <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:px-10">
