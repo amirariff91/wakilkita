@@ -95,3 +95,26 @@ select:focus-visible,
     transition-duration: 0.01ms !important;
   }
 }
+
+.journey-connector {
+  width: 1px;
+  background-color: var(--line);
+  flex: 1;
+  min-height: 1.5rem;
+}
+
+@keyframes journey-connect {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .journey-connector {
+    transform-origin: top;
+    animation: journey-connect 0.45s ease-out forwards;
+  }
+}
