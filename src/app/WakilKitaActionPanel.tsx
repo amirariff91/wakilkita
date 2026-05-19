@@ -44,8 +44,8 @@ export function WakilKitaActionPanel() {
 
   const missingFields = useMemo(() => {
     const fields = [
-      cleanText(constituency, 80).length > 2 ? null : "your constituency",
-      cleanText(personName, 80).length > 2 ? null : "a name, representative, or issue area",
+      cleanText(constituency, 80).length > 2 ? null : "your parliamentary constituency",
+      cleanText(personName, 80).length > 2 ? null : "a nominee name",
       cleanText(reason, 420).length > 12 ? null : "a short reason",
     ].filter(Boolean) as string[];
     return formatMissingFields(fields);
@@ -83,16 +83,16 @@ export function WakilKitaActionPanel() {
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="inline-flex bg-[var(--soft)] px-3 py-2 text-xs font-bold tracking-[0.08em] text-[var(--civic)]">
-              In-platform intake · dashboard queue
+              Nomination intake · review queue
             </p>
             <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Submit a P105 nomination, endorsement, or local issue into the review dashboard.
+              Nominate or endorse a P105 local representative.
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              No email handoff. Your entry is saved into a dashboard queue in this browser, with review state, risk flags, and clear next steps before anything public appears.
+              Your submission enters the review queue first. Nothing becomes public until it passes basic checks for privacy, consent, and safety.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Do not enter IC numbers, home addresses, private allegations, or sensitive identity details here. IC/eKYC belongs in a separate verification flow, not in the public nomination form.
+              Do not enter IC numbers, home addresses, private allegations, or sensitive identity details. This form is for public reasons only.
             </div>
           </div>
 
@@ -101,11 +101,11 @@ export function WakilKitaActionPanel() {
             className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6"
           >
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              Petaling Jaya nomination form
+              P105 nomination form
             </p>
 
             <label className="mt-5 block text-sm font-bold" htmlFor="constituency">
-              Your constituency <span className="text-[var(--amber-text)]">*</span>
+              Parliamentary constituency <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="constituency"
@@ -118,7 +118,7 @@ export function WakilKitaActionPanel() {
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="constituency-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Keep this tied to your parliamentary area. P105 Petaling Jaya is the active first constituency.
+              P105 Petaling Jaya is the active first constituency.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="intake-type">
@@ -137,7 +137,7 @@ export function WakilKitaActionPanel() {
             </select>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
-              Who or what are you submitting? <span className="text-[var(--amber-text)]">*</span>
+              Who are you nominating or endorsing? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="person-name"
@@ -146,15 +146,15 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="person-name-help"
-              placeholder="Name, public role, or issue"
+              placeholder="Name or public role"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Use a public name, role, or issue. A nominated person still needs consent or claim review before any public profile.
+              Use a public name or role. A nominated person still needs consent or claim review before any public profile appears.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
-              Which local priority does this relate to?
+              Which local priority is most relevant?
             </label>
             <select
               id="priority-area"
@@ -168,7 +168,7 @@ export function WakilKitaActionPanel() {
             </select>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="reason">
-              Why should residents consider this? <span className="text-[var(--amber-text)]">*</span>
+              Why should P105 residents consider this person? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
               id="reason"
@@ -178,12 +178,12 @@ export function WakilKitaActionPanel() {
               required
               aria-describedby="reason-help reason-count"
               rows={5}
-              placeholder="Give the public reason, affected area, and what a representative can do first."
+              placeholder="Share what they have done, where they are active, or why residents trust them."
               className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <div className="mt-1.5 flex items-center justify-between gap-4">
               <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                Required. Keep it factual and safe to review.
+                Keep it factual, public, and safe to review.
               </p>
               <p
                 id="reason-count"
@@ -216,7 +216,7 @@ export function WakilKitaActionPanel() {
                 aria-live="polite"
               >
                 {isReady
-                  ? "Ready to submit into the dashboard queue."
+                  ? "Ready to send for review."
                   : missingFields
                     ? `Still needed: ${missingFields}.`
                     : "Fill in the required fields to continue."}
@@ -229,7 +229,7 @@ export function WakilKitaActionPanel() {
               aria-describedby="submit-readiness"
               className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
             >
-              Submit to dashboard
+              Send for review
             </button>
 
             <div
@@ -238,7 +238,7 @@ export function WakilKitaActionPanel() {
             >
               {saved && (
                 <p className="text-sm font-bold text-[var(--civic-dark)]">
-                  Submission saved. Opening the dashboard queue now.
+                  Submission saved. Opening the review queue now.
                 </p>
               )}
             </div>
