@@ -36,101 +36,44 @@ type DemoState = Record<
   }
 >;
 
-const STORAGE_KEY = "wakilkita_demo_v1";
+const STORAGE_KEY = "wakilkita_pandan_mvp_v1";
 const MAX_NOMINEES_PER_SEAT = 12;
 
 const seedConstituencies: Constituency[] = [
   {
-    code: "P105",
-    name: "Petaling Jaya",
+    code: "P100",
+    name: "Pandan",
     state: "Selangor",
-    residentSignal: 1284,
+    residentSignal: 148730,
     issues: [
-      { label: "Transit reliability", score: 84, source: "GTFS sample + resident priority" },
-      { label: "Flood mitigation", score: 76, source: "NADMA sample + local reports" },
-      { label: "Clinic access", score: 61, source: "OpenDOSM sample + facility distance" },
+      { label: "High-density urban services", score: 88, source: "OpenDOSM: 11,371 people/km²; 20km² seat" },
+      { label: "Public transport and walkability pressure", score: 81, source: "Urban density + resident priority input needed" },
+      { label: "Clinic, grocery, ATM and public facility access", score: 74, source: "OpenDOSM public-service indicators" },
+      { label: "Youth, family and working-age needs", score: 71, source: "OpenDOSM: 71.8% working age; 21.3% children" },
     ],
     nominees: [
       {
-        id: "p105-a",
-        name: "Illustrative community organiser",
-        focus: "Transit reliability",
-        plan: "Publish monthly bus punctuality scorecards and push council escalations for unreliable corridors.",
+        id: "p100-a",
+        name: "Illustrative community service organiser",
+        focus: "High-density urban services",
+        plan: "Publish a Pandan service-pressure dashboard covering clinic access, walkability complaints, council response times, and high-density neighbourhood needs.",
+        supportCount: 612,
+        seeded: true,
+      },
+      {
+        id: "p100-b",
+        name: "Illustrative mobility advocate",
+        focus: "Public transport and walkability",
+        plan: "Map unsafe crossings, first-mile access gaps, bus reliability pain points, and propose monthly resident-backed fixes to the relevant agencies.",
         supportCount: 487,
         seeded: true,
       },
       {
-        id: "p105-b",
-        name: "Illustrative neighbourhood chair",
-        focus: "Flood mitigation",
-        plan: "Prioritise drain desilting maps, hotspot reporting, and public SLA tracking before monsoon season.",
-        supportCount: 391,
-        seeded: true,
-      },
-      {
-        id: "p105-c",
-        name: "Illustrative service advocate",
-        focus: "Clinic access",
-        plan: "Track queue pressure and propose mobile clinic days for older residents in high-density zones.",
-        supportCount: 262,
-        seeded: true,
-      },
-    ],
-  },
-  {
-    code: "P104",
-    name: "Subang",
-    state: "Selangor",
-    residentSignal: 842,
-    issues: [
-      { label: "Flood mitigation", score: 82, source: "NADMA sample + resident reports" },
-      { label: "Public transport gaps", score: 70, source: "GTFS sample + resident priority" },
-      { label: "School density", score: 58, source: "MOE sample + population density" },
-    ],
-    nominees: [
-      {
-        id: "p104-a",
-        name: "Illustrative flood-response volunteer",
-        focus: "Flood mitigation",
-        plan: "Coordinate public hotspot maps, response teams, and visible council follow-up after every incident.",
-        supportCount: 311,
-        seeded: true,
-      },
-      {
-        id: "p104-b",
-        name: "Illustrative mobility advocate",
-        focus: "Public transport gaps",
-        plan: "Use resident reports to push first-mile routes, pedestrian fixes, and safer late-evening access.",
-        supportCount: 228,
-        seeded: true,
-      },
-    ],
-  },
-  {
-    code: "P121",
-    name: "Lembah Pantai",
-    state: "Kuala Lumpur",
-    residentSignal: 517,
-    issues: [
-      { label: "Rental pressure", score: 79, source: "OpenDOSM sample + resident priority" },
-      { label: "Clinic access", score: 66, source: "Facility distance sample" },
-      { label: "School density", score: 63, source: "MOE sample + population density" },
-    ],
-    nominees: [
-      {
-        id: "p121-a",
-        name: "Illustrative housing researcher",
-        focus: "Rental pressure",
-        plan: "Publish rent-pressure snapshots and coordinate tenant-help referrals with local NGOs.",
-        supportCount: 207,
-        seeded: true,
-      },
-      {
-        id: "p121-b",
-        name: "Illustrative public health organiser",
-        focus: "Clinic access",
-        plan: "Identify access gaps and advocate mobile screening days for flats and older resident clusters.",
-        supportCount: 173,
+        id: "p100-c",
+        name: "Illustrative family services volunteer",
+        focus: "Youth and family support",
+        plan: "Coordinate resident feedback on childcare, school-adjacent congestion, youth facilities, and family-service access in dense Pandan neighbourhoods.",
+        supportCount: 392,
         seeded: true,
       },
     ],
@@ -205,6 +148,7 @@ export function WakilKitaDemo() {
   const [selectedCode, setSelectedCode] = useState(seedConstituencies[0].code);
   const [name, setName] = useState("");
   const [focus, setFocus] = useState("");
+  const [lastNomination, setLastNomination] = useState<string | null>(null);
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -229,6 +173,7 @@ export function WakilKitaDemo() {
         auditEvents: [`Demo verification pass ${passId} created locally`, ...current[selectedSeat.code].auditEvents].slice(0, 6),
       },
     }));
+    setLastNomination(null);
   }
 
   function supportNominee(nomineeId: string) {
@@ -292,6 +237,7 @@ export function WakilKitaDemo() {
         },
       };
     });
+    setLastNomination(nomineeName);
     setName("");
     setFocus("");
   }
@@ -302,12 +248,12 @@ export function WakilKitaDemo() {
     setState(next);
     setName("");
     setFocus("");
+    setLastNomination(null);
   }
 
   return (
     <section id="demo" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-      <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(7,22,19,0.96)] p-4 text-white shadow-[0_30px_100px_rgba(7,22,19,0.22)] sm:p-6 lg:p-8">
-        <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(221,247,232,0.12),rgba(255,250,241,0.04))] p-5 sm:p-7">
+      <div className="rounded-[2.4rem] border border-[var(--line)] bg-[rgba(7,22,19,0.96)] p-5 text-white shadow-[0_30px_100px_rgba(7,22,19,0.22)] sm:p-7 lg:p-9">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <p className="inline-flex rounded-full bg-[var(--mint)] px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--civic-dark)]">
@@ -355,7 +301,7 @@ export function WakilKitaDemo() {
                       <span className="text-xs font-black uppercase tracking-[0.14em] text-[var(--amber-text)]">{seat.code}</span>
                       <span className="mt-1 block text-xl font-black tracking-[-0.04em]">{seat.name}</span>
                       <span className="mt-1 block text-sm font-bold text-[var(--slate)]">
-                        {seat.state} · {formatNumber(seat.residentSignal)} seeded participant signals
+                        {seat.state} · {formatNumber(seat.residentSignal)} eligible-voter baseline
                       </span>
                     </button>
                   ))}
@@ -366,7 +312,7 @@ export function WakilKitaDemo() {
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">2 · Demo verification</p>
                 <h3 className="mt-3 text-2xl font-black tracking-[-0.05em]">Local pass for {selectedSeat.code}</h3>
                 <p className="mt-2 text-sm leading-6 text-[var(--slate)]">
-                  Real eKYC is intentionally not in this demo. Click once to simulate the point where a verified constituent would be allowed to record one preference signal.
+                  Real eKYC is intentionally not in this demo. Click once to simulate the point where a future verified constituent would be allowed to record one preference signal.
                 </p>
                 <button
                   type="button"
@@ -374,7 +320,7 @@ export function WakilKitaDemo() {
                   disabled={selectedState.demoPassCreated}
                   className="mt-4 w-full rounded-full bg-[var(--ink)] px-5 py-3 text-sm font-black uppercase tracking-[0.12em] text-[var(--mint)] disabled:cursor-not-allowed disabled:bg-[var(--civic)]"
                 >
-                  {selectedState.demoPassCreated ? "Demo pass active" : "Create local demo pass"}
+                  {selectedState.demoPassCreated ? "Demo pass active" : "Start demo verification"}
                 </button>
               </div>
 
@@ -394,6 +340,7 @@ export function WakilKitaDemo() {
                   placeholder="e.g. Illustrative community advocate"
                   className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
                 />
+                <p className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Use a fictional or role-based name only.</p>
                 <label className="mt-4 block text-sm font-black" htmlFor="demo-focus">
                   Main issue focus
                 </label>
@@ -405,6 +352,7 @@ export function WakilKitaDemo() {
                   placeholder="e.g. Flood mitigation"
                   className="mt-2 w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
                 />
+                <p className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">Do not include names, addresses, IC numbers, phone numbers, or allegations.</p>
                 <button
                   type="submit"
                   disabled={!name.trim() || !focus.trim() || selectedState.nominees.length >= MAX_NOMINEES_PER_SEAT}
@@ -412,6 +360,11 @@ export function WakilKitaDemo() {
                 >
                   Add local demo nomination
                 </button>
+                {lastNomination && (
+                  <p className="mt-3 rounded-2xl bg-[rgba(15,107,77,0.08)] px-4 py-3 text-sm font-bold leading-6 text-[var(--civic-dark)]" aria-live="polite">
+                    Added locally: {lastNomination}. It appears in the demo list only on this browser.
+                  </p>
+                )}
               </form>
             </div>
 
@@ -420,11 +373,9 @@ export function WakilKitaDemo() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">4 · Demo preference signal</p>
-                    <h3 className="mt-2 text-3xl font-black tracking-[-0.06em]">
-                      {selectedSeat.code} {selectedSeat.name}
-                    </h3>
+                    <h3 className="mt-2 text-3xl font-black tracking-[-0.06em]">{`${selectedSeat.code} ${selectedSeat.name}`}</h3>
                     <p className="mt-2 text-sm font-bold text-[var(--slate)]">
-                      {selectedState.demoPassCreated ? "Demo pass active" : "Create a demo pass first"} · {formatNumber(totalSupport)} aggregate signals
+                      {selectedState.demoPassCreated ? "Demo pass active" : "Start demo verification first"} · {formatNumber(totalSupport)} seeded demo signals
                     </p>
                   </div>
                   <span className="rounded-full bg-[rgba(217,154,30,0.14)] px-3 py-2 text-xs font-black text-[var(--amber-text)]">
@@ -458,7 +409,7 @@ export function WakilKitaDemo() {
                               <p className="mt-2 text-sm leading-6 text-[var(--slate)]">{nominee.plan}</p>
                             </div>
                             <div className="shrink-0 rounded-2xl bg-[var(--mint)] px-4 py-3 text-center">
-                              <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[var(--civic-dark)]">Demo signal</p>
+                              <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[var(--civic-dark)]">Seeded demo</p>
                               <p className="text-2xl font-black">{percent}%</p>
                             </div>
                           </div>
@@ -467,7 +418,7 @@ export function WakilKitaDemo() {
                           </div>
                           <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <p className="text-xs font-bold text-[var(--slate)]">
-                              {formatNumber(nominee.supportCount)} demo signals · aggregate only
+                              {formatNumber(nominee.supportCount)} seeded demo count · aggregate only
                             </p>
                             <button
                               type="button"
@@ -475,7 +426,7 @@ export function WakilKitaDemo() {
                               disabled={!selectedState.demoPassCreated || locked}
                               className="rounded-full bg-[var(--ink)] px-5 py-3 text-sm font-black uppercase tracking-[0.1em] text-[var(--mint)] disabled:cursor-not-allowed disabled:bg-[rgba(7,22,19,0.34)]"
                             >
-                              {supported ? "Recorded" : locked ? "Signal used" : selectedState.demoPassCreated ? "Record demo signal" : "Create demo eligibility pass"}
+                              {supported ? "Recorded" : locked ? "Signal used" : selectedState.demoPassCreated ? "Record demo signal" : "Locked — start demo verification first"}
                             </button>
                           </div>
                         </div>
@@ -486,7 +437,7 @@ export function WakilKitaDemo() {
 
                 {selectedState.supportedNomineeId && (
                   <p className="mt-4 rounded-2xl bg-[rgba(15,107,77,0.08)] px-4 py-3 text-sm font-bold leading-6 text-[var(--civic-dark)]">
-                    You have signaled one local preference in this constituency. In a real system this would be backed by identity verification, eligibility checks, and a dispute process.
+                    You have signaled one local preference in this browser-only demo. In a real system this would be backed by identity verification, eligibility checks, and a dispute process.
                   </p>
                 )}
               </div>
@@ -512,6 +463,7 @@ export function WakilKitaDemo() {
 
                 <div className="rounded-3xl bg-[rgba(221,247,232,0.1)] p-5">
                   <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--mint)]">Local audit trail</p>
+                  <p className="mt-2 text-sm font-bold leading-6 text-white/70">Your local demo actions appear here. A real pilot would need a server-side audit log, dispute process, and retention policy.</p>
                   <div className="mt-5 space-y-3" aria-live="polite" aria-atomic="false">
                     {selectedState.auditEvents.map((event, index) => (
                       <p key={`${index}-${event}`} className="rounded-2xl bg-white/8 px-4 py-3 text-sm font-bold leading-6 text-white/78 ring-1 ring-white/10">
@@ -523,11 +475,10 @@ export function WakilKitaDemo() {
               </div>
 
               <p className="rounded-3xl border border-white/10 bg-white/5 p-5 text-sm font-bold leading-6 text-white/70">
-                Guardrail: this demo deliberately avoids real IC, phone, address, email, backend storage, supporter lists, and shareable leaderboards. It shows the product interaction model, not a production trust system.
+                Guardrail: this demo deliberately avoids real IC, phone, address, email, backend storage, supporter lists, and shareable leaderboards. It shows the product interaction model, not a production trust system. <a className="font-black text-[var(--mint)] underline" href="mailto:miccy@arusdigital.com?subject=WakilKita%20Pandan%20report%20or%20takedown">Report impersonation, dispute a nomination, or request takedown.</a>
               </p>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

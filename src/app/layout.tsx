@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "WakilKita — Non-binding civic preference signal",
   description:
-    "A trust-first Malaysian civic prototype for constituents to nominate, support, and compare local representatives using planned verification and public-data issue signals.",
+    "Independent Pandan-only civic demo for non-binding preference signals; not SPR-affiliated, not online voting, and not an official election service.",
 };
 
 export default function RootLayout({
