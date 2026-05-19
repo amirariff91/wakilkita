@@ -74,12 +74,64 @@ const afterSubmitSteps = [
   ["3", "Open verified backing later", "One verified private support signal per eligible resident comes only after privacy, dispute, and verification rules are published."],
 ];
 
-const profilePromise = [
-  "Public service profile with clear claimed/unclaimed status",
-  "Priority issues the representative says they will address",
-  "Evidence of community work, source notes, and correction path",
-  "Aggregate participant support only when verification and thresholds are ready",
+type NomineePreviewStatus = "unclaimed" | "claimed" | "future";
+
+const nomineePreviewCards: Array<{
+  initials: string;
+  label: string;
+  constituency: string;
+  status: NomineePreviewStatus;
+  statusLabel: string;
+  priorities: string[];
+  evidenceNote: string;
+  disclaimer: string;
+}> = [
+  {
+    initials: "??",
+    label: "Unclaimed nomination",
+    constituency: "P100 Pandan",
+    status: "unclaimed",
+    statusLabel: "Awaiting review",
+    priorities: ["Mobility and walkability", "Council response time"],
+    evidenceNote: "Community nomination received. No contact made yet.",
+    disclaimer: "Preview only — not a real nomination record.",
+  },
+  {
+    initials: "WK",
+    label: "Claimed profile",
+    constituency: "P100 Pandan",
+    status: "claimed",
+    statusLabel: "Profile claimed · consent recorded",
+    priorities: ["Mobility and walkability", "Cost of living and local services", "Youth and family needs"],
+    evidenceNote: "Priority issues stated. Source notes and correction path published.",
+    disclaimer: "Illustrative card — real profiles appear only after consent.",
+  },
+  {
+    initials: "WK",
+    label: "Verified backing later",
+    constituency: "P105 Petaling Jaya",
+    status: "future",
+    statusLabel: "Not live · requires threshold and dispute rules",
+    priorities: ["Council response and maintenance"],
+    evidenceNote: "Aggregate support signals shown only after verification is ready.",
+    disclaimer: "This state does not exist yet. Shown to explain the product goal.",
+  },
 ];
+
+const previewStatusStyles: Record<NomineePreviewStatus, { avatar: string; badge: string }> = {
+  unclaimed: {
+    avatar: "bg-[rgba(7,22,19,0.08)] text-[var(--slate)]",
+    badge: "bg-[rgba(217,154,30,0.12)] text-[var(--amber-text)]",
+  },
+  claimed: {
+    avatar: "bg-[var(--ink)] text-[var(--mint)]",
+    badge: "bg-[rgba(15,107,77,0.09)] text-[var(--civic-dark)]",
+  },
+  future: {
+    avatar: "bg-[var(--civic)] text-white",
+    badge: "border border-dashed border-[rgba(51,65,61,0.32)] bg-[rgba(7,22,19,0.05)] text-[var(--slate)]",
+  },
+};
 
 function TrustArchitectureDiagram() {
   const steps = [
@@ -196,13 +248,13 @@ function IssuePriorityCarousel() {
             Public cards should start with local priorities. Named people stay in private review until they are contacted, consent is clear, and a correction path exists.
           </p>
         </div>
-        <div className="mt-6 flex gap-4 overflow-x-auto pb-2" aria-label="Local priority cards">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Local priority cards">
           {issuePriorityCards.map((item) => (
-            <article key={item.title} className="min-w-[18rem] max-w-sm rounded-3xl border border-[rgba(15,107,77,0.18)] bg-[var(--paper)] p-5 sm:min-w-[22rem]">
+            <article key={item.title} className="flex min-h-[20rem] flex-col rounded-3xl border border-[rgba(15,107,77,0.18)] bg-[var(--paper)] p-5">
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--amber-text)]">Priority card</p>
               <h3 className="mt-3 text-2xl font-black tracking-[-0.05em] text-[var(--ink)]">{item.title}</h3>
               <p className="mt-3 text-sm font-semibold leading-6 text-[var(--slate)]">{item.body}</p>
-              <a href="#take-part" className="mt-5 inline-flex rounded-full bg-[var(--ink)] px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-[var(--mint)]">Nominate someone for this</a>
+              <a href="#take-part" className="mt-auto inline-flex rounded-full bg-[var(--ink)] px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-[var(--mint)]">Nominate someone for this</a>
             </article>
           ))}
         </div>
@@ -289,24 +341,49 @@ function AfterSubmitSection() {
 function RepresentativeProfilePromise() {
   return (
     <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10" aria-labelledby="profile-promise-heading">
-      <div className="grid gap-5 rounded-[2.2rem] border border-[var(--line)] bg-[rgba(221,247,232,0.36)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.07)] sm:p-7 lg:grid-cols-[0.86fr_1.14fr]">
-        <div>
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Representative profiles</p>
-          <h2 id="profile-promise-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">What a nomination can become.</h2>
-          <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
-            A WakilKita representative is a community-nominated person who may agree to be listed with local priorities, public evidence, and later aggregate verified backing. It does not mean candidacy, party endorsement, or an official role.
-          </p>
-          <div className="mt-5 rounded-3xl bg-[var(--ink)] p-4 text-white">
+      <div className="rounded-[2.2rem] border border-[var(--line)] bg-[rgba(221,247,232,0.36)] p-5 shadow-[0_24px_90px_rgba(7,22,19,0.07)] sm:p-7">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--civic)]">Profile preview cards</p>
+            <h2 id="profile-promise-heading" className="mt-3 font-serif text-3xl font-black tracking-[-0.06em] text-[var(--ink)] sm:text-4xl">Vertical cards, without pretending real people opted in.</h2>
+            <p className="mt-4 text-base font-semibold leading-7 text-[var(--slate)]">
+              These cards show the future structure of a claimed profile. They use placeholders instead of scraped photos or unconsented names, because public profiles should appear only after consent, source notes, and correction paths exist.
+            </p>
+          </div>
+          <div className="rounded-3xl bg-[var(--ink)] p-4 text-white lg:max-w-xs">
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--mint)]">Current public profile status</p>
             <p className="mt-2 text-lg font-black tracking-[-0.03em]">No public representative profiles yet. Nominate someone serving your constituency.</p>
           </div>
         </div>
-        <div className="grid content-start gap-3 sm:grid-cols-2">
-          {profilePromise.map((item) => (
-            <div key={item} className="rounded-3xl border border-[rgba(15,107,77,0.18)] bg-[var(--paper)] p-5">
-              <p className="text-base font-black leading-6 text-[var(--ink)]">{item}</p>
-            </div>
-          ))}
+
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {nomineePreviewCards.map((card) => {
+            const style = previewStatusStyles[card.status];
+
+            return (
+              <article key={`${card.label}-${card.constituency}`} className="flex min-h-[31rem] flex-col rounded-[2rem] border border-[var(--line)] bg-[var(--paper)] p-6 shadow-[0_18px_60px_rgba(7,22,19,0.08)]">
+                <div className={`mx-auto grid h-20 w-20 place-items-center rounded-full ${style.avatar}`} aria-hidden="true">
+                  <span className="text-2xl font-black tracking-[-0.04em]">{card.initials}</span>
+                </div>
+                <span className={`mt-4 self-center rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] ${style.badge}`}>
+                  {card.statusLabel}
+                </span>
+                <h3 className="mt-5 text-center text-2xl font-black tracking-[-0.05em] text-[var(--ink)]">{card.label}</h3>
+                <p className="mt-1 text-center text-xs font-black uppercase tracking-[0.16em] text-[var(--civic)]">{card.constituency}</p>
+
+                <div className="mt-5 flex flex-col gap-2">
+                  {card.priorities.map((priority) => (
+                    <span key={priority} className="rounded-2xl bg-[rgba(15,107,77,0.07)] px-4 py-2.5 text-sm font-bold leading-5 text-[var(--ink)]">
+                      {priority}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="mt-5 text-sm font-semibold leading-6 text-[var(--slate)]">{card.evidenceNote}</p>
+                <p className="mt-auto pt-6 text-xs font-bold leading-5 text-[var(--slate)]">{card.disclaimer}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
