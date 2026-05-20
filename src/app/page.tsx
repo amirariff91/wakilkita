@@ -108,6 +108,48 @@ function IntakeDeskPanel() {
   );
 }
 
+function ManifestoSection() {
+  return (
+    <section
+      className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10"
+      aria-labelledby="manifesto-heading"
+    >
+      <div className="grid gap-0 border border-[var(--line)] bg-[var(--ink)] text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] lg:grid-cols-[0.38fr_0.62fr]">
+        <div className="border-b border-white/15 p-6 sm:p-8 lg:border-b-0 lg:border-r">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--mint)]">
+            Prinsip WakilKita
+          </p>
+          <h2
+            id="manifesto-heading"
+            className="mt-4 text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-4xl"
+          >
+            Rakyat memilih wakil mereka sendiri.
+          </h2>
+        </div>
+        <div className="space-y-5 p-6 text-base leading-8 text-white/86 sm:p-8 sm:text-lg">
+          <p>Politik hari ini terlalu lama dikawal oleh struktur parti dan birokrasi.</p>
+          <p>
+            Calon selalunya dipilih oleh parti.
+            <br />
+            Rakyat hanya diberi pilihan terakhir.
+          </p>
+          <p>
+            Kami percaya sudah tiba masanya rakyat diberi kuasa untuk menentukan sendiri siapa yang layak mewakili mereka.
+          </p>
+          <p>Platform ini dibina dengan satu prinsip mudah:</p>
+          <ul className="space-y-2 font-bold text-white">
+            <li>• Bukan parti memilih rakyat.</li>
+            <li>• Rakyat memilih wakil mereka sendiri.</li>
+          </ul>
+          <p>
+            Kami juga percaya setiap suara mesti dihargai secara adil dan telus. Bukan sekadar angka yang hilang dalam sistem politik
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WhatIsSection() {
   const isItems = [
     "A place to suggest who should represent Petaling Jaya",
@@ -306,6 +348,8 @@ export default function Home() {
             <IntakeDeskPanel />
           </div>
         </section>
+
+        <ManifestoSection />
 
         <WakilKitaActionPanel />
 
