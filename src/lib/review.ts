@@ -53,6 +53,13 @@ export type PublicReviewRecord = Omit<ReviewRecord, "replyContact" | "reviewerNo
   hasReplyContact: boolean;
 };
 
+export type CandidateDashboardEntry = Pick<
+  ReviewRecord,
+  "id" | "constituency" | "nameOrRole" | "priorityArea" | "reason" | "submittedAt" | "updatedAt"
+> & {
+  stage: "Cadangan diterima" | "Dalam semakan" | "Diluluskan untuk polling";
+};
+
 export type AuditEvent = {
   id: string;
   recordId: string;
@@ -173,6 +180,25 @@ export function toPublicReviewRecord(entry: ReviewRecord): PublicReviewRecord {
   return {
     ...safeEntry,
     hasReplyContact: Boolean(replyContact),
+  };
+}
+
+export function toCandidateDashboardEntry(entry: ReviewRecord): CandidateDashboardEntry {
+  const stage: CandidateDashboardEntry["stage"] = entry.status === "approved"
+    ? "Diluluskan untuk polling"
+    : entry.status === "submitted"
+      ? "Cadangan diterima"
+      : "Dalam semakan";
+
+  return {
+    id: entry.id,
+    constituency: entry.constituency,
+    nameOrRole: entry.nameOrRole,
+    priorityArea: entry.priorityArea,
+    reason: entry.reason,
+    submittedAt: entry.submittedAt,
+    updatedAt: entry.updatedAt,
+    stage,
   };
 }
 

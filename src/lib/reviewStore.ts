@@ -5,8 +5,10 @@ import {
   cleanReviewText,
   createReviewRecord,
   normaliseStoredRecord,
+  toCandidateDashboardEntry,
   toPublicReviewRecord,
   type AuditEvent,
+  type CandidateDashboardEntry,
   type IntakeDraft,
   type PublicReviewRecord,
   type ReviewRecord,
@@ -101,6 +103,11 @@ function audit(recordId: string, action: AuditEvent["action"], detail: string, a
 export async function listReviewEntries(): Promise<PublicReviewRecord[]> {
   const store = await readStore();
   return store.entries.map(toPublicReviewRecord);
+}
+
+export async function listCandidateDashboardEntries(): Promise<CandidateDashboardEntry[]> {
+  const store = await readStore();
+  return store.entries.map(toCandidateDashboardEntry);
 }
 
 export async function listAuditEvents(): Promise<AuditEvent[]> {

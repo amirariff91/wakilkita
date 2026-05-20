@@ -343,10 +343,10 @@ export default function Home() {
                   Cadangkan nama
                 </a>
                 <a
-                  href="#how-it-works"
+                  href="/dashboard"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  Lihat cara polling berjalan
+                  Lihat dashboard calon
                 </a>
               </div>
             </div>

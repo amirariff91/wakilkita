@@ -254,9 +254,14 @@ export function WakilKitaActionPanel() {
               aria-live="polite"
             >
               {saved && (
-                <p className="text-sm font-bold text-[var(--civic-dark)]">
-                  Cadangan diterima. Ia akan disemak dahulu sebelum masuk ke senarai polling komuniti.
-                </p>
+                <div className="space-y-3">
+                  <p className="text-sm font-bold text-[var(--civic-dark)]">
+                    Cadangan diterima. Nama ini sudah masuk ke dashboard calon dan akan disemak sebelum polling komuniti.
+                  </p>
+                  <a href="/dashboard" className="inline-flex border border-[var(--line)] bg-white px-4 py-2 text-xs font-bold text-[var(--ink)]">
+                    Lihat dashboard calon
+                  </a>
+                </div>
               )}
             </div>
           </form>

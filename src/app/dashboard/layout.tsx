@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Private review queue — WakilKita",
-  description: "Token-gated WakilKita reviewer queue for private intake review.",
+  title: "Dashboard calon — WakilKita",
+  description: "Dashboard cadangan calon WakilKita untuk Petaling Jaya dengan kemas kini langsung.",
   robots: {
     index: false,
     follow: false,
