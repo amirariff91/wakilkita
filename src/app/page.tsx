@@ -327,7 +327,7 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Selepas prinsip, barulah polling komuniti.
+                Prinsip dahulu. Pilihan komuniti kemudian.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
                 Mula dengan cadangan nama. Selepas 7 hari, nama yang diluluskan masuk ke polling supaya warga Petaling Jaya boleh memilih bersama.
