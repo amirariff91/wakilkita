@@ -3,69 +3,69 @@ import { CivicFooter, CivicNav } from "./civic-content";
 import { P105LineMotif } from "./WakilKitaMark";
 
 const boundaryChips = [
-  "Cadang nama yang dipercayai",
-  "P105 Petaling Jaya first",
-  "Review before public profile",
-  "Poll only after rules are ready",
+  "Untuk P105 Petaling Jaya",
+  "Cadang nama + sebab jelas",
+  "Semakan dahulu sebelum umum",
+  "Tiada IC atau eKYC di borang ini",
 ];
 
 const intakeFacts = [
   {
-    label: "Open now",
+    label: "Sedang dibuka",
     value: "P105 Petaling Jaya",
-    note: "Tell us who residents should seriously consider",
+    note: "Buat masa ini WakilKita menerima cadangan untuk kawasan Parlimen P105 dahulu.",
   },
   {
-    label: "Accepting",
-    value: "Names + reasons",
-    note: "A useful nomination explains trust, local work, and issues they can champion",
+    label: "Apa diperlukan",
+    value: "Nama + sebab khusus",
+    note: "Cadangan yang berguna menerangkan kerja, kepercayaan komuniti, atau isu tempatan yang pernah dibantu.",
   },
   {
-    label: "Before public",
-    value: "Review first",
-    note: "We check safety, duplicates, consent needs, and privacy risk before anything appears",
+    label: "Sebelum umum",
+    value: "Semakan dahulu",
+    note: "Kami semak keselamatan, pendua, kaitan kawasan, keperluan kebenaran, dan risiko privasi sebelum apa-apa digunakan secara terbuka.",
   },
 ];
 
 const reviewSteps = [
   {
     n: "1",
-    title: "Suggest a trusted person",
-    body: "Start with one name and one clear reason. Keep it factual: what they have done, who trusts them, and what local issue they can help move.",
+    title: "Cadangkan orang yang dipercayai",
+    body: "Mulakan dengan satu nama dan satu sebab yang jelas. Ceritakan kerja mereka, kepercayaan komuniti, atau isu Petaling Jaya yang mereka faham.",
   },
   {
     n: "2",
-    title: "We review before public use",
-    body: "Submissions go into a private queue first. We screen for unsafe details, duplicates, consent needs, and whether the entry belongs to P105.",
+    title: "Kami semak sebelum digunakan",
+    body: "Cadangan masuk ke barisan semakan tertutup. Kami melihat pendua, butiran sensitif, kaitan kawasan, risiko privasi, dan keperluan kebenaran.",
   },
   {
     n: "3",
-    title: "Build a cleaner shortlist",
-    body: "Approved names can become a consent-safe public shortlist. No public profile should appear just because someone typed in a name.",
+    title: "Bina senarai semakan yang lebih bersih",
+    body: "Nama yang sesuai hanya boleh dipertimbangkan untuk paparan awam selepas semakan keselamatan, laluan pembetulan, dan kebenaran yang wajar.",
   },
   {
     n: "4",
-    title: "Open the poll only when trust rules are ready",
-    body: "A community poll comes later, after verification, privacy thresholds, dispute handling, and methodology are clear.",
+    title: "Langkah seterusnya hanya bila peraturan jelas",
+    body: "Sebarang maklum balas komuniti yang lebih kuat hanya patut dibuat kemudian, selepas kaedah, privasi, ambang keselamatan, dan cara bantahan diterangkan dengan jelas.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "Trust starts before the poll",
-    body: "The first job is to collect useful names and reasons without exposing private resident data.",
+    heading: "Kepercayaan bermula sebelum paparan awam",
+    body: "Tugas pertama ialah mengumpul nama dan sebab yang berguna tanpa mendedahkan data peribadi penduduk.",
   },
   {
-    heading: "No instant public profiles",
-    body: "Named people need review, correction routes, and consent handling before a public profile appears.",
+    heading: "Tiada profil awam secara automatik",
+    body: "Nama yang dicadangkan perlu melalui semakan, laluan pembetulan, dan pengendalian kebenaran sebelum profil awam wujud.",
   },
   {
-    heading: "No public participant list",
-    body: "Contact details and future identity checks stay separate from any public poll or public profile.",
+    heading: "Tiada senarai peserta awam",
+    body: "Butiran hubungan dan sebarang semakan identiti masa depan mesti kekal berasingan daripada paparan awam.",
   },
   {
-    heading: "Clear public promise",
-    body: "Suggest names first. Review before public use. Publish only what can be explained and defended.",
+    heading: "Janji awam yang jelas",
+    body: "Cadangkan nama dahulu. Semak sebelum digunakan. Paparkan hanya perkara yang boleh diterangkan dan dipertahankan.",
   },
 ];
 
@@ -73,14 +73,14 @@ function IntakeDeskPanel() {
   return (
     <aside
       className="border border-[var(--line)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
-      aria-label="Before submitting"
+      aria-label="Sebelum menghantar cadangan"
     >
       <div className="border-b border-[var(--line)] px-6 py-4">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-          For Petaling Jaya residents
+          Untuk warga Petaling Jaya
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">
-          Start with the name residents already trust
+          Mulakan dengan nama yang sudah dipercayai komuniti
         </h2>
       </div>
       <div className="divide-y divide-[var(--line)]">
@@ -98,7 +98,7 @@ function IntakeDeskPanel() {
       </div>
       <div className="border-t border-[var(--line)] px-6 py-4">
         <p className="text-sm leading-6 text-[var(--slate)]">
-          This is the first step: collect names worth reviewing, not publish a popularity board.
+          Ini langkah awal untuk mengumpul cadangan yang boleh disemak dengan bertanggungjawab — bukan carta populariti.
         </p>
       </div>
       <div className="px-6 pb-4 text-[var(--civic)]">
@@ -123,7 +123,7 @@ function ManifestoSection() {
             id="manifesto-heading"
             className="mt-4 text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-4xl"
           >
-            Rakyat patut boleh mencadangkan wakil yang mereka percaya.
+            Rakyat patut ada ruang mencadangkan wakil yang mereka percaya.
           </h2>
         </div>
         <div className="space-y-5 p-6 text-base leading-8 text-white/86 sm:p-8 sm:text-lg">
@@ -152,16 +152,16 @@ function ManifestoSection() {
 
 function WhatIsSection() {
   const isItems = [
-    "A place to suggest who should be considered for Petaling Jaya",
-    "A short public reason for every nomination",
-    "A private review queue before public profiles",
-    "A foundation for a future community poll with clear rules",
+    "Ruang untuk mencadangkan nama yang wajar dipertimbangkan di Petaling Jaya",
+    "Setiap cadangan perlu ada sebab yang jelas dan boleh disemak",
+    "Cadangan masuk ke barisan semakan tertutup sebelum sebarang paparan awam",
+    "Langkah awal untuk membina rekod komuniti yang lebih bertanggungjawab",
   ];
 
   const isNotItems = [
-    "Not a government-run selection process or public authority service",
-    "Not run by SPR, Parliament, MBPJ, or any party",
-    "Not a public list of IC numbers, verification records, or participants",
+    "Bukan proses rasmi pilihan raya, SPR, kerajaan, Parlimen, MBPJ, parti, atau pejabat wakil rakyat",
+    "Bukan tempat menghantar aduan rasmi yang memerlukan tindakan pihak berkuasa",
+    "Bukan senarai awam nombor IC, rekod eKYC, peserta, penyokong, kiraan, atau ranking",
   ];
 
   return (
@@ -175,13 +175,13 @@ function WhatIsSection() {
             id="what-is-heading"
             className="text-xl font-bold tracking-[-0.03em] text-[var(--ink)]"
           >
-            What this is — and what it is not
+            Apa WakilKita buat — dan tidak buat
           </h2>
         </div>
         <div className="grid divide-y divide-[var(--line)] sm:grid-cols-2 sm:divide-x sm:divide-y-0">
           <div className="px-6 py-6">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              What this is
+              Apa ini
             </p>
             <ul className="space-y-3">
               {isItems.map((item) => (
@@ -197,7 +197,7 @@ function WhatIsSection() {
           </div>
           <div className="px-6 py-6">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.08em] text-[var(--slate)]">
-              What this is not
+              Apa ini bukan
             </p>
             <ul className="space-y-3">
               {isNotItems.map((item) => (
@@ -229,16 +229,16 @@ function ReviewJourneySection() {
       <div className="border border-[var(--line)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
         <div className="border-b border-[var(--line)] px-6 py-5 sm:px-7">
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-            After you submit
+            Selepas anda hantar
           </p>
           <h2
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            First collect trusted names. Then earn the right to ask more.
+            Cadangan dikumpul dahulu. Kepercayaan dibina sebelum apa-apa dibuka kepada umum.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            The conversion we care about now is a good nomination: one real name, one clear reason, and enough care to protect everyone involved.
+            Matlamat sekarang ialah cadangan yang berkualiti: satu nama sebenar, satu sebab yang jelas, dan maklumat yang selamat untuk disemak.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -275,16 +275,16 @@ function PrivacyModelSection() {
     >
       <div className="mx-auto max-w-4xl px-5 sm:px-8 lg:px-10">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-          Trust and privacy
+          Kepercayaan dan privasi
         </p>
         <h2
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          Trust is the product. The poll comes later.
+          Kepercayaan ialah produk. Paparan awam datang kemudian.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          WakilKita has to prove the intake is careful before it asks residents for stronger verification. That means no public participant lists, no instant profiles, and no public counts without a published method.
+          WakilKita perlu membuktikan pengambilan cadangan dibuat dengan cermat sebelum meminta kepercayaan yang lebih besar daripada penduduk. Maksudnya: tiada senarai peserta awam, tiada profil segera, dan tiada kiraan awam tanpa kaedah yang diterbitkan.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -303,7 +303,7 @@ export default function Home() {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        Langkau ke kandungan utama
       </a>
       <main id="main-content" tabIndex={-1} className="min-h-screen overflow-hidden">
         <section className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-5 py-6 sm:px-8 lg:px-10">
@@ -325,23 +325,26 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Who should Petaling Jaya seriously consider?
+                Siapa yang Petaling Jaya patut pertimbangkan dengan serius?
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Suggest a local name you trust and explain why. WakilKita reviews each nomination before any public profile, shortlist, or community poll appears.
+                Cadangkan satu nama tempatan yang anda percaya, dan jelaskan sebabnya. WakilKita menyemak setiap cadangan sebelum sebarang profil, senarai semakan, atau paparan awam dibuat.
+              </p>
+              <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
+                Bukan undian. Bukan SPR. Tiada IC atau eKYC diminta di sini.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#take-part"
                   className="bg-[var(--ink)] px-6 py-4 text-center text-sm font-bold text-[var(--mint)] shadow-[0_1px_3px_rgba(0,0,0,0.12)]"
                 >
-                  Suggest a name
+                  Cadangkan nama
                 </a>
                 <a
                   href="#how-it-works"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  See how it works
+                  Lihat cara semakan dibuat
                 </a>
               </div>
             </div>
@@ -352,13 +355,9 @@ export default function Home() {
         <ManifestoSection />
 
         <WakilKitaActionPanel />
-
         <WhatIsSection />
-
         <ReviewJourneySection />
-
         <PrivacyModelSection />
-
         <CivicFooter />
       </main>
     </>

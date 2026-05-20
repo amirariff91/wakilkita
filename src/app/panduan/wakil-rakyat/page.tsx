@@ -4,25 +4,25 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../../civic-content";
 export const metadata: Metadata = {
   title: "Panduan Wakil Rakyat | WakilKita",
   description:
-    "Independent civic guide to wakil rakyat roles, safe resident submissions, privacy review, and privacy boundaries.",
+    "Panduan sivik bebas tentang peranan wakil rakyat, cadangan penduduk yang selamat, semakan privasi, dan had paparan awam.",
 };
 
 const blocks = [
   {
-    title: "Use clear role language",
-    body: "A wakil rakyat may be linked to lawmaking, constituency communication, policy discussion, local issue follow-up, or connecting residents to the right authority route.",
+    title: "Gunakan bahasa peranan yang jelas",
+    body: "Wakil rakyat boleh dikaitkan dengan penggubalan undang-undang, komunikasi kawasan, perbincangan dasar, susulan isu setempat, atau menghubungkan penduduk kepada laluan pihak berkuasa yang betul.",
   },
   {
-    title: "Do not mix roles",
-    body: "Some issues belong to councils, state agencies, federal agencies, courts, police, schools, or service providers. The right route depends on the issue and required action.",
+    title: "Jangan campur semua peranan",
+    body: "Sesetengah isu berada di bawah majlis, agensi negeri, agensi persekutuan, mahkamah, polis, sekolah, atau penyedia perkhidmatan. Laluan yang betul bergantung pada isu dan tindakan yang diperlukan.",
   },
   {
-    title: "Nomination is not publication",
-    body: "A local nomination or endorsement is a nomination record. Public use requires review, consent where needed, correction handling, and privacy screening.",
+    title: "Cadangan nama bukan penerbitan awam",
+    body: "Cadangan tempatan ialah rekod semakan. Sebarang kegunaan awam memerlukan semakan, kebenaran jika perlu, pengendalian pembetulan, dan saringan privasi.",
   },
   {
-    title: "Preference signals stay private",
-    body: "Preference and participant signals should help careful review, not create public pressure, public lists, or popularity displays.",
+    title: "Maklum balas penduduk kekal peribadi",
+    body: "Maklum balas peserta hanya membantu semakan berhati-hati, bukan mewujudkan tekanan awam, senarai awam, atau paparan populariti.",
   },
 ];
 
@@ -30,14 +30,14 @@ export default function PanduanWakilRakyatPage() {
   return (
     <CivicPageShell
       eyebrow="Panduan wakil rakyat"
-      title="Understand representative roles with privacy-first community nomination."
-      intro="This guide helps residents describe local concerns and representative expectations without turning WakilKita into a public authority service or a public popularity display."
-      cta={{ label: "Suggest a name", href: "/#take-part", secondaryLabel: "Read privacy page", secondaryHref: "/privasi" }}
+      title="Fahami peranan wakil dengan cadangan komuniti yang mengutamakan privasi."
+      intro="Panduan ini membantu penduduk menerangkan isu setempat dan jangkaan terhadap wakil tanpa menjadikan WakilKita perkhidmatan pihak berkuasa atau paparan populariti awam."
+      cta={{ label: "Cadangkan nama", href: "/#take-part", secondaryLabel: "Baca halaman privasi", secondaryHref: "/privasi" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
-        title="Responsible authority routes still matter."
-        body="When a matter needs a decision, enforcement, permit, service delivery, or casework action, use the relevant authority route. WakilKita records civic priorities for review only."
+        title="Laluan pihak berkuasa yang bertanggungjawab masih penting."
+        body="Apabila sesuatu perkara memerlukan keputusan, penguatkuasaan, permit, penyampaian perkhidmatan, atau tindakan kerja kes, gunakan laluan pihak berkuasa yang berkaitan. WakilKita hanya merekodkan keutamaan sivik untuk semakan."
       />
     </CivicPageShell>
   );

@@ -4,40 +4,40 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../../civic-content";
 export const metadata: Metadata = {
   title: "Panduan Ahli Parlimen | WakilKita",
   description:
-    "Plain-language guide to Ahli Parlimen responsibilities, resident contact boundaries, and community nomination review.",
+    "Panduan bahasa mudah tentang tanggungjawab Ahli Parlimen, had hubungan penduduk, dan semakan cadangan komuniti.",
 };
 
 const blocks = [
   {
-    title: "What an MP can usually help explain",
-    body: "An MP may raise public policy matters, connect residents to the right route, ask questions, and communicate issues affecting the parliamentary area.",
+    title: "Apa yang biasanya boleh dijelaskan oleh MP",
+    body: "Seorang MP boleh membangkitkan perkara dasar awam, menghubungkan penduduk kepada laluan yang betul, bertanya soalan, dan menyampaikan isu yang menjejaskan kawasan Parlimen.",
   },
   {
-    title: "What may need another route",
-    body: "Council services, enforcement, licensing, police matters, courts, immigration, school placement, and welfare casework may sit with a different authority or office.",
+    title: "Apa yang mungkin perlukan laluan lain",
+    body: "Perkhidmatan majlis, penguatkuasaan, lesen, hal polis, mahkamah, imigresen, penempatan sekolah, dan kerja kes kebajikan mungkin berada di bawah pihak berkuasa atau pejabat lain.",
   },
   {
-    title: "How to write a safe request",
-    body: "Use a clear issue, affected area, timeline, and desired follow-up. Avoid IC numbers, private addresses, medical details, and allegations about people who cannot respond.",
+    title: "Cara menulis permintaan yang selamat",
+    body: "Gunakan isu yang jelas, kawasan terlibat, garis masa, dan susulan yang diingini. Elakkan nombor IC, alamat peribadi, butiran kesihatan, dan tuduhan terhadap orang yang tidak boleh menjawab.",
   },
   {
-    title: "How WakilKita intake differs",
-    body: "WakilKita stores a community nomination item for review. It is not a representative office, not a complaint channel, and not a public endorsement list.",
+    title: "Perbezaan pengambilan WakilKita",
+    body: "WakilKita menyimpan item cadangan komuniti untuk semakan. Ia bukan pejabat wakil rakyat, bukan saluran aduan, dan bukan senarai sokongan awam.",
   },
 ];
 
 export default function PanduanAhliParlimenPage() {
   return (
     <CivicPageShell
-      eyebrow="Panduan civic"
-      title="A plain guide to the Ahli Parlimen role and resident follow-up."
-      intro="Use this guide to understand where an MP role may fit, where another authority may be responsible, and how WakilKita keeps community nomination separate from formal channels."
-      cta={{ label: "Suggest a name", href: "/#take-part", secondaryLabel: "Petaling Jaya guide", secondaryHref: "/petaling-jaya" }}
+      eyebrow="Panduan sivik"
+      title="Panduan mudah tentang peranan Ahli Parlimen dan susulan penduduk."
+      intro="Gunakan panduan ini untuk memahami di mana peranan MP mungkin sesuai, di mana pihak berkuasa lain mungkin bertanggungjawab, dan bagaimana WakilKita memisahkan cadangan komuniti daripada saluran rasmi."
+      cta={{ label: "Cadangkan nama", href: "/#take-part", secondaryLabel: "Panduan Petaling Jaya", secondaryHref: "/petaling-jaya" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
-        title="Always use the responsible channel for matters needing formal action."
-        body="WakilKita can help collect civic priorities and preference signals for review, but it cannot receive or decide matters that belong to a public authority or representative office."
+        title="Sentiasa gunakan saluran bertanggungjawab untuk perkara yang memerlukan tindakan rasmi."
+        body="WakilKita boleh membantu mengumpul keutamaan sivik dan cadangan komuniti untuk semakan, tetapi ia tidak boleh menerima atau memutuskan perkara yang berada di bawah pihak berkuasa awam atau pejabat wakil rakyat."
       />
     </CivicPageShell>
   );

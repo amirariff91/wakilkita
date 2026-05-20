@@ -135,7 +135,7 @@ export default function DashboardPage() {
             WakilKita
           </Link>
           <div className="flex items-center gap-4 text-sm font-bold text-[var(--slate)]">
-            <Link href="/#take-part">Submit</Link>
+            <Link href="/#take-part">Hantar cadangan</Link>
             <Link href="/ketelusan">Ketelusan</Link>
           </div>
         </nav>
@@ -152,7 +152,7 @@ export default function DashboardPage() {
               The intake queue contains named people, resident explanations, risk flags, and review state. It is not a public dashboard and it should not be indexed, copied, or shared.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Contact details are hidden in this list. Stronger verification belongs in a separate system before future preference signals count; IC and identity verification records must stay separate.
+              Butiran hubungan disembunyikan dalam senarai ini. Pengesahan yang lebih kuat perlu berada dalam sistem berasingan sebelum sebarang maklum balas komuniti digunakan; rekod IC dan identiti mesti kekal berasingan.
             </div>
           </div>
 

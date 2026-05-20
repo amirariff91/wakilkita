@@ -4,48 +4,48 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../civic-content";
 export const metadata: Metadata = {
   title: "Ketelusan WakilKita",
   description:
-    "Transparency foundations for WakilKita: independence, review process, consent, privacy limits, and no public popularity displays.",
+    "Asas ketelusan WakilKita: kebebasan, proses semakan, kebenaran, had privasi, dan tiada paparan populariti awam.",
 };
 
 const blocks = [
   {
-    title: "Independence",
-    body: "WakilKita is not run by Parliament, MBPJ, any public body, any party, or any representative office. Copy, links, and page structure should keep that separation clear.",
+    title: "Bebas",
+    body: "WakilKita bukan dikendalikan oleh Parlimen, MBPJ, mana-mana badan awam, parti, atau pejabat wakil rakyat. Salinan, pautan, dan struktur halaman perlu mengekalkan pemisahan ini dengan jelas.",
   },
   {
-    title: "Review queue",
-    body: "Submissions enter a private review list first. Review checks constituency scope, safety, duplicate entries, consent needs, correction requests, and removal requests.",
+    title: "Barisan semakan",
+    body: "Cadangan masuk ke senarai semakan tertutup dahulu. Semakan melihat skop kawasan, keselamatan, pendua, keperluan kebenaran, permintaan pembetulan, dan permintaan pemadaman.",
   },
   {
-    title: "No public pressure metrics",
-    body: "Public pages should not display counts, rank lists, public participant lists, or popularity indicators. Internal summaries need documented methodology and thresholds before any public release.",
+    title: "Tiada metrik tekanan awam",
+    body: "Halaman awam tidak patut memaparkan kiraan, susunan kedudukan, senarai peserta awam, atau petunjuk populariti. Ringkasan dalaman memerlukan metodologi dan ambang keselamatan sebelum sebarang penerbitan.",
   },
   {
-    title: "Correction and removal",
-    body: "Named people and submitters need clear routes to correct, dispute, or remove information. Public profiles should not appear without careful handling.",
+    title: "Pembetulan dan pemadaman",
+    body: "Nama yang dicadangkan dan penghantar cadangan perlukan laluan jelas untuk membetulkan, mempertikaikan, atau memadam maklumat. Profil awam tidak patut muncul tanpa pengendalian yang cermat.",
   },
   {
-    title: "Data minimisation",
-    body: "Collect only what is needed for review. Avoid IC numbers, exact home addresses, sensitive identity details, and private allegations in the intake flow.",
+    title: "Minimakan data",
+    body: "Kumpul hanya perkara yang diperlukan untuk semakan. Elakkan nombor IC, alamat rumah tepat, butiran identiti sensitif, dan tuduhan peribadi dalam aliran pengambilan cadangan.",
   },
   {
-    title: "Auditability before scale",
-    body: "Before expanding scope, WakilKita should document reviewer access, retention periods, deletion handling, moderation criteria, audit logs, and incident response."
+    title: "Boleh diaudit sebelum diperluas",
+    body: "Sebelum memperluas skop, WakilKita perlu mendokumenkan akses penyemak, tempoh penyimpanan, cara pemadaman, kriteria moderasi, log audit, dan tindak balas insiden."
   },
 ];
 
 export default function KetelusanPage() {
   return (
     <CivicPageShell
-      eyebrow="Transparency"
-      title="Clear limits for a review-first community nomination project."
-      intro="This page states how WakilKita handles independence, review, consent, participant signals, and public information before the product asks for stronger resident trust."
-      cta={{ label: "Read privacy page", href: "/privasi", secondaryLabel: "Suggest a name", secondaryHref: "/#take-part" }}
+      eyebrow="Ketelusan"
+      title="Had yang jelas untuk ruang cadangan komuniti yang mengutamakan semakan."
+      intro="Halaman ini menerangkan cara WakilKita mengendalikan kebebasan, semakan, kebenaran, maklum balas peribadi, dan maklumat awam sebelum produk ini meminta kepercayaan penduduk yang lebih besar."
+      cta={{ label: "Baca halaman privasi", href: "/privasi", secondaryLabel: "Cadangkan nama", secondaryHref: "/#take-part" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
-        title="Public information should be slower than private review."
-        body="A submission should never become a public claim just because it was entered. Careful review protects residents, nominated people, and the credibility of the civic record."
+        title="Maklumat awam perlu lebih perlahan daripada semakan peribadi."
+        body="Cadangan tidak boleh menjadi dakwaan awam hanya kerana ia dihantar. Semakan yang cermat melindungi penduduk, orang yang dicadangkan, dan kredibiliti rekod sivik."
       />
     </CivicPageShell>
   );

@@ -4,48 +4,48 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../civic-content";
 export const metadata: Metadata = {
   title: "Privasi WakilKita",
   description:
-    "Privacy foundations for WakilKita community nomination: data minimisation, review-first intake, retention, removal, and authority-channel boundaries.",
+    "Asas privasi WakilKita: minimakan data, pengambilan cadangan berasaskan semakan, penyimpanan, pemadaman, dan had saluran pihak berkuasa.",
 };
 
 const blocks = [
   {
-    title: "Data collected in the nomination form",
-    body: "The current form asks for constituency, nominee name, trust reason, priority area, and optional reply contact. It does not ask for IC numbers or exact addresses.",
+    title: "Data yang dikumpul dalam borang cadangan",
+    body: "Borang semasa meminta kawasan, nama orang yang dicadangkan, sebab kepercayaan, bidang keutamaan, dan butiran hubungan pilihan. Ia tidak meminta nombor IC atau alamat tepat.",
   },
   {
-    title: "How contact details are used",
-    body: "A reply contact is used only for follow-up, correction, consent, dispute, or removal handling. It should not be published or shared as a public participant list.",
+    title: "Cara butiran hubungan digunakan",
+    body: "Butiran hubungan digunakan hanya untuk susulan, pembetulan, kebenaran, pertikaian, atau pemadaman. Ia tidak patut diterbitkan atau dikongsi sebagai senarai peserta awam.",
   },
   {
-    title: "Sensitive details",
-    body: "Do not submit IC numbers, home addresses, private allegations, medical details, or private family information. Reviewers should remove unnecessary sensitive details from summaries.",
+    title: "Butiran sensitif",
+    body: "Jangan hantar nombor IC, alamat rumah, tuduhan peribadi, maklumat kesihatan, atau maklumat keluarga yang sensitif. Penyemak patut membuang butiran sensitif yang tidak diperlukan daripada ringkasan.",
   },
   {
-    title: "Retention and deletion",
-    body: "A production service should define retention periods, reviewer access, deletion handling, and audit logs before collecting broader resident information.",
+    title: "Penyimpanan dan pemadaman",
+    body: "Perkhidmatan produksi perlu menentukan tempoh penyimpanan, akses penyemak, cara pemadaman, dan log audit sebelum mengumpul maklumat penduduk yang lebih luas.",
   },
   {
-    title: "Consent for named people",
-    body: "A nominated person should be contacted where practical before public profile use. Requests to correct, dispute, or remove information should be handled promptly.",
+    title: "Kebenaran untuk nama yang dicadangkan",
+    body: "Orang yang dicadangkan patut dihubungi bila praktikal sebelum sebarang penggunaan profil awam. Permintaan pembetulan, pertikaian, atau pemadaman perlu ditangani dengan segera.",
   },
   {
-    title: "Authority channels",
-    body: "Complaints that require authority action must still go to the relevant authority. WakilKita stores community nomination for review and cannot replace responsible channels."
+    title: "Saluran pihak berkuasa",
+    body: "Aduan yang memerlukan tindakan pihak berkuasa mesti terus dihantar kepada pihak yang berkaitan. WakilKita menyimpan cadangan komuniti untuk semakan dan tidak menggantikan saluran yang bertanggungjawab."
   },
 ];
 
 export default function PrivasiPage() {
   return (
     <CivicPageShell
-      eyebrow="Privacy"
-      title="Privacy foundations for community nomination."
-      intro="WakilKita should collect less, review more, and publish slowly. The aim is to protect submitters, nominated people, and the credibility of local issue records."
-      cta={{ label: "Submit carefully", href: "/#take-part", secondaryLabel: "Read transparency page", secondaryHref: "/ketelusan" }}
+      eyebrow="Privasi"
+      title="Asas privasi untuk cadangan komuniti."
+      intro="WakilKita patut mengumpul lebih sedikit, menyemak lebih banyak, dan menerbitkan dengan perlahan. Tujuannya ialah melindungi penghantar cadangan, orang yang dicadangkan, dan kredibiliti rekod isu setempat."
+      cta={{ label: "Hantar cadangan dengan cermat", href: "/#take-part", secondaryLabel: "Baca halaman ketelusan", secondaryHref: "/ketelusan" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
-        title="Do not put sensitive details in the nomination form."
-        body="Keep submissions factual and safe to review. If a matter needs formal action, use the relevant authority channel and keep WakilKita intake limited to broad civic context and trusted nominations."
+        title="Jangan letak butiran sensitif dalam borang cadangan."
+        body="Pastikan cadangan faktual dan selamat untuk disemak. Jika sesuatu perkara memerlukan tindakan rasmi, gunakan saluran pihak berkuasa yang berkaitan dan hadkan pengambilan WakilKita kepada konteks sivik umum serta cadangan nama yang dipercayai."
       />
     </CivicPageShell>
   );

@@ -10,9 +10,9 @@ import {
 } from "@/lib/p105-issues";
 
 export const metadata: Metadata = {
-  title: "P105 Petaling Jaya issue priorities — WakilKita",
+  title: "Keutamaan isu P105 Petaling Jaya — WakilKita",
   description:
-    "Issue-first P105 Petaling Jaya open-data priority cards with caveats, confidence, jurisdiction, resident validation questions, and representative action paths.",
+    "Kad keutamaan isu P105 Petaling Jaya berasaskan data terbuka dengan batasan, keyakinan, bidang kuasa, soalan pengesahan penduduk, dan laluan tindakan wakil.",
 };
 
 function Badge({ children }: { children: ReactNode }) {
@@ -52,7 +52,7 @@ function IssueCardView({ issue }: { issue: IssueCard }) {
       <div className="border-b border-[var(--line)] p-5 sm:p-6">
         <div className="flex flex-wrap gap-2">
           <Badge>{issue.scope}</Badge>
-          <Badge>Confidence: {issue.confidence}</Badge>
+          <Badge>Keyakinan: {issue.confidence}</Badge>
         </div>
         <h2 className="mt-4 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl">
           {issue.title}
@@ -63,20 +63,20 @@ function IssueCardView({ issue }: { issue: IssueCard }) {
       <div className="grid gap-0 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="space-y-6 border-b border-[var(--line)] p-5 sm:p-6 lg:border-b-0 lg:border-r">
           <div>
-            <SectionLabel>Why this may matter</SectionLabel>
+            <SectionLabel>Kenapa ini mungkin penting</SectionLabel>
             <p className="mt-3 text-sm leading-6 text-[var(--slate)]">{issue.whyItMatters}</p>
           </div>
-          <IssueList title="Open-data or validation signals" items={issue.localSignals} />
-          <IssueList title="Caveats" items={issue.caveats} />
-          <IssueList title="Jurisdiction to test" items={issue.jurisdiction} />
+          <IssueList title="Data terbuka atau tanda untuk disahkan" items={issue.localSignals} />
+          <IssueList title="Batasan" items={issue.caveats} />
+          <IssueList title="Bidang kuasa untuk diuji" items={issue.jurisdiction} />
         </div>
 
         <div className="space-y-6 p-5 sm:p-6">
-          <IssueList title="Prioritisation lens" items={issue.prioritisationLens} />
-          <IssueList title="Resident validation questions" items={issue.validationQuestions} />
-          <IssueList title="Representative action suggestions" items={issue.representativeActions} />
+          <IssueList title="Lensa keutamaan" items={issue.prioritisationLens} />
+          <IssueList title="Soalan pengesahan penduduk" items={issue.validationQuestions} />
+          <IssueList title="Cadangan tindakan wakil" items={issue.representativeActions} />
           <div className="border border-[var(--line)] bg-[var(--soft)] p-4">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Source notes</p>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Nota sumber</p>
             <ul className="mt-2 space-y-1.5">
               {issue.sourceNotes.map((note) => (
                 <li key={note} className="text-xs font-semibold leading-5 text-[var(--slate)]">
@@ -95,7 +95,7 @@ export default function PetalingJayaIssuesPage() {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        Langkau ke kandungan utama
       </a>
       <main id="main-content" tabIndex={-1} className="min-h-screen bg-[var(--background)] px-5 py-6 text-[var(--ink)] sm:px-8 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -104,9 +104,9 @@ export default function PetalingJayaIssuesPage() {
             WakilKita
           </Link>
           <div className="flex items-center gap-4 text-sm font-bold text-[var(--slate)]">
-            <Link href="/#take-part">Submit</Link>
+            <Link href="/#take-part">Hantar cadangan</Link>
             <Link href="/petaling-jaya/isu" className="text-[var(--civic)]">
-              Issue priorities
+              Keutamaan isu
             </Link>
             <Link href="/ketelusan">Ketelusan</Link>
           </div>
@@ -116,24 +116,24 @@ export default function PetalingJayaIssuesPage() {
           <div>
             <div className="flex flex-wrap gap-2">
               <Badge>P105 Petaling Jaya</Badge>
-              <Badge>Issue-first</Badge>
-              <Badge>No public counts or rank lists</Badge>
+              <Badge>Isu dahulu</Badge>
+              <Badge>Tiada kiraan atau ranking awam</Badge>
             </div>
             <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.05em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-              Open-data issue cards for resident priority-setting.
+              Kad isu data terbuka untuk membantu penduduk menentukan keutamaan.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-              This page turns P105 Petaling Jaya concerns into reusable issue cards. Each card labels what is known, what is only a district or operational proxy, what still needs resident validation, and which practical action routes a representative could pursue.
+              Halaman ini menukar kebimbangan P105 Petaling Jaya kepada kad isu yang boleh digunakan semula. Setiap kad membezakan apa yang diketahui, apa yang sekadar proksi daerah atau operasi, apa yang masih perlu disahkan penduduk, dan laluan tindakan praktikal yang boleh diusahakan wakil.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Boundary: this is not a public popularity board. It does not publish resident counts, rank issues, identify participants, or treat open-data proxies as P105-only proof.
+              Had: ini bukan papan populariti awam. Ia tidak menerbitkan kiraan penduduk, menyusun isu mengikut ranking, mengenal pasti peserta, atau menganggap proksi data terbuka sebagai bukti khusus P105.
             </div>
           </div>
 
           <aside className="border border-[var(--line)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
             <div className="border-b border-[var(--line)] p-5">
-              <SectionLabel>Area context</SectionLabel>
-              <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)]">Context facts used here</h2>
+              <SectionLabel>Konteks kawasan</SectionLabel>
+              <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)]">Fakta konteks yang digunakan di sini</h2>
             </div>
             <div className="divide-y divide-[var(--line)]">
               {p105AreaFacts.map((fact) => (
@@ -150,9 +150,9 @@ export default function PetalingJayaIssuesPage() {
         <section className="pb-12" aria-labelledby="principles-heading">
           <div className="grid gap-4 lg:grid-cols-[0.72fr_1.28fr]">
             <div className="border border-[var(--line)] bg-white p-5 sm:p-6">
-              <SectionLabel>Framework rules</SectionLabel>
+              <SectionLabel>Peraturan rangka kerja</SectionLabel>
               <h2 id="principles-heading" className="mt-2 text-2xl font-bold tracking-[-0.04em]">
-                How cards should be read
+                Cara membaca kad isu
               </h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -168,12 +168,12 @@ export default function PetalingJayaIssuesPage() {
         <section className="pb-12" aria-labelledby="rubric-heading">
           <div className="border border-[var(--line)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
             <div className="border-b border-[var(--line)] p-5 sm:p-6">
-              <SectionLabel>Scoring rubric, not public scoring</SectionLabel>
+              <SectionLabel>Rubrik semakan, bukan pemarkahan awam</SectionLabel>
               <h2 id="rubric-heading" className="mt-2 text-2xl font-bold tracking-[-0.04em] sm:text-3xl">
-                Reviewers can compare issues using the same lenses before any public prioritisation method exists.
+                Penyemak boleh membandingkan isu menggunakan lensa yang sama sebelum sebarang kaedah keutamaan awam wujud.
               </h2>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--slate)]">
-                The rubric is shown to make review criteria transparent. It does not create public issue rank lists, resident totals, or popularity signals.
+                Rubrik ini dipaparkan supaya kriteria semakan jelas. Ia tidak mencipta ranking isu awam, jumlah penduduk, atau petunjuk populariti.
               </p>
             </div>
             <div className="grid divide-y divide-[var(--line)] md:grid-cols-5 md:divide-x md:divide-y-0">
@@ -190,9 +190,9 @@ export default function PetalingJayaIssuesPage() {
         <section className="pb-16" aria-labelledby="issue-cards-heading">
           <div className="mb-5 flex flex-col gap-4 border-y border-[var(--line)] bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <SectionLabel>Reusable issue cards</SectionLabel>
+              <SectionLabel>Kad isu boleh guna semula</SectionLabel>
               <h2 id="issue-cards-heading" className="mt-1 text-xl font-bold tracking-[-0.03em]">
-                First P105 issue surfaces
+                Permukaan isu awal P105
               </h2>
             </div>
             <div className="flex flex-wrap gap-2">

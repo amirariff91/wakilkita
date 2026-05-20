@@ -1,5 +1,5 @@
 export const intakeTypes = [
-  "Nominate a representative",
+  "Cadangkan nama untuk semakan",
 ] as const;
 
 export type IntakeType = (typeof intakeTypes)[number];
@@ -118,7 +118,7 @@ export function detectRiskFlags(entry: Pick<IntakeDraft, "intakeType" | "nameOrR
 
 export function validateIntakePayload(payload: unknown): { draft?: IntakeDraft; issues: ValidationIssue[]; rejectedAuditDetail?: string } {
   if (!isRecord(payload)) {
-    return { issues: [{ field: "form", message: "Submission payload must be an object." }] };
+    return { issues: [{ field: "form", message: "Hantaran borang mesti dalam format yang betul." }] };
   }
 
   const rawIntakeType = cleanReviewText(String(payload.intakeType ?? intakeTypes[0]), maxLengths.intakeType);
@@ -133,13 +133,13 @@ export function validateIntakePayload(payload: unknown): { draft?: IntakeDraft; 
   };
 
   const issues: ValidationIssue[] = [];
-  if (draft.constituency.length < 3) issues.push({ field: "constituency", message: "Add the constituency." });
-  if (draft.nameOrRole.length < 3) issues.push({ field: "nameOrRole", message: "Add a public name, role, or issue area." });
-  if (draft.reason.length < 13) issues.push({ field: "reason", message: "Add a short factual reason." });
+  if (draft.constituency.length < 3) issues.push({ field: "constituency", message: "Tambah kawasan Parlimen anda." });
+  if (draft.nameOrRole.length < 3) issues.push({ field: "nameOrRole", message: "Tambah nama orang yang dicadangkan." });
+  if (draft.reason.length < 13) issues.push({ field: "reason", message: "Tambah sebab cadangan yang ringkas dan faktual." });
 
   const rawText = Object.values(draft).join(" ");
   if (containsIcNumber(rawText)) {
-    issues.push({ field: "form", message: "Do not submit IC numbers here. eKYC must happen in a separate verified identity flow." });
+    issues.push({ field: "form", message: "Jangan hantar nombor IC di sini. eKYC mesti berlaku dalam aliran identiti berasingan." });
   }
 
   return {

@@ -15,7 +15,7 @@ export const siteLinks = [
 
 const footerLinks = [
   ...siteLinks,
-  { href: "/#take-part", label: "Suggest a name" },
+  { href: "/#take-part", label: "Cadangkan nama" },
 ];
 
 export type CivicPageProps = {
@@ -39,17 +39,17 @@ export type InfoBlock = {
 export function CivicNav() {
   return (
     <nav className="flex flex-col gap-4 border-b border-[var(--line)] bg-white px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
-      <Link href="/" className="flex items-center gap-3" aria-label="WakilKita home">
+      <Link href="/" className="flex items-center gap-3" aria-label="Laman utama WakilKita">
         <span className="grid h-10 w-10 shrink-0 place-items-center bg-[var(--ink)] text-[var(--mint)]">
           <WakilKitaMark size={28} />
         </span>
         <span>
           <span className="block text-base font-bold tracking-[-0.03em] text-[var(--ink)]">WakilKita</span>
-          <span className="block text-xs font-semibold text-[var(--civic)]">Petaling Jaya civic intake</span>
+          <span className="block text-xs font-semibold text-[var(--civic)]">Ruang cadangan sivik Petaling Jaya</span>
         </span>
       </Link>
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[var(--slate)]">
-        <Link href="/#take-part">Submit</Link>
+        <Link href="/#take-part">Hantar cadangan</Link>
         <Link href="/petaling-jaya">Petaling Jaya</Link>
         <Link href="/ketelusan">Ketelusan</Link>
         <Link href="/privasi">Privasi</Link>
@@ -63,21 +63,21 @@ export function CivicFooter() {
     <footer className="border-t border-[var(--line)] bg-[rgba(255,250,241,0.72)] px-5 py-10 text-sm leading-6 text-[var(--slate)] sm:px-8 lg:px-10">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
-          <p className="font-bold text-[var(--ink)]">Independent community nomination</p>
-          <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · review before public use</p>
+          <p className="font-bold text-[var(--ink)]">Ruang cadangan komuniti bebas</p>
+          <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · semakan dahulu sebelum umum</p>
           <div className="mt-5 text-[var(--civic)]">
             <P105LineMotif />
           </div>
         </div>
         <div className="space-y-4">
           <p>
-            WakilKita is independent. It is not run by Parliament, MBPJ, any public body, any party, or any representative office.
+            WakilKita bebas. Ia bukan dikendalikan oleh SPR, Parlimen, MBPJ, mana-mana badan awam, parti politik, atau pejabat wakil rakyat.
           </p>
           <p>
-            This site helps residents suggest names for careful review. It is not for formal complaints or government service requests; those still go to the right authority.
+            Laman ini membantu penduduk mencadangkan nama untuk semakan berhati-hati. Ia bukan saluran aduan rasmi atau permintaan perkhidmatan kerajaan; perkara begitu masih perlu dihantar kepada pihak berkuasa yang betul.
           </p>
           <p>
-            Contact details stay private. Public pages should show reviewed civic information, not participant lists.
+            Butiran hubungan kekal peribadi. Halaman awam patut memaparkan maklumat sivik yang telah disemak, bukan senarai peserta atau penyokong.
           </p>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {footerLinks.map((link) => (
@@ -88,7 +88,7 @@ export function CivicFooter() {
           </div>
           <p>
             <a className="font-bold text-[var(--civic-dark)] underline" href="mailto:miccy@arusdigital.com?subject=WakilKita%20report%20or%20removal">
-              Report impersonation, dispute a nomination, or request removal.
+              Laporkan penyamaran, pertikai cadangan, atau minta pemadaman.
             </a>
           </p>
         </div>
@@ -101,7 +101,7 @@ export function CivicPageShell({ eyebrow, title, intro, children, cta }: CivicPa
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        Langkau ke kandungan utama
       </a>
       <main id="main-content" tabIndex={-1} className="min-h-screen overflow-hidden bg-[var(--background)]">
         <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:px-10">
@@ -140,15 +140,15 @@ export function CivicPageShell({ eyebrow, title, intro, children, cta }: CivicPa
 
 function DisclosurePanel() {
   return (
-    <aside className="border border-[var(--line)] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]" aria-label="WakilKita boundaries">
-      <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Clear boundaries</p>
-      <h2 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">A community signal, not a government process.</h2>
+    <aside className="border border-[var(--line)] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]" aria-label="Had WakilKita">
+      <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Had yang jelas</p>
+      <h2 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">Ruang cadangan komuniti, bukan proses kerajaan.</h2>
       <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--slate)]">
-        <li>Not run by SPR, Parliament, MBPJ, parties, or representative offices.</li>
-        <li>Not a government-run selection process or public service.</li>
-        <li>Not a place for authority-action complaints; those still go to the relevant authority.</li>
-        <li>No public IC numbers, eKYC records, or participant lists.</li>
-        <li>Contact details are used only for verification and follow-up.</li>
+        <li>Bukan dikendalikan oleh SPR, Parlimen, MBPJ, parti, atau pejabat wakil rakyat.</li>
+        <li>Bukan proses rasmi pilihan raya, pemilihan calon, atau perkhidmatan awam.</li>
+        <li>Bukan tempat aduan yang memerlukan tindakan pihak berkuasa; perkara itu masih perlu ke saluran rasmi.</li>
+        <li>Tiada nombor IC, rekod eKYC, senarai peserta, atau senarai penyokong dipaparkan kepada umum.</li>
+        <li>Butiran hubungan digunakan hanya untuk semakan dan susulan.</li>
       </ul>
     </aside>
   );
@@ -171,7 +171,7 @@ export function NoteSection({ title, body }: { title: string; body: string }) {
   return (
     <section className="border-y border-[var(--line)] bg-[var(--soft)] py-14">
       <div className="mx-auto max-w-4xl px-5 sm:px-8 lg:px-10">
-        <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Important note</p>
+        <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Nota penting</p>
         <h2 className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)]">{title}</h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">{body}</p>
       </div>

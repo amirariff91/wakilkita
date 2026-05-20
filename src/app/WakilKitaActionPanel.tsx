@@ -4,12 +4,12 @@ import { FormEvent, useMemo, useState } from "react";
 import { cleanReviewText, type IntakeType } from "@/lib/review";
 
 const defaultIssues = [
-  "Listens before deciding",
-  "Follows up on local issues",
-  "Understands Petaling Jaya",
-  "Works across communities",
-  "Clean and accountable",
-  "Other",
+  "Mendengar sebelum membuat keputusan",
+  "Bantu susulan isu setempat",
+  "Faham Petaling Jaya",
+  "Dipercayai merentas komuniti",
+  "Telus dan bertanggungjawab",
+  "Lain-lain",
 ];
 
 function cleanText(value: string, maxLength: number) {
@@ -19,13 +19,13 @@ function cleanText(value: string, maxLength: number) {
 function formatMissingFields(fields: string[]): string {
   if (fields.length === 0) return "";
   if (fields.length === 1) return fields[0];
-  if (fields.length === 2) return `${fields[0]} and ${fields[1]}`;
-  return `${fields[0]}, ${fields[1]}, and ${fields[2]}`;
+  if (fields.length === 2) return `${fields[0]} dan ${fields[1]}`;
+  return `${fields[0]}, ${fields[1]}, dan ${fields[2]}`;
 }
 
 export function WakilKitaActionPanel() {
   const [constituency, setConstituency] = useState("P105 Petaling Jaya");
-  const intakeType: IntakeType = "Nominate a representative";
+  const intakeType: IntakeType = "Cadangkan nama untuk semakan";
   const [personName, setPersonName] = useState("");
   const [issue, setIssue] = useState(defaultIssues[0]);
   const [reason, setReason] = useState("");
@@ -44,9 +44,9 @@ export function WakilKitaActionPanel() {
 
   const missingFields = useMemo(() => {
     const fields = [
-      cleanText(constituency, 80).length > 2 ? null : "your constituency",
-      cleanText(personName, 80).length > 2 ? null : "the person’s name",
-      cleanText(reason, 420).length > 12 ? null : "a short reason",
+      cleanText(constituency, 80).length > 2 ? null : "kawasan Parlimen",
+      cleanText(personName, 80).length > 2 ? null : "nama orang yang dicadangkan",
+      cleanText(reason, 420).length > 12 ? null : "sebab cadangan yang jelas",
     ].filter(Boolean) as string[];
     return formatMissingFields(fields);
   }, [constituency, personName, reason]);
@@ -84,7 +84,7 @@ export function WakilKitaActionPanel() {
 
       const result = await response.json().catch(() => null) as { issues?: { message?: string }[] } | null;
       if (!response.ok) {
-        const message = result?.issues?.[0]?.message ?? "We could not save this nomination. Please check the form and try again.";
+        const message = result?.issues?.[0]?.message ?? "Cadangan ini belum dapat disimpan. Sila semak borang dan cuba lagi.";
         setSubmitError(message);
         return;
       }
@@ -94,7 +94,7 @@ export function WakilKitaActionPanel() {
       setReason("");
       setContact("");
     } catch {
-      setSubmitError("We could not send this nomination. Please try again.");
+      setSubmitError("Cadangan ini belum dapat dihantar kerana masalah sambungan. Sila cuba sekali lagi.");
     } finally {
       setIsSubmitting(false);
     }
@@ -106,16 +106,16 @@ export function WakilKitaActionPanel() {
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="inline-flex bg-[var(--soft)] px-3 py-2 text-xs font-bold tracking-[0.08em] text-[var(--civic)]">
-              Suggest a name
+              Cadangkan nama
             </p>
             <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Know someone Petaling Jaya should seriously consider?
+              Kenal seseorang yang patut dipertimbangkan oleh warga Petaling Jaya?
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              Put their name forward with a short, factual reason. We review nominations before anything public appears.
+              Hantar nama mereka bersama sebab yang ringkas dan faktual. Cadangan yang baik membantu kami faham kenapa orang itu dipercayai, bukan sekadar siapa yang paling dikenali.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              This form is for safe intake first. Do not include IC numbers, home addresses, private allegations, or sensitive family details.
+              Jangan masukkan nombor IC, alamat rumah, dokumen identiti, tuduhan peribadi, maklumat kesihatan, atau butiran keluarga sensitif. Jika isu memerlukan tindakan pihak berkuasa, gunakan saluran rasmi yang berkaitan.
             </div>
           </div>
 
@@ -124,11 +124,11 @@ export function WakilKitaActionPanel() {
             className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6"
           >
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              Your nomination
+              Cadangan anda
             </p>
 
             <label className="mt-5 block text-sm font-bold" htmlFor="constituency">
-              Your constituency <span className="text-[var(--amber-text)]">*</span>
+              Kawasan Parlimen anda <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="constituency"
@@ -137,15 +137,15 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="constituency-help"
-              placeholder="e.g. P105 Petaling Jaya"
+              placeholder="Contoh: P105 Petaling Jaya"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="constituency-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Keep this tied to your parliamentary area. P105 Petaling Jaya is the active first constituency.
+              P105 Petaling Jaya ialah kawasan pertama yang dibuka. Jika anda di luar kawasan ini, nyatakan kawasan sebenar anda.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
-              Who are you suggesting? <span className="text-[var(--amber-text)]">*</span>
+              Nama orang yang anda cadangkan <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="person-name"
@@ -154,15 +154,15 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="person-name-help"
-              placeholder="Their name or public role"
+              placeholder="Nama penuh atau nama yang dikenali umum"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Use the name people would recognise. We review it before it appears in the poll.
+              Gunakan nama yang boleh dikenali dengan jelas. Jangan letak nombor telefon, alamat, atau IC orang tersebut.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
-              What makes them worth considering?
+              Kenapa mereka wajar dipertimbangkan?
             </label>
             <select
               id="priority-area"
@@ -176,7 +176,7 @@ export function WakilKitaActionPanel() {
             </select>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="reason">
-              Explain the nomination <span className="text-[var(--amber-text)]">*</span>
+              Sebab cadangan anda <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
               id="reason"
@@ -186,12 +186,12 @@ export function WakilKitaActionPanel() {
               required
               aria-describedby="reason-help reason-count"
               rows={5}
-              placeholder="Example: They already help residents follow up local issues, explain decisions clearly, and people know where to reach them."
+              placeholder="Contoh: Beliau sering membantu penduduk SS2 membuat susulan isu longkang dan parkir, menerangkan proses dengan jelas, dan mudah dihubungi oleh komuniti setempat."
               className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <div className="mt-1.5 flex items-center justify-between gap-4">
               <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                Write this as if it may be reviewed with the nominated person. Keep it respectful, specific, and safe.
+                Tulis secara khusus dan hormat. Ceritakan apa yang mereka pernah buat, siapa yang mengenali kerja mereka, atau isu PJ yang mereka boleh bantu. Elakkan tuduhan yang belum disahkan.
               </p>
               <p
                 id="reason-count"
@@ -199,23 +199,26 @@ export function WakilKitaActionPanel() {
                 aria-live="off"
               >
                 {reasonMinReached && (
-                  <span className="mr-2 text-[var(--civic)]">Minimum reached ·</span>
+                  <span className="mr-2 text-[var(--civic)]">Minimum cukup ·</span>
                 )}
                 {reasonLength} / 420
               </p>
             </div>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="contact">
-              Your contact for review follow-up
+              Cara untuk kami hubungi anda, jika perlu
             </label>
             <input
               id="contact"
               value={contact}
               onChange={(event) => setContact(event.target.value)}
               maxLength={120}
-              placeholder="Email or phone number, optional"
+              placeholder="Emel atau nombor telefon, pilihan"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
+            <p className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
+              Pilihan sahaja. Digunakan untuk semakan, pembetulan, kebenaran, atau pertanyaan lanjut. Tidak dipaparkan sebagai senarai awam.
+            </p>
 
             <div className="mt-5 border border-[var(--line)] bg-white px-4 py-3">
               <p
@@ -224,10 +227,10 @@ export function WakilKitaActionPanel() {
                 aria-live="polite"
               >
                 {isReady
-                  ? "Ready to submit for review."
+                  ? "Cadangan ini sedia dihantar untuk semakan."
                   : missingFields
-                    ? `Still needed: ${missingFields}.`
-                    : "Fill in the required fields to continue."}
+                    ? `Masih diperlukan: ${missingFields}.`
+                    : "Lengkapkan medan wajib untuk teruskan."}
               </p>
             </div>
 
@@ -237,7 +240,7 @@ export function WakilKitaActionPanel() {
               aria-describedby="submit-readiness"
               className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
             >
-              {isSubmitting ? "Submitting for review..." : "Submit nomination"}
+              {isSubmitting ? "Menghantar untuk semakan..." : "Hantar cadangan untuk semakan"}
             </button>
 
             {submitError && (
@@ -252,7 +255,7 @@ export function WakilKitaActionPanel() {
             >
               {saved && (
                 <p className="text-sm font-bold text-[var(--civic-dark)]">
-                  Nomination received. It enters review before any public use.
+                  Cadangan diterima. Ia masuk ke barisan semakan dahulu. Tiada profil awam, senarai penyokong, atau kiraan umum akan dipaparkan secara automatik.
                 </p>
               )}
             </div>

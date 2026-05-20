@@ -2,42 +2,42 @@ import type { Metadata } from "next";
 import { CivicPageShell, InfoGrid, NoteSection } from "../../civic-content";
 
 export const metadata: Metadata = {
-  title: "Aduan Petaling Jaya guide | WakilKita",
+  title: "Panduan aduan Petaling Jaya | WakilKita",
   description:
-    "A conservative guide explaining how WakilKita handles Petaling Jaya issue priorities while authority-action complaints remain with the relevant authority.",
+    "Panduan berhati-hati tentang cara WakilKita mengendalikan keutamaan isu Petaling Jaya sementara aduan yang memerlukan tindakan kekal dengan pihak berkuasa berkaitan.",
 };
 
 const blocks = [
   {
-    title: "Use WakilKita for civic priorities",
-    body: "Submit patterns, local pain points, and representative follow-up ideas that residents want reviewed. Keep details factual, brief, and safe for manual review.",
+    title: "Guna WakilKita untuk keutamaan sivik",
+    body: "Hantar corak isu, kesakitan setempat, dan idea susulan wakil yang penduduk mahu disemak. Pastikan butiran faktual, ringkas, dan selamat untuk semakan manual.",
   },
   {
-    title: "Use authority channels for action",
-    body: "Service requests, permits, enforcement, emergencies, and casework that require authority action must still be sent to the relevant authority through its own channel.",
+    title: "Guna saluran pihak berkuasa untuk tindakan",
+    body: "Permintaan perkhidmatan, permit, penguatkuasaan, kecemasan, dan kerja kes yang memerlukan tindakan pihak berkuasa mesti terus dihantar kepada pihak berkaitan melalui saluran mereka sendiri.",
   },
   {
-    title: "Remove private details",
-    body: "Do not include IC numbers, home addresses, phone numbers, private medical details, or allegations about a named person. Share only what is needed to understand the issue area.",
+    title: "Buang butiran peribadi",
+    body: "Jangan masukkan nombor IC, alamat rumah, nombor telefon, butiran perubatan peribadi, atau tuduhan terhadap individu bernama. Kongsi hanya perkara yang diperlukan untuk memahami kawasan isu.",
   },
   {
-    title: "Review before public use",
-    body: "A submission can be grouped into a broad issue theme only after screening. Raw submissions and contact details should not be published."
+    title: "Semakan sebelum kegunaan awam",
+    body: "Cadangan hanya boleh dikelompokkan sebagai tema isu umum selepas saringan. Cadangan mentah dan butiran hubungan tidak patut diterbitkan."
   },
 ];
 
 export default function AduanPetalingJayaPage() {
   return (
     <CivicPageShell
-      eyebrow="Petaling Jaya aduan guide"
-      title="Separate civic issue intake from authority-action complaints."
-      intro="WakilKita can collect local issue priorities for review, but it cannot replace the channels that handle formal action, service delivery, enforcement, or casework."
-      cta={{ label: "Submit an issue priority", href: "/#take-part", secondaryLabel: "Read transparency notes", secondaryHref: "/ketelusan" }}
+      eyebrow="Panduan aduan Petaling Jaya"
+      title="Asingkan pengambilan isu sivik daripada aduan yang memerlukan tindakan pihak berkuasa."
+      intro="WakilKita boleh mengumpul keutamaan isu setempat untuk semakan, tetapi ia tidak menggantikan saluran yang mengendalikan tindakan rasmi, penyampaian perkhidmatan, penguatkuasaan, atau kerja kes."
+      cta={{ label: "Cadangkan keutamaan isu", href: "/#take-part", secondaryLabel: "Baca nota ketelusan", secondaryHref: "/ketelusan" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
-        title="Send action-required complaints to the relevant authority."
-        body="WakilKita may help reviewers understand recurring civic priorities in Petaling Jaya, but authority-action complaints still need to be filed with the responsible authority."
+        title="Hantar aduan yang memerlukan tindakan kepada pihak berkuasa berkaitan."
+        body="WakilKita boleh membantu penyemak memahami keutamaan sivik berulang di Petaling Jaya, tetapi aduan yang memerlukan tindakan masih perlu difailkan dengan pihak berkuasa yang bertanggungjawab."
       />
     </CivicPageShell>
   );
