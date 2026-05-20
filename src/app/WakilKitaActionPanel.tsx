@@ -109,13 +109,13 @@ export function WakilKitaActionPanel() {
               Cadangkan nama
             </p>
             <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Kenal seseorang yang patut dipertimbangkan oleh warga Petaling Jaya?
+              Cadangkan wakil yang anda percaya
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              Hantar nama mereka bersama sebab yang ringkas dan faktual. Cadangan yang baik membantu kami faham kenapa orang itu dipercayai, bukan sekadar siapa yang paling dikenali.
+              Hantar satu nama dan sebab yang jelas. Selepas 7 hari, nama yang diluluskan akan masuk ke polling komuniti.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Jangan masukkan nombor IC, alamat rumah, dokumen identiti, tuduhan peribadi, maklumat kesihatan, atau butiran keluarga sensitif. Jika isu memerlukan tindakan pihak berkuasa, gunakan saluran rasmi yang berkaitan.
+              Cadangan dan undi memerlukan pengesahan supaya satu orang hanya satu suara. Jangan masukkan nombor IC atau dokumen identiti dalam borang ini — rekod eKYC perlu kekal berasingan daripada paparan awam.
             </div>
           </div>
 
@@ -240,7 +240,7 @@ export function WakilKitaActionPanel() {
               aria-describedby="submit-readiness"
               className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
             >
-              {isSubmitting ? "Menghantar untuk semakan..." : "Hantar cadangan untuk semakan"}
+              {isSubmitting ? "Menghantar cadangan..." : "Hantar cadangan"}
             </button>
 
             {submitError && (
@@ -255,7 +255,7 @@ export function WakilKitaActionPanel() {
             >
               {saved && (
                 <p className="text-sm font-bold text-[var(--civic-dark)]">
-                  Cadangan diterima. Ia masuk ke barisan semakan dahulu. Tiada profil awam, senarai penyokong, atau kiraan umum akan dipaparkan secara automatik.
+                  Cadangan diterima. Ia akan disemak dahulu sebelum masuk ke senarai polling komuniti.
                 </p>
               )}
             </div>

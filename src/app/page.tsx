@@ -3,10 +3,10 @@ import { CivicFooter, CivicNav } from "./civic-content";
 import { P105LineMotif } from "./WakilKitaMark";
 
 const boundaryChips = [
-  "Untuk P105 Petaling Jaya",
-  "Cadang nama + sebab jelas",
-  "Semakan dahulu sebelum umum",
-  "Tiada IC atau eKYC di borang ini",
+  "Prinsip dahulu",
+  "Cadang wakil yang dipercayai",
+  "7 hari untuk cadangan",
+  "Kemudian polling komuniti",
 ];
 
 const intakeFacts = [
@@ -16,56 +16,56 @@ const intakeFacts = [
     note: "Buat masa ini WakilKita menerima cadangan untuk kawasan Parlimen P105 dahulu.",
   },
   {
-    label: "Apa diperlukan",
-    value: "Nama + sebab khusus",
-    note: "Cadangan yang berguna menerangkan kerja, kepercayaan komuniti, atau isu tempatan yang pernah dibantu.",
+    label: "Mula-mula",
+    value: "Cadang nama + sebab",
+    note: "Rakyat cadangkan siapa yang mereka percaya, bersama sebab yang jelas dan boleh disemak.",
   },
   {
-    label: "Sebelum umum",
-    value: "Semakan dahulu",
-    note: "Kami semak keselamatan, pendua, kaitan kawasan, keperluan kebenaran, dan risiko privasi sebelum apa-apa digunakan secara terbuka.",
+    label: "Selepas 7 hari",
+    value: "Polling komuniti",
+    note: "Nama yang diluluskan masuk ke polling. Untuk undi, pengguna perlu melalui eKYC supaya satu orang hanya satu suara.",
   },
 ];
 
 const reviewSteps = [
   {
     n: "1",
-    title: "Cadangkan orang yang dipercayai",
-    body: "Mulakan dengan satu nama dan satu sebab yang jelas. Ceritakan kerja mereka, kepercayaan komuniti, atau isu Petaling Jaya yang mereka faham.",
+    title: "Rakyat cadangkan wakil",
+    body: "Fasa pertama ialah cadangan nama. Setiap cadangan perlu ada sebab yang jelas supaya komuniti faham kenapa orang itu dipercayai.",
   },
   {
     n: "2",
-    title: "Kami semak sebelum digunakan",
-    body: "Cadangan masuk ke barisan semakan tertutup. Kami melihat pendua, butiran sensitif, kaitan kawasan, risiko privasi, dan keperluan kebenaran.",
+    title: "Kami semak senarai nama",
+    body: "Cadangan disemak untuk pendua, risiko privasi, kaitan kawasan, dan keselamatan sebelum masuk ke senarai polling.",
   },
   {
     n: "3",
-    title: "Bina senarai semakan yang lebih bersih",
-    body: "Nama yang sesuai hanya boleh dipertimbangkan untuk paparan awam selepas semakan keselamatan, laluan pembetulan, dan kebenaran yang wajar.",
+    title: "Polling dibuka selepas seminggu",
+    body: "Selepas tempoh cadangan tamat, nama yang diluluskan dibuka untuk polling komuniti.",
   },
   {
     n: "4",
-    title: "Langkah seterusnya hanya bila peraturan jelas",
-    body: "Sebarang maklum balas komuniti yang lebih kuat hanya patut dibuat kemudian, selepas kaedah, privasi, ambang keselamatan, dan cara bantahan diterangkan dengan jelas.",
+    title: "Satu orang, satu suara",
+    body: "Untuk mengundi, pengguna perlu disahkan melalui eKYC. Keputusan boleh dipaparkan, tetapi IC, eKYC, dan senarai pengundi kekal berasingan.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "Kepercayaan bermula sebelum paparan awam",
-    body: "Tugas pertama ialah mengumpul nama dan sebab yang berguna tanpa mendedahkan data peribadi penduduk.",
+    heading: "Prinsip dahulu, polling kemudian",
+    body: "WakilKita bermula dengan sebab: rakyat patut mencadangkan wakil mereka sendiri. Polling datang selepas nama dikumpul dan disemak.",
   },
   {
-    heading: "Tiada profil awam secara automatik",
-    body: "Nama yang dicadangkan perlu melalui semakan, laluan pembetulan, dan pengendalian kebenaran sebelum profil awam wujud.",
+    heading: "eKYC untuk elak spam",
+    body: "Cadangan dan undi perlu disahkan supaya sistem tidak dipenuhi akaun palsu, undi berulang, atau manipulasi.",
   },
   {
-    heading: "Tiada senarai peserta awam",
-    body: "Butiran hubungan dan sebarang semakan identiti masa depan mesti kekal berasingan daripada paparan awam.",
+    heading: "Identiti bukan paparan awam",
+    body: "IC, rekod eKYC, nombor telefon, dan senarai pengundi tidak dipaparkan sebagai kandungan awam.",
   },
   {
     heading: "Janji awam yang jelas",
-    body: "Cadangkan nama dahulu. Semak sebelum digunakan. Paparkan hanya perkara yang boleh diterangkan dan dipertahankan.",
+    body: "Rakyat cadang nama dahulu. Selepas seminggu, komuniti mengundi daripada senarai yang sudah disemak.",
   },
 ];
 
@@ -123,7 +123,7 @@ function ManifestoSection() {
             id="manifesto-heading"
             className="mt-4 text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-4xl"
           >
-            Rakyat patut ada ruang mencadangkan wakil yang mereka percaya.
+            Rakyat memilih wakil mereka sendiri.
           </h2>
         </div>
         <div className="space-y-5 p-6 text-base leading-8 text-white/86 sm:p-8 sm:text-lg">
@@ -134,15 +134,15 @@ function ManifestoSection() {
             Rakyat hanya diberi pilihan terakhir.
           </p>
           <p>
-            Kami percaya sudah tiba masanya rakyat diberi ruang untuk mencadangkan sendiri siapa yang layak dipertimbangkan sebagai wakil komuniti.
+            Kami percaya sudah tiba masanya rakyat diberi kuasa untuk menentukan sendiri siapa yang layak mewakili mereka.
           </p>
           <p>Platform ini dibina dengan satu prinsip mudah:</p>
           <ul className="space-y-2 font-bold text-white">
-            <li>• Bukan parti menentukan semua pilihan.</li>
-            <li>• Rakyat mencadangkan nama yang mereka percaya.</li>
+            <li>• Bukan parti memilih rakyat.</li>
+            <li>• Rakyat memilih wakil mereka sendiri.</li>
           </ul>
           <p>
-            Setiap cadangan perlu dilayan dengan adil, telus, dan berhati-hati — bukan sekadar angka yang hilang dalam sistem politik.
+            Kami juga percaya setiap suara mesti dihargai secara adil dan telus. Bukan sekadar angka yang hilang dalam sistem politik
           </p>
         </div>
       </div>
@@ -152,16 +152,16 @@ function ManifestoSection() {
 
 function WhatIsSection() {
   const isItems = [
-    "Ruang untuk mencadangkan nama yang wajar dipertimbangkan di Petaling Jaya",
+    "Ruang untuk rakyat mencadangkan wakil yang mereka percaya",
     "Setiap cadangan perlu ada sebab yang jelas dan boleh disemak",
-    "Cadangan masuk ke barisan semakan tertutup sebelum sebarang paparan awam",
-    "Langkah awal untuk membina rekod komuniti yang lebih bertanggungjawab",
+    "Selepas 7 hari, nama yang diluluskan masuk ke polling komuniti",
+    "Polling memerlukan eKYC supaya satu orang hanya satu suara",
   ];
 
   const isNotItems = [
-    "Bukan proses rasmi pilihan raya, SPR, kerajaan, Parlimen, MBPJ, parti, atau pejabat wakil rakyat",
+    "Bukan pilihan raya rasmi, SPR, kerajaan, Parlimen, MBPJ, parti, atau pejabat wakil rakyat",
     "Bukan tempat menghantar aduan rasmi yang memerlukan tindakan pihak berkuasa",
-    "Bukan senarai awam nombor IC, rekod eKYC, peserta, penyokong, kiraan, atau ranking",
+    "Bukan senarai awam nombor IC, rekod eKYC, peserta, atau pengundi",
   ];
 
   return (
@@ -235,10 +235,10 @@ function ReviewJourneySection() {
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            Cadangan dikumpul dahulu. Kepercayaan dibina sebelum apa-apa dibuka kepada umum.
+            Cadangan dahulu. Polling kemudian.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            Matlamat sekarang ialah cadangan yang berkualiti: satu nama sebenar, satu sebab yang jelas, dan maklumat yang selamat untuk disemak.
+            Alirannya mudah: rakyat cadang nama dahulu, WakilKita semak, kemudian komuniti mengundi selepas tempoh cadangan tamat.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -281,10 +281,10 @@ function PrivacyModelSection() {
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          Kepercayaan ialah produk. Paparan awam datang kemudian.
+          Kepercayaan dahulu. Polling selepas itu.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          WakilKita perlu membuktikan pengambilan cadangan dibuat dengan cermat sebelum meminta kepercayaan yang lebih besar daripada penduduk. Maksudnya: tiada senarai peserta awam, tiada profil segera, dan tiada kiraan awam tanpa kaedah yang diterbitkan.
+          Polling hanya bermakna kalau orang percaya prosesnya. Sebab itu WakilKita bermula dengan prinsip, semakan nama, dan perlindungan identiti sebelum keputusan dipaparkan.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -327,13 +327,13 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Siapa yang Petaling Jaya patut pertimbangkan dengan serius?
+                Selepas prinsip, barulah polling komuniti.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Cadangkan satu nama tempatan yang anda percaya, dan jelaskan sebabnya. WakilKita menyemak setiap cadangan sebelum sebarang profil, senarai semakan, atau paparan awam dibuat.
+                Mula dengan cadangan nama. Selepas 7 hari, nama yang diluluskan masuk ke polling supaya warga Petaling Jaya boleh memilih bersama.
               </p>
               <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
-                Bukan undian. Bukan SPR. Tiada IC atau eKYC diminta di sini.
+                Untuk cadangan dan undi, pengguna perlu disahkan. IC dan rekod eKYC tidak dipaparkan kepada umum.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -346,7 +346,7 @@ export default function Home() {
                   href="#how-it-works"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  Lihat cara semakan dibuat
+                  Lihat cara polling berjalan
                 </a>
               </div>
             </div>
