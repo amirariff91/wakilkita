@@ -3,69 +3,69 @@ import { CivicFooter, CivicNav } from "./civic-content";
 import { P105LineMotif } from "./WakilKitaMark";
 
 const boundaryChips = [
-  "Nominate someone you trust",
-  "One person, one verified voice",
-  "7 days to suggest names",
-  "Then the community votes",
+  "Cadang nama yang dipercayai",
+  "P105 Petaling Jaya first",
+  "Review before public profile",
+  "Poll only after rules are ready",
 ];
 
 const intakeFacts = [
   {
     label: "Open now",
     value: "P105 Petaling Jaya",
-    note: "Tell us who you trust to speak for the area",
+    note: "Tell us who residents should seriously consider",
   },
   {
     label: "Accepting",
-    value: "Real people only",
-    note: "A quick identity check keeps spam and repeat votes out",
+    value: "Names + reasons",
+    note: "A useful nomination explains trust, local work, and issues they can champion",
   },
   {
-    label: "Then",
-    value: "Community poll",
-    note: "After nominations close, residents can choose from the approved names",
+    label: "Before public",
+    value: "Review first",
+    note: "We check safety, duplicates, consent needs, and privacy risk before anything appears",
   },
 ];
 
 const reviewSteps = [
   {
     n: "1",
-    title: "Confirm you are a real person",
-    body: "Before your nomination counts, we ask for a quick eKYC check. This helps keep the list clean and fair.",
+    title: "Suggest a trusted person",
+    body: "Start with one name and one clear reason. Keep it factual: what they have done, who trusts them, and what local issue they can help move.",
   },
   {
     n: "2",
-    title: "Suggest someone you trust",
-    body: "For 7 days, residents can put forward one name and explain why that person should be considered.",
+    title: "We review before public use",
+    body: "Submissions go into a private queue first. We screen for unsafe details, duplicates, consent needs, and whether the entry belongs to P105.",
   },
   {
     n: "3",
-    title: "Vote from the approved list",
-    body: "When nominations close, the approved names move into a simple poll. One verified person gets one vote.",
+    title: "Build a cleaner shortlist",
+    body: "Approved names can become a consent-safe public shortlist. No public profile should appear just because someone typed in a name.",
   },
   {
     n: "4",
-    title: "Share the result, not private details",
-    body: "The public can see the poll result. They do not see IC numbers, eKYC records, or the list of voters.",
+    title: "Open the poll only when trust rules are ready",
+    body: "A community poll comes later, after verification, privacy thresholds, dispute handling, and methodology are clear.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "One real person, one voice",
-    body: "Nominations and votes need eKYC so the poll is harder to spam or game.",
+    heading: "Trust starts before the poll",
+    body: "The first job is to collect useful names and reasons without exposing private resident data.",
   },
   {
-    heading: "7 days to suggest names",
-    body: "The first week is only for names. After that, the list closes and voting begins.",
+    heading: "No instant public profiles",
+    body: "Named people need review, correction routes, and consent handling before a public profile appears.",
   },
   {
-    heading: "No public voter list",
-    body: "Results can be public. Voter names, IC details, and verification records stay private.",
+    heading: "No public participant list",
+    body: "Contact details and future identity checks stay separate from any public poll or public profile.",
   },
   {
     heading: "Clear public promise",
-    body: "Suggest names first. Vote after the list closes. Keep identity checks separate from public results.",
+    body: "Suggest names first. Review before public use. Publish only what can be explained and defended.",
   },
 ];
 
@@ -80,7 +80,7 @@ function IntakeDeskPanel() {
           For Petaling Jaya residents
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">
-          How this works
+          Start with the name residents already trust
         </h2>
       </div>
       <div className="divide-y divide-[var(--line)]">
@@ -98,7 +98,7 @@ function IntakeDeskPanel() {
       </div>
       <div className="border-t border-[var(--line)] px-6 py-4">
         <p className="text-sm leading-6 text-[var(--slate)]">
-          Start with a name. Tell us why. Once nominations close, the community votes from the approved list.
+          This is the first step: collect names worth reviewing, not publish a popularity board.
         </p>
       </div>
       <div className="px-6 pb-4 text-[var(--civic)]">
@@ -123,7 +123,7 @@ function ManifestoSection() {
             id="manifesto-heading"
             className="mt-4 text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-4xl"
           >
-            Rakyat memilih wakil mereka sendiri.
+            Rakyat patut boleh mencadangkan wakil yang mereka percaya.
           </h2>
         </div>
         <div className="space-y-5 p-6 text-base leading-8 text-white/86 sm:p-8 sm:text-lg">
@@ -134,15 +134,15 @@ function ManifestoSection() {
             Rakyat hanya diberi pilihan terakhir.
           </p>
           <p>
-            Kami percaya sudah tiba masanya rakyat diberi kuasa untuk menentukan sendiri siapa yang layak mewakili mereka.
+            Kami percaya sudah tiba masanya rakyat diberi ruang untuk mencadangkan sendiri siapa yang layak dipertimbangkan sebagai wakil komuniti.
           </p>
           <p>Platform ini dibina dengan satu prinsip mudah:</p>
           <ul className="space-y-2 font-bold text-white">
-            <li>• Bukan parti memilih rakyat.</li>
-            <li>• Rakyat memilih wakil mereka sendiri.</li>
+            <li>• Bukan parti menentukan semua pilihan.</li>
+            <li>• Rakyat mencadangkan nama yang mereka percaya.</li>
           </ul>
           <p>
-            Kami juga percaya setiap suara mesti dihargai secara adil dan telus. Bukan sekadar angka yang hilang dalam sistem politik
+            Setiap cadangan perlu dilayan dengan adil, telus, dan berhati-hati — bukan sekadar angka yang hilang dalam sistem politik.
           </p>
         </div>
       </div>
@@ -152,16 +152,16 @@ function ManifestoSection() {
 
 function WhatIsSection() {
   const isItems = [
-    "A place to suggest who should represent Petaling Jaya",
-    "A short reason for every nomination",
-    "A 7-day nomination round",
-    "A community poll after names are reviewed",
+    "A place to suggest who should be considered for Petaling Jaya",
+    "A short public reason for every nomination",
+    "A private review queue before public profiles",
+    "A foundation for a future community poll with clear rules",
   ];
 
   const isNotItems = [
-    "Not an official election",
+    "Not a government-run selection process or public authority service",
     "Not run by SPR, Parliament, MBPJ, or any party",
-    "Not a public list of IC numbers, voters, or participants",
+    "Not a public list of IC numbers, verification records, or participants",
   ];
 
   return (
@@ -235,10 +235,10 @@ function ReviewJourneySection() {
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            First suggest names. Then choose together.
+            First collect trusted names. Then earn the right to ask more.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            The goal is simple: collect trusted names, remove noise, and let real residents choose from a clean list.
+            The conversion we care about now is a good nomination: one real name, one clear reason, and enough care to protect everyone involved.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -281,10 +281,10 @@ function PrivacyModelSection() {
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          We check identity so the poll stays fair — not to expose people.
+          Trust is the product. The poll comes later.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          A quick identity check helps stop fake or repeated entries. The public result should show the community’s choice, not anyone’s private identity.
+          WakilKita has to prove the intake is careful before it asks residents for stronger verification. That means no public participant lists, no instant profiles, and no public counts without a published method.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -325,10 +325,10 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Who should represent Petaling Jaya?
+                Who should Petaling Jaya seriously consider?
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Suggest someone you trust. After 7 days, the approved names go into a community poll so residents can choose together.
+                Suggest a local name you trust and explain why. WakilKita reviews each nomination before any public profile, shortlist, or community poll appears.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a

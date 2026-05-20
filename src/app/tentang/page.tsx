@@ -4,21 +4,21 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../civic-content";
 export const metadata: Metadata = {
   title: "Tentang WakilKita",
   description:
-    "About WakilKita: independent, community nomination for Petaling Jaya community nominations and poll signals.",
+    "About WakilKita: independent civic intake for Petaling Jaya community nominations, review, and future preference signals.",
 };
 
 const blocks = [
   {
     title: "What WakilKita is",
-    body: "WakilKita is an independent community nomination project for community nominations and poll signals that need careful review.",
+    body: "WakilKita is an independent civic intake project where residents can suggest people who deserve serious consideration, with review before public use.",
   },
   {
     title: "What WakilKita is not",
-    body: "WakilKita is not Parliament, MBPJ, a public body, a party, a representative office, a complaint authority, or a public ranking service.",
+    body: "WakilKita is not Parliament, MBPJ, a public body, a party, a representative office, a complaint authority, or a public popularity board.",
   },
   {
-    title: "Why dashboard-first",
-    body: "Dashboard-first intake lets reviewers screen privacy risk, contact named people, group issues carefully, and avoid instant public exposure.",
+    title: "Why review-first",
+    body: "Review-first intake lets reviewers screen privacy risk, contact named people where needed, group issues carefully, and avoid instant public exposure.",
   },
   {
     title: "Current scope",
@@ -30,14 +30,14 @@ export default function TentangPage() {
   return (
     <CivicPageShell
       eyebrow="About WakilKita"
-      title="Independent community nomination, built around consent and review."
-      intro="WakilKita helps residents submit local nominations, endorsements, and issue priorities into a review list. It uses conservative language so nobody mistakes it for a public service."
+      title="Independent community nomination, built around trust before reach."
+      intro="WakilKita helps residents submit local nominations and issue priorities into a private review list first. The product earns public visibility only when the information is safe, useful, and clearly labelled."
       cta={{ label: "Suggest a name", href: "/#take-part", secondaryLabel: "Read transparency page", secondaryHref: "/ketelusan" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
-        title="Trust starts by saying what this site cannot do."
-        body="WakilKita cannot decide complaints, speak for authorities, publish private participant data, or imply consent from a nominated person. Those boundaries should stay visible across the product."
+        title="Trust starts by refusing shortcuts."
+        body="WakilKita cannot decide complaints, speak for authorities, publish private participant data, or imply consent from a nominated person. The public layer has to be slower than the intake layer."
       />
     </CivicPageShell>
   );

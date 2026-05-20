@@ -4,13 +4,13 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../civic-content";
 export const metadata: Metadata = {
   title: "Privasi WakilKita",
   description:
-    "Privacy foundations for WakilKita community nomination: data minimisation, privacy review, retention, removal, and authority-channel boundaries.",
+    "Privacy foundations for WakilKita community nomination: data minimisation, review-first intake, retention, removal, and authority-channel boundaries.",
 };
 
 const blocks = [
   {
     title: "Data collected in the nomination form",
-    body: "The current form asks for constituency, intake type, name or issue area, priority area, reason, and optional reply contact. It does not ask for IC numbers or exact addresses.",
+    body: "The current form asks for constituency, nominee name, trust reason, priority area, and optional reply contact. It does not ask for IC numbers or exact addresses.",
   },
   {
     title: "How contact details are used",
@@ -26,7 +26,7 @@ const blocks = [
   },
   {
     title: "Consent for named people",
-    body: "A nominated or endorsed person should be contacted where practical before public profile use. Requests to correct, dispute, or remove information should be handled promptly.",
+    body: "A nominated person should be contacted where practical before public profile use. Requests to correct, dispute, or remove information should be handled promptly.",
   },
   {
     title: "Authority channels",
@@ -39,13 +39,13 @@ export default function PrivasiPage() {
     <CivicPageShell
       eyebrow="Privacy"
       title="Privacy foundations for community nomination."
-      intro="WakilKita should collect less, review more, and publish slowly. The aim is to protect submitters, nominated people, and local issue records."
+      intro="WakilKita should collect less, review more, and publish slowly. The aim is to protect submitters, nominated people, and the credibility of local issue records."
       cta={{ label: "Submit carefully", href: "/#take-part", secondaryLabel: "Read transparency page", secondaryHref: "/ketelusan" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
         title="Do not put sensitive details in the nomination form."
-        body="Keep submissions factual and safe to review. If a matter needs formal action, use the relevant authority channel and keep WakilKita intake limited to broad civic context."
+        body="Keep submissions factual and safe to review. If a matter needs formal action, use the relevant authority channel and keep WakilKita intake limited to broad civic context and trusted nominations."
       />
     </CivicPageShell>
   );

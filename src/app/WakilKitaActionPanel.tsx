@@ -4,9 +4,9 @@ import { FormEvent, useMemo, useState } from "react";
 import { cleanReviewText, type IntakeType } from "@/lib/review";
 
 const defaultIssues = [
-  "Listens to residents",
-  "Gets things followed up",
-  "Understands local issues",
+  "Listens before deciding",
+  "Follows up on local issues",
+  "Understands Petaling Jaya",
   "Works across communities",
   "Clean and accountable",
   "Other",
@@ -109,13 +109,13 @@ export function WakilKitaActionPanel() {
               Suggest a name
             </p>
             <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Know someone who should speak for Petaling Jaya?
+              Know someone Petaling Jaya should seriously consider?
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              Put their name forward and tell other residents why. Once the 7-day nomination round ends, approved names go into a community poll.
+              Put their name forward with a short, factual reason. We review nominations before anything public appears.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              We ask for identity verification so each person gets one nomination and one vote. Your IC and eKYC records are not shown on the public poll.
+              This form is for safe intake first. Do not include IC numbers, home addresses, private allegations, or sensitive family details.
             </div>
           </div>
 
@@ -162,7 +162,7 @@ export function WakilKitaActionPanel() {
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
-              Why do you trust them?
+              What makes them worth considering?
             </label>
             <select
               id="priority-area"
@@ -176,7 +176,7 @@ export function WakilKitaActionPanel() {
             </select>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="reason">
-              Tell residents why <span className="text-[var(--amber-text)]">*</span>
+              Explain the nomination <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
               id="reason"
@@ -186,12 +186,12 @@ export function WakilKitaActionPanel() {
               required
               aria-describedby="reason-help reason-count"
               rows={5}
-              placeholder="Example: They listen, follow up on local issues, and people know where to find them."
+              placeholder="Example: They already help residents follow up local issues, explain decisions clearly, and people know where to reach them."
               className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <div className="mt-1.5 flex items-center justify-between gap-4">
               <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                This may be shown publicly, so keep it respectful and factual.
+                Write this as if it may be reviewed with the nominated person. Keep it respectful, specific, and safe.
               </p>
               <p
                 id="reason-count"
@@ -206,14 +206,14 @@ export function WakilKitaActionPanel() {
             </div>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="contact">
-              Your contact for verification
+              Your contact for review follow-up
             </label>
             <input
               id="contact"
               value={contact}
               onChange={(event) => setContact(event.target.value)}
               maxLength={120}
-              placeholder="Email or phone number"
+              placeholder="Email or phone number, optional"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
 
@@ -224,7 +224,7 @@ export function WakilKitaActionPanel() {
                 aria-live="polite"
               >
                 {isReady
-                  ? "Ready to send your nomination."
+                  ? "Ready to submit for review."
                   : missingFields
                     ? `Still needed: ${missingFields}.`
                     : "Fill in the required fields to continue."}
@@ -237,7 +237,7 @@ export function WakilKitaActionPanel() {
               aria-describedby="submit-readiness"
               className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
             >
-              {isSubmitting ? "Sending nomination..." : "Send nomination"}
+              {isSubmitting ? "Submitting for review..." : "Submit nomination"}
             </button>
 
             {submitError && (
@@ -252,7 +252,7 @@ export function WakilKitaActionPanel() {
             >
               {saved && (
                 <p className="text-sm font-bold text-[var(--civic-dark)]">
-                  Nomination received. We will verify it before it appears in the poll.
+                  Nomination received. It enters review before any public use.
                 </p>
               )}
             </div>

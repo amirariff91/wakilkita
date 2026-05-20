@@ -4,7 +4,7 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../civic-content";
 export const metadata: Metadata = {
   title: "Ketelusan WakilKita",
   description:
-    "Transparency foundations for WakilKita: independence, review process, consent, privacy limits, and no public ranking displays.",
+    "Transparency foundations for WakilKita: independence, review process, consent, privacy limits, and no public popularity displays.",
 };
 
 const blocks = [
@@ -14,11 +14,11 @@ const blocks = [
   },
   {
     title: "Review queue",
-    body: "Submissions enter a private review list first. Review should check scope, safety, duplicate entries, consent needs, correction requests, and removal requests.",
+    body: "Submissions enter a private review list first. Review checks constituency scope, safety, duplicate entries, consent needs, correction requests, and removal requests.",
   },
   {
     title: "No public pressure metrics",
-    body: "Public pages should not display counts, rank lists, public participant lists, or popularity indicators. Internal summaries need documented methodology before any public release.",
+    body: "Public pages should not display counts, rank lists, public participant lists, or popularity indicators. Internal summaries need documented methodology and thresholds before any public release.",
   },
   {
     title: "Correction and removal",
@@ -30,7 +30,7 @@ const blocks = [
   },
   {
     title: "Auditability before scale",
-    body: "Before expanding scope, WakilKita should document reviewer access, retention periods, deletion handling, moderation criteria, and incident response."
+    body: "Before expanding scope, WakilKita should document reviewer access, retention periods, deletion handling, moderation criteria, audit logs, and incident response."
   },
 ];
 
@@ -38,14 +38,14 @@ export default function KetelusanPage() {
   return (
     <CivicPageShell
       eyebrow="Transparency"
-      title="Clear limits for a privacy-first community nomination project."
-      intro="This page states how WakilKita should handle independence, review, consent, participant signals, and public information before deeper product work."
+      title="Clear limits for a review-first community nomination project."
+      intro="This page states how WakilKita handles independence, review, consent, participant signals, and public information before the product asks for stronger resident trust."
       cta={{ label: "Read privacy page", href: "/privasi", secondaryLabel: "Suggest a name", secondaryHref: "/#take-part" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection
         title="Public information should be slower than private review."
-        body="A submission should never become a public claim just because it was entered. Careful review protects residents, nominated people, and the usefulness of the civic record."
+        body="A submission should never become a public claim just because it was entered. Careful review protects residents, nominated people, and the credibility of the civic record."
       />
     </CivicPageShell>
   );
