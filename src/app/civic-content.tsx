@@ -15,7 +15,7 @@ export const siteLinks = [
 
 const footerLinks = [
   ...siteLinks,
-  { href: "/#take-part", label: "Private intake" },
+  { href: "/#take-part", label: "Suggest a name" },
 ];
 
 export type CivicPageProps = {
@@ -45,7 +45,7 @@ export function CivicNav() {
         </span>
         <span>
           <span className="block text-base font-bold tracking-[-0.03em] text-[var(--ink)]">WakilKita</span>
-          <span className="block text-xs font-semibold text-[var(--civic)]">Private civic intake</span>
+          <span className="block text-xs font-semibold text-[var(--civic)]">Petaling Jaya community poll</span>
         </span>
       </Link>
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[var(--slate)]">
@@ -63,8 +63,8 @@ export function CivicFooter() {
     <footer className="border-t border-[var(--line)] bg-[rgba(255,250,241,0.72)] px-5 py-10 text-sm leading-6 text-[var(--slate)] sm:px-8 lg:px-10">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
-          <p className="font-bold text-[var(--ink)]">Independent civic intake</p>
-          <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · review queue</p>
+          <p className="font-bold text-[var(--ink)]">Independent community nomination</p>
+          <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · names first, poll after</p>
           <div className="mt-5 text-[var(--civic)]">
             <P105LineMotif />
           </div>
@@ -74,10 +74,10 @@ export function CivicFooter() {
             WakilKita is independent. It is not run by Parliament, MBPJ, any public body, any party, or any representative office.
           </p>
           <p>
-            This site is for private intake, local nomination, preference signal, participant signal, and review. Authority-action complaints must still go to the relevant authority.
+            This site helps residents suggest names for a community poll. It is not for formal complaints or government service requests; those still go to the right authority.
           </p>
           <p>
-            Contact details stay private during review. No public counts, rank lists, or public participant lists are shown.
+            Contact and identity details stay private. Public pages should show clean nomination and poll information, not voter lists.
           </p>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {footerLinks.map((link) => (
@@ -142,13 +142,13 @@ function DisclosurePanel() {
   return (
     <aside className="border border-[var(--line)] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]" aria-label="WakilKita boundaries">
       <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">Clear boundaries</p>
-      <h2 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">Independent, careful, and limited.</h2>
+      <h2 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">A community signal, not an official election.</h2>
       <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--slate)]">
-        <li>Not a public authority service.</li>
-        <li>Not run by Parliament, MBPJ, parties, or representative offices.</li>
+        <li>Not run by SPR, Parliament, MBPJ, parties, or representative offices.</li>
+        <li>Not an official election or replacement for voting.</li>
         <li>Not a place for authority-action complaints; those still go to the relevant authority.</li>
-        <li>No public counts, rank lists, or public participant lists.</li>
-        <li>Contact details are used only for review and follow-up.</li>
+        <li>No public IC numbers, eKYC records, or voter lists.</li>
+        <li>Contact details are used only for verification and follow-up.</li>
       </ul>
     </aside>
   );

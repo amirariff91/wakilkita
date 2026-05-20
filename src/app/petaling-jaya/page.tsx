@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { CivicPageShell, InfoGrid, NoteSection } from "../civic-content";
 
 export const metadata: Metadata = {
-  title: "Petaling Jaya civic intake | WakilKita",
+  title: "Petaling Jaya community nomination | WakilKita",
   description:
-    "Independent P105 Petaling Jaya private intake for local nominations, issue priorities, and consent-based review.",
+    "Independent P105 Petaling Jaya private intake for local nominations, issue priorities, and privacy review.",
 };
 
 const blocks = [
   {
     title: "What this page is for",
-    body: "Residents can understand the P105 Petaling Jaya intake scope before submitting a local nomination, endorsement, profile claim, or issue priority into the private review queue.",
+    body: "Residents can understand the P105 Petaling Jaya intake scope before submitting a local nomination into the review list.",
   },
   {
     title: "What stays private",
@@ -30,9 +30,9 @@ export default function PetalingJayaPage() {
   return (
     <CivicPageShell
       eyebrow="P105 Petaling Jaya"
-      title="A careful civic intake page for Petaling Jaya residents."
-      intro="WakilKita starts with private intake and manual review. It helps collect local nominations, endorsements, issue priorities, and preference signals without presenting itself as a public body."
-      cta={{ label: "Submit private intake", href: "/#take-part", secondaryLabel: "Read privacy rules", secondaryHref: "/privasi" }}
+      title="A careful community nomination page for Petaling Jaya residents."
+      intro="WakilKita starts with private intake and manual review. It helps collect local nominations and poll signals without presenting itself as a public body."
+      cta={{ label: "Suggest a name", href: "/#take-part", secondaryLabel: "Read privacy rules", secondaryHref: "/privasi" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection

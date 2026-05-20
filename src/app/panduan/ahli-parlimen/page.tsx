@@ -4,7 +4,7 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../../civic-content";
 export const metadata: Metadata = {
   title: "Panduan Ahli Parlimen | WakilKita",
   description:
-    "Plain-language guide to Ahli Parlimen responsibilities, resident contact boundaries, and private civic intake review.",
+    "Plain-language guide to Ahli Parlimen responsibilities, resident contact boundaries, and community nomination review.",
 };
 
 const blocks = [
@@ -22,7 +22,7 @@ const blocks = [
   },
   {
     title: "How WakilKita intake differs",
-    body: "WakilKita stores a private civic intake item for review. It is not a representative office, not a complaint channel, and not a public endorsement list.",
+    body: "WakilKita stores a community nomination item for review. It is not a representative office, not a complaint channel, and not a public endorsement list.",
   },
 ];
 
@@ -31,8 +31,8 @@ export default function PanduanAhliParlimenPage() {
     <CivicPageShell
       eyebrow="Panduan civic"
       title="A plain guide to the Ahli Parlimen role and resident follow-up."
-      intro="Use this guide to understand where an MP role may fit, where another authority may be responsible, and how WakilKita keeps civic intake separate from formal channels."
-      cta={{ label: "Start private intake", href: "/#take-part", secondaryLabel: "Petaling Jaya guide", secondaryHref: "/petaling-jaya" }}
+      intro="Use this guide to understand where an MP role may fit, where another authority may be responsible, and how WakilKita keeps community nomination separate from formal channels."
+      cta={{ label: "Suggest a name", href: "/#take-part", secondaryLabel: "Petaling Jaya guide", secondaryHref: "/petaling-jaya" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection

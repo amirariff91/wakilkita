@@ -4,7 +4,7 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../../civic-content";
 export const metadata: Metadata = {
   title: "Ahli Parlimen Petaling Jaya civic guide | WakilKita",
   description:
-    "Independent Petaling Jaya guide to representative roles, nomination intake, consent review, and privacy boundaries.",
+    "Independent Petaling Jaya guide to representative roles, nomination intake, privacy review, and privacy boundaries.",
 };
 
 const blocks = [
@@ -14,7 +14,7 @@ const blocks = [
   },
   {
     title: "Local nomination intake",
-    body: "Residents may nominate or endorse trusted local names for review. A nomination is only a private intake item until consent, safety, and correction checks are complete.",
+    body: "Residents may nominate or endorse trusted local names for review. A nomination is only a nomination record until consent, safety, and correction checks are complete.",
   },
   {
     title: "No public popularity display",

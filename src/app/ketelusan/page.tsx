@@ -14,7 +14,7 @@ const blocks = [
   },
   {
     title: "Review queue",
-    body: "Submissions enter a private dashboard queue first. Review should check scope, safety, duplicate entries, consent needs, correction requests, and removal requests.",
+    body: "Submissions enter a private review list first. Review should check scope, safety, duplicate entries, consent needs, correction requests, and removal requests.",
   },
   {
     title: "No public pressure metrics",
@@ -38,9 +38,9 @@ export default function KetelusanPage() {
   return (
     <CivicPageShell
       eyebrow="Transparency"
-      title="Clear limits for a privacy-first civic intake project."
+      title="Clear limits for a privacy-first community nomination project."
       intro="This page states how WakilKita should handle independence, review, consent, participant signals, and public information before deeper product work."
-      cta={{ label: "Read privacy page", href: "/privasi", secondaryLabel: "Submit private intake", secondaryHref: "/#take-part" }}
+      cta={{ label: "Read privacy page", href: "/privasi", secondaryLabel: "Suggest a name", secondaryHref: "/#take-part" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection

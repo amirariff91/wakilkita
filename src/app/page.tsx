@@ -3,69 +3,69 @@ import { CivicFooter, CivicNav } from "./civic-content";
 import { P105LineMotif } from "./WakilKitaMark";
 
 const boundaryChips = [
-  "Nominate your rep",
-  "eKYC required",
-  "1 week nomination window",
-  "Then live polling",
+  "Nominate someone you trust",
+  "One person, one verified voice",
+  "7 days to suggest names",
+  "Then the community votes",
 ];
 
 const intakeFacts = [
   {
     label: "Open now",
     value: "P105 Petaling Jaya",
-    note: "Nominate one person to represent Petaling Jaya",
+    note: "Tell us who you trust to speak for the area",
   },
   {
     label: "Accepting",
-    value: "Verified nominations",
-    note: "Nomination and voting both require eKYC",
+    value: "Real people only",
+    note: "A quick identity check keeps spam and repeat votes out",
   },
   {
     label: "Then",
-    value: "Live polling",
-    note: "After 7 days, verified users can vote in the live poll",
+    value: "Community poll",
+    note: "After nominations close, residents can choose from the approved names",
   },
 ];
 
 const reviewSteps = [
   {
     n: "1",
-    title: "Verify identity",
-    body: "A user must pass eKYC before a nomination or vote can count.",
+    title: "Confirm you are a real person",
+    body: "Before your nomination counts, we ask for a quick eKYC check. This helps keep the list clean and fair.",
   },
   {
     n: "2",
-    title: "Nominate your rep",
-    body: "For the first week, verified P105 users submit one representative nomination and one clear reason.",
+    title: "Suggest someone you trust",
+    body: "For 7 days, residents can put forward one name and explain why that person should be considered.",
   },
   {
     n: "3",
-    title: "Open live polling",
-    body: "After 7 days, approved nominees move into a live poll for verified users.",
+    title: "Vote from the approved list",
+    body: "When nominations close, the approved names move into a simple poll. One verified person gets one vote.",
   },
   {
     n: "4",
-    title: "Show clean results",
-    body: "Votes can be shown publicly, but identity data, IC, and raw verification records stay private.",
+    title: "Share the result, not private details",
+    body: "The public can see the poll result. They do not see IC numbers, eKYC records, or the list of voters.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "eKYC gates nomination and voting",
-    body: "Only verified users can nominate or vote. Verification data is kept separate from public poll data.",
+    heading: "One real person, one voice",
+    body: "Nominations and votes need eKYC so the poll is harder to spam or game.",
   },
   {
-    heading: "One week to nominate",
-    body: "The first phase is nomination only. After the first week, nominations close and live polling opens.",
+    heading: "7 days to suggest names",
+    body: "The first week is only for names. After that, the list closes and voting begins.",
   },
   {
     heading: "No public voter list",
-    body: "Poll totals can be public, but voter identities and verification details are not shown or shared.",
+    body: "Results can be public. Voter names, IC details, and verification records stay private.",
   },
   {
-    heading: "Simple public promise",
-    body: "Nominate first, vote later, verify both times, and keep private identity data out of public pages.",
+    heading: "Clear public promise",
+    body: "Suggest names first. Vote after the list closes. Keep identity checks separate from public results.",
   },
 ];
 
@@ -77,10 +77,10 @@ function IntakeDeskPanel() {
     >
       <div className="border-b border-[var(--line)] px-6 py-4">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-          P105 Petaling Jaya intake
+          For Petaling Jaya residents
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">
-          Before you submit
+          How this works
         </h2>
       </div>
       <div className="divide-y divide-[var(--line)]">
@@ -98,7 +98,7 @@ function IntakeDeskPanel() {
       </div>
       <div className="border-t border-[var(--line)] px-6 py-4">
         <p className="text-sm leading-6 text-[var(--slate)]">
-          First week: verified users nominate. After that: verified users vote in a live poll. Nothing needs to be more complicated than that.
+          Start with a name. Tell us why. Once nominations close, the community votes from the approved list.
         </p>
       </div>
       <div className="px-6 pb-4 text-[var(--civic)]">
@@ -110,16 +110,16 @@ function IntakeDeskPanel() {
 
 function WhatIsSection() {
   const isItems = [
-    "A simple P105 representative nomination flow",
-    "eKYC required before nominating",
-    "Live polling starts after one week",
-    "eKYC required before voting",
+    "A place to suggest who should represent Petaling Jaya",
+    "A short reason for every nomination",
+    "A 7-day nomination round",
+    "A community poll after names are reviewed",
   ];
 
   const isNotItems = [
-    "Not a public authority service",
-    "Not an election or SPR process",
-    "Not a public IC, voter, or participant list",
+    "Not an official election",
+    "Not run by SPR, Parliament, MBPJ, or any party",
+    "Not a public list of IC numbers, voters, or participants",
   ];
 
   return (
@@ -133,7 +133,7 @@ function WhatIsSection() {
             id="what-is-heading"
             className="text-xl font-bold tracking-[-0.03em] text-[var(--ink)]"
           >
-            What WakilKita is — and is not
+            What this is — and what it is not
           </h2>
         </div>
         <div className="grid divide-y divide-[var(--line)] sm:grid-cols-2 sm:divide-x sm:divide-y-0">
@@ -193,10 +193,10 @@ function ReviewJourneySection() {
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            Nominate for one week. Then vote live.
+            First suggest names. Then choose together.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            Keep the product clear: eKYC first, one nomination per verified user, then a verified live poll after the nomination window closes.
+            The goal is simple: collect trusted names, remove noise, and let real residents choose from a clean list.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -233,16 +233,16 @@ function PrivacyModelSection() {
     >
       <div className="mx-auto max-w-4xl px-5 sm:px-8 lg:px-10">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-          Simple rules
+          Trust and privacy
         </p>
         <h2
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          Verify people. Keep identity private.
+          We check identity so the poll stays fair — not to expose people.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          Trust starts with a simple rule: nomination and voting require eKYC, but IC and verification records never become public poll content.
+          A quick identity check helps stop fake or repeated entries. The public result should show the community’s choice, not anyone’s private identity.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -283,23 +283,23 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Nominate your Petaling Jaya representative. After one week, live polling opens.
+                Who should represent Petaling Jaya?
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Simple: verified users nominate one rep, we review the list, then verified users vote in a live poll.
+                Suggest someone you trust. After 7 days, the approved names go into a community poll so residents can choose together.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#take-part"
                   className="bg-[var(--ink)] px-6 py-4 text-center text-sm font-bold text-[var(--mint)] shadow-[0_1px_3px_rgba(0,0,0,0.12)]"
                 >
-                  Nominate your rep
+                  Suggest a name
                 </a>
                 <a
                   href="#how-it-works"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  How polling works
+                  See how it works
                 </a>
               </div>
             </div>

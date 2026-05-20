@@ -4,7 +4,7 @@ import { CivicPageShell, InfoGrid, NoteSection } from "../../civic-content";
 export const metadata: Metadata = {
   title: "Panduan Wakil Rakyat | WakilKita",
   description:
-    "Independent civic guide to wakil rakyat roles, safe resident submissions, consent review, and privacy boundaries.",
+    "Independent civic guide to wakil rakyat roles, safe resident submissions, privacy review, and privacy boundaries.",
 };
 
 const blocks = [
@@ -18,7 +18,7 @@ const blocks = [
   },
   {
     title: "Nomination is not publication",
-    body: "A local nomination or endorsement is a private intake item. Public use requires review, consent where needed, correction handling, and privacy screening.",
+    body: "A local nomination or endorsement is a nomination record. Public use requires review, consent where needed, correction handling, and privacy screening.",
   },
   {
     title: "Preference signals stay private",
@@ -30,9 +30,9 @@ export default function PanduanWakilRakyatPage() {
   return (
     <CivicPageShell
       eyebrow="Panduan wakil rakyat"
-      title="Understand representative roles with privacy-first civic intake."
+      title="Understand representative roles with privacy-first community nomination."
       intro="This guide helps residents describe local concerns and representative expectations without turning WakilKita into a public authority service or a public popularity display."
-      cta={{ label: "Submit private intake", href: "/#take-part", secondaryLabel: "Read privacy page", secondaryHref: "/privasi" }}
+      cta={{ label: "Suggest a name", href: "/#take-part", secondaryLabel: "Read privacy page", secondaryHref: "/privasi" }}
     >
       <InfoGrid blocks={blocks} />
       <NoteSection

@@ -4,12 +4,12 @@ import { FormEvent, useMemo, useState } from "react";
 import { cleanReviewText, type IntakeType } from "@/lib/review";
 
 const defaultIssues = [
-  "Clean governance",
-  "Council follow-up",
-  "Walkability and crossings",
-  "Transit and access",
-  "Local facilities",
-  "Cost pressure",
+  "Listens to residents",
+  "Gets things followed up",
+  "Understands local issues",
+  "Works across communities",
+  "Clean and accountable",
+  "Other",
 ];
 
 function cleanText(value: string, maxLength: number) {
@@ -45,7 +45,7 @@ export function WakilKitaActionPanel() {
   const missingFields = useMemo(() => {
     const fields = [
       cleanText(constituency, 80).length > 2 ? null : "your constituency",
-      cleanText(personName, 80).length > 2 ? null : "a name, representative, or issue area",
+      cleanText(personName, 80).length > 2 ? null : "the person’s name",
       cleanText(reason, 420).length > 12 ? null : "a short reason",
     ].filter(Boolean) as string[];
     return formatMissingFields(fields);
@@ -84,7 +84,7 @@ export function WakilKitaActionPanel() {
 
       const result = await response.json().catch(() => null) as { issues?: { message?: string }[] } | null;
       if (!response.ok) {
-        const message = result?.issues?.[0]?.message ?? "Submission could not be saved. Please review the form and try again.";
+        const message = result?.issues?.[0]?.message ?? "We could not save this nomination. Please check the form and try again.";
         setSubmitError(message);
         return;
       }
@@ -94,7 +94,7 @@ export function WakilKitaActionPanel() {
       setReason("");
       setContact("");
     } catch {
-      setSubmitError("Submission could not reach the private review queue. Please try again.");
+      setSubmitError("We could not send this nomination. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -106,16 +106,16 @@ export function WakilKitaActionPanel() {
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="inline-flex bg-[var(--soft)] px-3 py-2 text-xs font-bold tracking-[0.08em] text-[var(--civic)]">
-              Step 1 · nominate your rep
+              Suggest a name
             </p>
             <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Nominate one Petaling Jaya representative.
+              Know someone who should speak for Petaling Jaya?
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              Simple flow: verify with eKYC, nominate a rep, then live polling opens after the first week.
+              Put their name forward and tell other residents why. Once the 7-day nomination round ends, approved names go into a community poll.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              eKYC is required for nomination and voting, but IC and identity data must stay in a separate verification system — not in this public reason form.
+              We ask for identity verification so each person gets one nomination and one vote. Your IC and eKYC records are not shown on the public poll.
             </div>
           </div>
 
@@ -124,7 +124,7 @@ export function WakilKitaActionPanel() {
             className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6"
           >
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              Petaling Jaya rep nomination
+              Your nomination
             </p>
 
             <label className="mt-5 block text-sm font-bold" htmlFor="constituency">
@@ -145,7 +145,7 @@ export function WakilKitaActionPanel() {
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
-              Who do you nominate? <span className="text-[var(--amber-text)]">*</span>
+              Who are you suggesting? <span className="text-[var(--amber-text)]">*</span>
             </label>
             <input
               id="person-name"
@@ -154,15 +154,15 @@ export function WakilKitaActionPanel() {
               maxLength={80}
               required
               aria-describedby="person-name-help"
-              placeholder="Full public name or known public role"
+              placeholder="Their name or public role"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Use a public name only. The nominee is reviewed before appearing in the poll list.
+              Use the name people would recognise. We review it before it appears in the poll.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
-              What should this rep focus on?
+              Why do you trust them?
             </label>
             <select
               id="priority-area"
@@ -176,7 +176,7 @@ export function WakilKitaActionPanel() {
             </select>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="reason">
-              Why this person? <span className="text-[var(--amber-text)]">*</span>
+              Tell residents why <span className="text-[var(--amber-text)]">*</span>
             </label>
             <textarea
               id="reason"
@@ -186,12 +186,12 @@ export function WakilKitaActionPanel() {
               required
               aria-describedby="reason-help reason-count"
               rows={5}
-              placeholder="Give one clear public reason. Keep it factual."
+              placeholder="Example: They listen, follow up on local issues, and people know where to find them."
               className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <div className="mt-1.5 flex items-center justify-between gap-4">
               <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                Required. Keep it factual and safe for public review.
+                This may be shown publicly, so keep it respectful and factual.
               </p>
               <p
                 id="reason-count"
@@ -206,14 +206,14 @@ export function WakilKitaActionPanel() {
             </div>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="contact">
-              Contact for eKYC follow-up
+              Your contact for verification
             </label>
             <input
               id="contact"
               value={contact}
               onChange={(event) => setContact(event.target.value)}
               maxLength={120}
-              placeholder="Email or phone for verification follow-up"
+              placeholder="Email or phone number"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
 
@@ -224,7 +224,7 @@ export function WakilKitaActionPanel() {
                 aria-live="polite"
               >
                 {isReady
-                  ? "Ready to submit nomination for eKYC and review."
+                  ? "Ready to send your nomination."
                   : missingFields
                     ? `Still needed: ${missingFields}.`
                     : "Fill in the required fields to continue."}
@@ -237,7 +237,7 @@ export function WakilKitaActionPanel() {
               aria-describedby="submit-readiness"
               className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
             >
-              {isSubmitting ? "Saving nomination..." : "Submit nomination"}
+              {isSubmitting ? "Sending nomination..." : "Send nomination"}
             </button>
 
             {submitError && (
@@ -252,7 +252,7 @@ export function WakilKitaActionPanel() {
             >
               {saved && (
                 <p className="text-sm font-bold text-[var(--civic-dark)]">
-                  Nomination saved. Next step: eKYC verification before it can count.
+                  Nomination received. We will verify it before it appears in the poll.
                 </p>
               )}
             </div>
