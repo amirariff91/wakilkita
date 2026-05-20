@@ -114,8 +114,13 @@ export function WakilKitaActionPanel() {
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
               Cadangkan nama mereka dan ceritakan sebabnya. Selepas seminggu, nama yang diluluskan akan dibuka untuk pengundian komuniti.
             </p>
-            <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Cadangan dan undi memerlukan pengesahan identiti supaya satu orang hanya satu suara. Jangan masukkan nombor IC atau dokumen pengenalan dalam borang ini.
+            <div className="mt-6 border border-[var(--ink)] bg-[var(--ink)] p-5 text-white">
+              <p className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--mint)]">
+                Pengesahan eKYC diperlukan
+              </p>
+              <p className="mt-3 text-sm leading-7 text-white/90">
+                Melalui sistem eKYC yang disahkan, setiap individu yang sah boleh mencalon, memilih dan mengundi calon pilihan mereka secara terus di platform ini — tanpa perlu menjadi ahli parti atau ahli mana-mana organisasi politik.
+              </p>
             </div>
           </div>
 

@@ -45,8 +45,8 @@ const reviewSteps = [
   },
   {
     n: "4",
-    title: "Satu orang, satu suara",
-    body: "Pengundi perlu sahkan identiti. Keputusan boleh dipaparkan — tetapi IC, rekod pengesahan, dan senarai pengundi kekal peribadi.",
+    title: "Satu orang, satu suara — wajib eKYC",
+    body: "Melalui sistem eKYC yang disahkan, setiap individu yang sah boleh mencalon, memilih dan mengundi secara terus — tanpa perlu menjadi ahli parti atau ahli mana-mana organisasi politik.",
   },
 ];
 
@@ -56,8 +56,8 @@ const privacyBlocks = [
     body: "WakilKita bermula dengan tujuan: rakyat patut mencadangkan wakil mereka sendiri. Pengundian berlaku hanya selepas nama dikumpul dan disemak.",
   },
   {
-    heading: "Pengesahan identiti untuk elak manipulasi",
-    body: "Cadangan dan undi perlu disahkan supaya sistem tidak dipenuhi akaun palsu, undi berulang, atau sebarang bentuk manipulasi.",
+    heading: "Pengesahan eKYC wajib untuk semua",
+    body: "Melalui sistem eKYC yang disahkan, setiap individu yang sah boleh mencalon, memilih dan mengundi calon pilihan mereka secara terus di platform ini — tanpa perlu menjadi ahli parti atau ahli mana-mana organisasi politik.",
   },
   {
     heading: "Identiti anda tidak dipaparkan",
@@ -333,7 +333,7 @@ export default function Home() {
                 Cadangkan seseorang yang anda percaya. Selepas seminggu, nama yang diluluskan dibuka untuk pengundian komuniti Petaling Jaya.
               </p>
               <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
-                Cadangan dan undi memerlukan pengesahan identiti. IC dan rekod pengesahan tidak dipaparkan kepada umum.
+                Pengesahan eKYC diperlukan untuk mencalon dan mengundi. IC dan rekod pengesahan tidak dipaparkan kepada umum.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
