@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dashboard calon — WakilKita",
-  description: "Dashboard cadangan calon WakilKita untuk Petaling Jaya dengan kemas kini langsung.",
+  title: "Calon dicadangkan — WakilKita",
+  description: "Senarai nama yang dicadangkan oleh warga Petaling Jaya, dikemas kini secara langsung.",
   robots: {
     index: false,
     follow: false,
