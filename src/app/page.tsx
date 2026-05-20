@@ -5,67 +5,67 @@ import { P105LineMotif } from "./WakilKitaMark";
 const boundaryChips = [
   "Prinsip dahulu",
   "Cadang wakil yang dipercayai",
-  "7 hari untuk cadangan",
-  "Kemudian polling komuniti",
+  "Seminggu untuk cadangan",
+  "Kemudian komuniti mengundi",
 ];
 
 const intakeFacts = [
   {
-    label: "Sedang dibuka",
+    label: "Dibuka sekarang",
     value: "P105 Petaling Jaya",
-    note: "Buat masa ini WakilKita menerima cadangan untuk kawasan Parlimen P105 dahulu.",
+    note: "WakilKita bermula di Petaling Jaya. Kawasan lain akan dibuka selepas ini.",
   },
   {
-    label: "Mula-mula",
-    value: "Cadang nama + sebab",
-    note: "Rakyat cadangkan siapa yang mereka percaya, bersama sebab yang jelas dan boleh disemak.",
+    label: "Langkah pertama",
+    value: "Cadang nama dan cerita sebabnya",
+    note: "Tulis nama orang yang anda percaya dan terangkan kenapa mereka layak dipercayai komuniti.",
   },
   {
-    label: "Selepas 7 hari",
-    value: "Polling komuniti",
-    note: "Nama yang diluluskan masuk ke polling. Untuk undi, pengguna perlu melalui eKYC supaya satu orang hanya satu suara.",
+    label: "Selepas seminggu",
+    value: "Komuniti mengundi bersama",
+    note: "Nama yang diluluskan masuk ke peringkat pengundian. Setiap pengundi perlu sahkan identiti — satu orang, satu suara.",
   },
 ];
 
 const reviewSteps = [
   {
     n: "1",
-    title: "Rakyat cadangkan wakil",
-    body: "Fasa pertama ialah cadangan nama. Setiap cadangan perlu ada sebab yang jelas supaya komuniti faham kenapa orang itu dipercayai.",
+    title: "Anda cadangkan seseorang",
+    body: "Namakan seseorang yang anda percaya. Ceritakan apa yang mereka telah lakukan untuk komuniti — bukan sekadar siapa mereka.",
   },
   {
     n: "2",
-    title: "Kami semak senarai nama",
-    body: "Cadangan disemak untuk pendua, risiko privasi, kaitan kawasan, dan keselamatan sebelum masuk ke senarai polling.",
+    title: "Kami semak setiap cadangan",
+    body: "Setiap nama disemak untuk pendua, keselamatan, kaitan kawasan, dan keperluan kebenaran sebelum tersenarai.",
   },
   {
     n: "3",
-    title: "Polling dibuka selepas seminggu",
-    body: "Selepas tempoh cadangan tamat, nama yang diluluskan dibuka untuk polling komuniti.",
+    title: "Pengundian dibuka selepas seminggu",
+    body: "Setelah tempoh cadangan tamat, nama yang diluluskan dibuka untuk pengundian komuniti.",
   },
   {
     n: "4",
     title: "Satu orang, satu suara",
-    body: "Untuk mengundi, pengguna perlu disahkan melalui eKYC. Keputusan boleh dipaparkan, tetapi IC, eKYC, dan senarai pengundi kekal berasingan.",
+    body: "Pengundi perlu sahkan identiti. Keputusan boleh dipaparkan — tetapi IC, rekod pengesahan, dan senarai pengundi kekal peribadi.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "Prinsip dahulu, polling kemudian",
-    body: "WakilKita bermula dengan sebab: rakyat patut mencadangkan wakil mereka sendiri. Polling datang selepas nama dikumpul dan disemak.",
+    heading: "Prinsip dahulu, pengundian selepas itu",
+    body: "WakilKita bermula dengan tujuan: rakyat patut mencadangkan wakil mereka sendiri. Pengundian berlaku hanya selepas nama dikumpul dan disemak.",
   },
   {
-    heading: "eKYC untuk elak spam",
-    body: "Cadangan dan undi perlu disahkan supaya sistem tidak dipenuhi akaun palsu, undi berulang, atau manipulasi.",
+    heading: "Pengesahan identiti untuk elak manipulasi",
+    body: "Cadangan dan undi perlu disahkan supaya sistem tidak dipenuhi akaun palsu, undi berulang, atau sebarang bentuk manipulasi.",
   },
   {
-    heading: "Identiti bukan paparan awam",
-    body: "IC, rekod eKYC, nombor telefon, dan senarai pengundi tidak dipaparkan sebagai kandungan awam.",
+    heading: "Identiti anda tidak dipaparkan",
+    body: "IC, rekod pengesahan, nombor telefon, dan senarai pengundi tidak akan dipaparkan sebagai maklumat awam.",
   },
   {
-    heading: "Janji awam yang jelas",
-    body: "Rakyat cadang nama dahulu. Selepas seminggu, komuniti mengundi daripada senarai yang sudah disemak.",
+    heading: "Telus dan boleh dipertanggungjawabkan",
+    body: "Rakyat cadang nama dahulu. Selepas seminggu, komuniti mengundi daripada senarai yang telah disemak dan diluluskan.",
   },
 ];
 
@@ -73,14 +73,14 @@ function IntakeDeskPanel() {
   return (
     <aside
       className="border border-[var(--line)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
-      aria-label="Sebelum menghantar cadangan"
+      aria-label="Cara WakilKita berfungsi"
     >
       <div className="border-b border-[var(--line)] px-6 py-4">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
           Untuk warga Petaling Jaya
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-[-0.03em] text-[var(--ink)]">
-          Mulakan dengan nama yang sudah dipercayai komuniti
+          Cadangkan orang yang komuniti anda sudah percaya
         </h2>
       </div>
       <div className="divide-y divide-[var(--line)]">
@@ -98,7 +98,7 @@ function IntakeDeskPanel() {
       </div>
       <div className="border-t border-[var(--line)] px-6 py-4">
         <p className="text-sm leading-6 text-[var(--slate)]">
-          Ini langkah awal untuk mengumpul cadangan yang boleh disemak dengan bertanggungjawab — bukan carta populariti.
+          Ini bukan carta populariti. Ini ruang untuk mengumpul cadangan yang boleh disemak dan dipertanggungjawabkan.
         </p>
       </div>
       <div className="px-6 pb-4 text-[var(--civic)]">
@@ -154,14 +154,14 @@ function WhatIsSection() {
   const isItems = [
     "Ruang untuk rakyat mencadangkan wakil yang mereka percaya",
     "Setiap cadangan perlu ada sebab yang jelas dan boleh disemak",
-    "Selepas 7 hari, nama yang diluluskan masuk ke polling komuniti",
-    "Polling memerlukan eKYC supaya satu orang hanya satu suara",
+    "Selepas seminggu, nama yang diluluskan masuk ke peringkat pengundian",
+    "Pengundian memerlukan pengesahan identiti — satu orang, satu suara",
   ];
 
   const isNotItems = [
-    "Bukan pilihan raya rasmi, SPR, kerajaan, Parlimen, MBPJ, parti, atau pejabat wakil rakyat",
-    "Bukan tempat menghantar aduan rasmi yang memerlukan tindakan pihak berkuasa",
-    "Bukan senarai awam nombor IC, rekod eKYC, peserta, atau pengundi",
+    "Bukan pilihan raya rasmi, SPR, Parlimen, MBPJ, parti, atau pejabat wakil rakyat",
+    "Bukan saluran aduan rasmi yang memerlukan tindakan pihak berkuasa",
+    "Bukan senarai awam nombor IC, rekod pengesahan, peserta, atau pengundi",
   ];
 
   return (
@@ -175,7 +175,7 @@ function WhatIsSection() {
             id="what-is-heading"
             className="text-xl font-bold tracking-[-0.03em] text-[var(--ink)]"
           >
-            Apa WakilKita buat — dan tidak buat
+            Apa WakilKita buat — dan apa yang tidak
           </h2>
         </div>
         <div className="grid divide-y divide-[var(--line)] sm:grid-cols-2 sm:divide-x sm:divide-y-0">
@@ -229,16 +229,16 @@ function ReviewJourneySection() {
       <div className="border border-[var(--line)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]">
         <div className="border-b border-[var(--line)] px-6 py-5 sm:px-7">
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-            Selepas anda hantar
+            Cara ia berjalan
           </p>
           <h2
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            Cadangan dahulu. Polling kemudian.
+            Cadangkan dahulu. Komuniti mengundi kemudian.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            Alirannya mudah: rakyat cadang nama dahulu, WakilKita semak, kemudian komuniti mengundi selepas tempoh cadangan tamat.
+            Rakyat cadang nama, WakilKita semak, komuniti mengundi. Mudah, telus, dan bertanggungjawab.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -281,10 +281,10 @@ function PrivacyModelSection() {
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          Kepercayaan dahulu. Polling selepas itu.
+          Dipercayai kerana ia telus.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          Polling hanya bermakna kalau orang percaya prosesnya. Sebab itu WakilKita bermula dengan prinsip, semakan nama, dan perlindungan identiti sebelum keputusan dipaparkan.
+          Pengundian hanya bermakna kalau proses boleh dipercayai. Sebab itu WakilKita bermula dengan prinsip, semakan nama, dan perlindungan identiti sebelum sebarang keputusan dipaparkan.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -330,10 +330,10 @@ export default function Home() {
                 Prinsip dahulu. Pilihan komuniti kemudian.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                Mula dengan cadangan nama. Selepas 7 hari, nama yang diluluskan masuk ke polling supaya warga Petaling Jaya boleh memilih bersama.
+                Cadangkan seseorang yang anda percaya. Selepas seminggu, nama yang diluluskan dibuka untuk pengundian komuniti Petaling Jaya.
               </p>
               <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[var(--civic-dark)]">
-                Untuk cadangan dan undi, pengguna perlu disahkan. IC dan rekod eKYC tidak dipaparkan kepada umum.
+                Cadangan dan undi memerlukan pengesahan identiti. IC dan rekod pengesahan tidak dipaparkan kepada umum.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -346,7 +346,7 @@ export default function Home() {
                   href="/dashboard"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  Lihat dashboard calon
+                  Lihat calon yang dicadangkan
                 </a>
               </div>
             </div>

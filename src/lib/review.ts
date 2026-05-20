@@ -57,7 +57,7 @@ export type CandidateDashboardEntry = Pick<
   ReviewRecord,
   "id" | "constituency" | "nameOrRole" | "priorityArea" | "reason" | "submittedAt" | "updatedAt"
 > & {
-  stage: "Cadangan diterima" | "Dalam semakan" | "Diluluskan untuk polling";
+  stage: "Cadangan diterima" | "Dalam semakan" | "Diluluskan untuk pengundian";
 };
 
 export type AuditEvent = {
@@ -185,7 +185,7 @@ export function toPublicReviewRecord(entry: ReviewRecord): PublicReviewRecord {
 
 export function toCandidateDashboardEntry(entry: ReviewRecord): CandidateDashboardEntry {
   const stage: CandidateDashboardEntry["stage"] = entry.status === "approved"
-    ? "Diluluskan untuk polling"
+    ? "Diluluskan untuk pengundian"
     : entry.status === "submitted"
       ? "Cadangan diterima"
       : "Dalam semakan";

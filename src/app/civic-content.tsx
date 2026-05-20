@@ -49,8 +49,8 @@ export function CivicNav() {
         </span>
       </Link>
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[var(--slate)]">
-        <Link href="/#take-part">Hantar cadangan</Link>
-        <Link href="/petaling-jaya">Petaling Jaya</Link>
+        <Link href="/#take-part">Cadangkan nama</Link>
+        <Link href="/dashboard">Calon dicadangkan</Link>
         <Link href="/ketelusan">Ketelusan</Link>
         <Link href="/privasi">Privasi</Link>
       </div>
@@ -64,7 +64,7 @@ export function CivicFooter() {
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
           <p className="font-bold text-[var(--ink)]">Ruang cadangan komuniti bebas</p>
-          <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · semakan dahulu sebelum umum</p>
+          <p className="mt-1 text-xs text-[var(--slate)]">P105 Petaling Jaya · semakan sebelum paparan awam</p>
           <div className="mt-5 text-[var(--civic)]">
             <P105LineMotif />
           </div>
@@ -74,10 +74,10 @@ export function CivicFooter() {
             WakilKita bebas. Ia bukan dikendalikan oleh SPR, Parlimen, MBPJ, mana-mana badan awam, parti politik, atau pejabat wakil rakyat.
           </p>
           <p>
-            Laman ini membantu penduduk mencadangkan nama untuk semakan berhati-hati. Ia bukan saluran aduan rasmi atau permintaan perkhidmatan kerajaan; perkara begitu masih perlu dihantar kepada pihak berkuasa yang betul.
+            Laman ini membantu penduduk mencadangkan nama untuk semakan berhati-hati. Ia bukan saluran aduan rasmi atau permintaan perkhidmatan kerajaan — perkara begitu masih perlu disampaikan kepada pihak berkuasa yang betul.
           </p>
           <p>
-            Butiran hubungan kekal peribadi. Halaman awam patut memaparkan maklumat sivik yang telah disemak, bukan senarai peserta atau penyokong.
+            Butiran hubungan kekal peribadi. Maklumat awam yang dipaparkan hanyalah nama calon dan cadangan yang telah disemak — bukan senarai peserta atau penyokong.
           </p>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {footerLinks.map((link) => (
@@ -147,7 +147,7 @@ function DisclosurePanel() {
         <li>Bukan dikendalikan oleh SPR, Parlimen, MBPJ, parti, atau pejabat wakil rakyat.</li>
         <li>Bukan proses rasmi pilihan raya, pemilihan calon, atau perkhidmatan awam.</li>
         <li>Bukan tempat aduan yang memerlukan tindakan pihak berkuasa; perkara itu masih perlu ke saluran rasmi.</li>
-        <li>Tiada nombor IC, rekod eKYC, senarai peserta, atau senarai penyokong dipaparkan kepada umum.</li>
+        <li>Tiada nombor IC, rekod pengesahan, senarai peserta, atau senarai penyokong dipaparkan kepada umum.</li>
         <li>Butiran hubungan digunakan hanya untuk semakan dan susulan.</li>
       </ul>
     </aside>

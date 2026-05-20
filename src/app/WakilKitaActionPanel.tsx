@@ -109,13 +109,13 @@ export function WakilKitaActionPanel() {
               Cadangkan nama
             </p>
             <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-              Cadangkan wakil yang anda percaya
+              Kenali seseorang yang layak dipercayai?
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--slate)] sm:text-lg">
-              Hantar satu nama dan sebab yang jelas. Selepas 7 hari, nama yang diluluskan akan masuk ke polling komuniti.
+              Cadangkan nama mereka dan ceritakan sebabnya. Selepas seminggu, nama yang diluluskan akan dibuka untuk pengundian komuniti.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Cadangan dan undi memerlukan pengesahan supaya satu orang hanya satu suara. Jangan masukkan nombor IC atau dokumen identiti dalam borang ini — rekod eKYC perlu kekal berasingan daripada paparan awam.
+              Cadangan dan undi memerlukan pengesahan identiti supaya satu orang hanya satu suara. Jangan masukkan nombor IC atau dokumen pengenalan dalam borang ini.
             </div>
           </div>
 
@@ -141,7 +141,7 @@ export function WakilKitaActionPanel() {
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="constituency-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              P105 Petaling Jaya ialah kawasan pertama yang dibuka. Jika anda di luar kawasan ini, nyatakan kawasan sebenar anda.
+              Kawasan pertama yang dibuka ialah P105 Petaling Jaya. Jika anda berada di luar kawasan ini, nyatakan kawasan sebenar anda.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
@@ -158,7 +158,7 @@ export function WakilKitaActionPanel() {
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Gunakan nama yang boleh dikenali dengan jelas. Jangan letak nombor telefon, alamat, atau IC orang tersebut.
+              Gunakan nama yang boleh dikenali dengan jelas. Jangan masukkan nombor telefon, alamat, atau nombor IC orang tersebut.
             </p>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
@@ -191,7 +191,7 @@ export function WakilKitaActionPanel() {
             />
             <div className="mt-1.5 flex items-center justify-between gap-4">
               <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                Tulis secara khusus dan hormat. Ceritakan apa yang mereka pernah buat, siapa yang mengenali kerja mereka, atau isu PJ yang mereka boleh bantu. Elakkan tuduhan yang belum disahkan.
+                Tulis secara khusus dan hormat. Ceritakan apa yang pernah mereka lakukan, siapa yang mengenali kerja mereka, atau isu PJ yang boleh mereka bantu. Elakkan tuduhan yang tidak disahkan.
               </p>
               <p
                 id="reason-count"
@@ -206,18 +206,18 @@ export function WakilKitaActionPanel() {
             </div>
 
             <label className="mt-4 block text-sm font-bold" htmlFor="contact">
-              Cara untuk kami hubungi anda, jika perlu
+              Cara untuk kami hubungi anda jika perlu
             </label>
             <input
               id="contact"
               value={contact}
               onChange={(event) => setContact(event.target.value)}
               maxLength={120}
-              placeholder="Emel atau nombor telefon, pilihan"
+              placeholder="Emel atau nombor telefon (pilihan)"
               className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
             />
             <p className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Pilihan sahaja. Digunakan untuk semakan, pembetulan, kebenaran, atau pertanyaan lanjut. Tidak dipaparkan sebagai senarai awam.
+              Tidak wajib. Digunakan untuk semakan, pembetulan, atau pertanyaan lanjut sahaja. Tidak dipaparkan kepada umum.
             </p>
 
             <div className="mt-5 border border-[var(--line)] bg-white px-4 py-3">
@@ -256,10 +256,10 @@ export function WakilKitaActionPanel() {
               {saved && (
                 <div className="space-y-3">
                   <p className="text-sm font-bold text-[var(--civic-dark)]">
-                    Cadangan diterima. Nama ini sudah masuk ke dashboard calon dan akan disemak sebelum polling komuniti.
+                    Terima kasih. Cadangan anda sudah kami terima dan akan disemak sebelum masuk ke peringkat pengundian komuniti.
                   </p>
                   <a href="/dashboard" className="inline-flex border border-[var(--line)] bg-white px-4 py-2 text-xs font-bold text-[var(--ink)]">
-                    Lihat dashboard calon
+                    Lihat calon yang dicadangkan
                   </a>
                 </div>
               )}
