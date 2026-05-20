@@ -1,7 +1,24 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
 import { cleanReviewText, type IntakeType } from "@/lib/review";
+
+// ─── Types ───────────────────────────────────────────────────────────────────
+
+type VerifyResponse = {
+  ok?: boolean;
+  token?: string;
+  field?: string;
+  message?: string;
+};
+
+type SubmitResponse = {
+  ok?: boolean;
+  issues?: { field?: string; message?: string }[];
+};
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const defaultIssues = [
   "Mendengar sebelum membuat keputusan",
@@ -23,24 +40,144 @@ function formatMissingFields(fields: string[]): string {
   return `${fields[0]}, ${fields[1]}, dan ${fields[2]}`;
 }
 
-export function WakilKitaActionPanel() {
+// ─── Step 1: eKYC Verification ───────────────────────────────────────────────
+
+function EkycStep({
+  onVerified,
+}: {
+  onVerified: (token: string) => void;
+}) {
+  const [ic, setIc] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleVerify(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ic: ic.replace(/[-\s]/g, ""), phone }),
+      });
+
+      const data = (await res.json().catch(() => null)) as VerifyResponse | null;
+
+      if (!res.ok || !data?.ok || !data.token) {
+        setError(data?.message ?? "Pengesahan tidak berjaya. Sila semak maklumat anda.");
+        return;
+      }
+
+      onVerified(data.token);
+    } catch {
+      setError("Masalah sambungan. Sila cuba lagi.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  const isReady = ic.replace(/[-\s]/g, "").length === 12 && phone.length >= 10;
+
+  return (
+    <div className="border border-[var(--line)] bg-[var(--soft)] p-5 sm:p-6">
+      <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
+        Langkah 1 daripada 2
+      </p>
+      <h3 className="mt-3 text-xl font-bold tracking-[-0.03em] text-[var(--ink)]">
+        Sahkan identiti anda dahulu
+      </h3>
+      <p className="mt-2 text-sm leading-6 text-[var(--slate)]">
+        Masukkan nombor IC dan nombor telefon anda. Maklumat ini direkodkan secara berasingan daripada cadangan — tidak dipaparkan kepada umum dan tidak dikaitkan dengan nama calon.
+      </p>
+
+      <form onSubmit={handleVerify} className="mt-5 space-y-4">
+        <div>
+          <label className="block text-sm font-bold text-[var(--ink)]" htmlFor="ekyc-ic">
+            Nombor IC (MyKad) <span className="text-[var(--amber-text)]">*</span>
+          </label>
+          <input
+            id="ekyc-ic"
+            type="text"
+            inputMode="numeric"
+            value={ic}
+            onChange={(e) => setIc(e.target.value)}
+            maxLength={14}
+            placeholder="cth: 900101-14-5678"
+            required
+            className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+          />
+          <p className="mt-1 text-xs text-[var(--slate)]">12 digit tanpa sempang, atau dalam format XXXXXX-XX-XXXX.</p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold text-[var(--ink)]" htmlFor="ekyc-phone">
+            Nombor telefon Malaysia <span className="text-[var(--amber-text)]">*</span>
+          </label>
+          <input
+            id="ekyc-phone"
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            maxLength={15}
+            placeholder="cth: 011-12345678"
+            required
+            className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+          />
+        </div>
+
+        {error && (
+          <div className="border border-[var(--amber)] bg-white p-3" aria-live="assertive">
+            <p className="text-sm font-bold text-[var(--amber-text)]">{error}</p>
+          </div>
+        )}
+
+        <div className="border border-[var(--line)] bg-white px-4 py-3">
+          <p className="text-xs font-semibold text-[var(--slate)]">
+            Nombor IC disimpan sebagai cincang kriptografi sahaja — bukan teks asal. Ia tidak akan dipaparkan, dikongsi, atau dikaitkan dengan nama calon anda.
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          disabled={!isReady || isSubmitting}
+          className="w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
+        >
+          {isSubmitting ? "Mengesahkan..." : "Sahkan identiti saya"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+// ─── Step 2: Nomination Form ──────────────────────────────────────────────────
+
+function NominationStep({
+  verificationToken,
+  onSuccess,
+}: {
+  verificationToken: string;
+  onSuccess: () => void;
+}) {
   const [constituency, setConstituency] = useState("P105 Petaling Jaya");
   const intakeType: IntakeType = "Cadangkan nama untuk semakan";
   const [personName, setPersonName] = useState("");
   const [issue, setIssue] = useState(defaultIssues[0]);
   const [reason, setReason] = useState("");
   const [contact, setContact] = useState("");
-  const [saved, setSaved] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const isReady = useMemo(() => {
-    return (
-      cleanText(constituency, 80).length > 2 &&
-      cleanText(personName, 80).length > 2 &&
-      cleanText(reason, 420).length > 12
-    );
-  }, [constituency, personName, reason]);
+  const reasonLength = cleanText(reason, 420).length;
+  const reasonMinReached = reasonLength > 12;
+
+  const isReady = useMemo(() => (
+    cleanText(constituency, 80).length > 2 &&
+    cleanText(personName, 80).length > 2 &&
+    cleanText(reason, 420).length > 12
+  ), [constituency, personName, reason]);
 
   const missingFields = useMemo(() => {
     const fields = [
@@ -51,54 +188,206 @@ export function WakilKitaActionPanel() {
     return formatMissingFields(fields);
   }, [constituency, personName, reason]);
 
-  const reasonLength = cleanText(reason, 420).length;
-  const reasonMinReached = reasonLength > 12;
-
-  async function submitIntake(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const safeConstituency = cleanText(constituency, 80);
-    const safeName = cleanText(personName, 80);
-    const safeReason = cleanText(reason, 420);
-    const safeContact = cleanText(contact, 120);
-
-    if (!safeConstituency || !safeName || !safeReason || isSubmitting) return;
-
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setSubmitError("");
-    setSaved(false);
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/submissions", {
+      const res = await fetch("/api/submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           intakeType,
-          constituency: safeConstituency,
-          nameOrRole: safeName,
+          constituency: cleanText(constituency, 80),
+          nameOrRole: cleanText(personName, 80),
           priorityArea: issue,
-          reason: safeReason,
-          replyContact: safeContact,
+          reason: cleanText(reason, 420),
+          replyContact: cleanText(contact, 120),
+          verificationToken,
         }),
       });
 
-      const result = await response.json().catch(() => null) as { issues?: { message?: string }[] } | null;
-      if (!response.ok) {
-        const message = result?.issues?.[0]?.message ?? "Cadangan ini belum dapat disimpan. Sila semak borang dan cuba lagi.";
-        setSubmitError(message);
+      const data = (await res.json().catch(() => null)) as SubmitResponse | null;
+
+      if (!res.ok) {
+        const msg = data?.issues?.[0]?.message ?? "Cadangan belum dapat dihantar. Sila cuba lagi.";
+        setSubmitError(msg);
         return;
       }
 
-      setSaved(true);
-      setPersonName("");
-      setReason("");
-      setContact("");
+      onSuccess();
     } catch {
-      setSubmitError("Cadangan ini belum dapat dihantar kerana masalah sambungan. Sila cuba sekali lagi.");
+      setSubmitError("Masalah sambungan. Sila cuba sekali lagi.");
     } finally {
       setIsSubmitting(false);
     }
   }
+
+  return (
+    <div className="border border-[var(--line)] bg-[var(--soft)] p-5 sm:p-6">
+      <div className="mb-5 flex items-center gap-3">
+        <span className="inline-flex items-center gap-2 border border-green-300 bg-green-50 px-3 py-1.5 text-xs font-bold text-green-700">
+          ✓ Identiti disahkan
+        </span>
+        <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
+          Langkah 2 daripada 2
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
+          Cadangan anda
+        </p>
+
+        <div>
+          <label className="block text-sm font-bold" htmlFor="constituency">
+            Kawasan Parlimen anda <span className="text-[var(--amber-text)]">*</span>
+          </label>
+          <input
+            id="constituency"
+            value={constituency}
+            onChange={(e) => setConstituency(e.target.value)}
+            maxLength={80}
+            required
+            placeholder="Contoh: P105 Petaling Jaya"
+            className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+          />
+          <p className="mt-1 text-xs text-[var(--slate)]">
+            Kawasan pertama yang dibuka ialah P105 Petaling Jaya. Jika anda berada di luar kawasan ini, nyatakan kawasan sebenar anda.
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold" htmlFor="person-name">
+            Nama orang yang anda cadangkan <span className="text-[var(--amber-text)]">*</span>
+          </label>
+          <input
+            id="person-name"
+            value={personName}
+            onChange={(e) => setPersonName(e.target.value)}
+            maxLength={80}
+            required
+            placeholder="Nama penuh atau nama yang dikenali umum"
+            className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+          />
+          <p className="mt-1 text-xs text-[var(--slate)]">
+            Jangan masukkan nombor telefon, alamat, atau nombor IC orang tersebut.
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold" htmlFor="priority-area">
+            Kenapa mereka wajar dipertimbangkan?
+          </label>
+          <select
+            id="priority-area"
+            value={issue}
+            onChange={(e) => setIssue(e.target.value)}
+            className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
+          >
+            {defaultIssues.map((item) => (
+              <option key={item}>{item}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold" htmlFor="reason">
+            Sebab cadangan anda <span className="text-[var(--amber-text)]">*</span>
+          </label>
+          <textarea
+            id="reason"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            maxLength={420}
+            required
+            rows={5}
+            placeholder="Contoh: Beliau sering membantu penduduk SS2 membuat susulan isu longkang dan parkir, menerangkan proses dengan jelas, dan mudah dihubungi oleh komuniti setempat."
+            className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+          />
+          <div className="mt-1 flex items-center justify-between gap-4">
+            <p className="text-xs text-[var(--slate)]">
+              Tulis secara khusus dan hormat. Ceritakan apa yang pernah mereka lakukan. Elakkan tuduhan yang tidak disahkan.
+            </p>
+            <p className="shrink-0 text-xs tabular-nums text-[var(--slate)]">
+              {reasonMinReached && <span className="mr-2 text-[var(--civic)]">Minimum cukup ·</span>}
+              {reasonLength} / 420
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold" htmlFor="contact">
+            Cara untuk kami hubungi anda jika perlu
+          </label>
+          <input
+            id="contact"
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+            maxLength={120}
+            placeholder="Emel atau nombor telefon (pilihan)"
+            className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
+          />
+          <p className="mt-1 text-xs text-[var(--slate)]">
+            Tidak wajib. Digunakan untuk semakan atau pertanyaan lanjut sahaja. Tidak dipaparkan kepada umum.
+          </p>
+        </div>
+
+        <div className="border border-[var(--line)] bg-white px-4 py-3" aria-live="polite">
+          <p className="text-xs font-semibold text-[var(--slate)]">
+            {isReady
+              ? "Cadangan ini sedia dihantar untuk semakan."
+              : missingFields
+                ? `Masih diperlukan: ${missingFields}.`
+                : "Lengkapkan medan wajib untuk teruskan."}
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          disabled={!isReady || isSubmitting}
+          className="w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
+        >
+          {isSubmitting ? "Menghantar cadangan..." : "Hantar cadangan"}
+        </button>
+
+        {submitError && (
+          <div className="border border-[var(--amber)] bg-white p-4" aria-live="assertive">
+            <p className="text-sm font-bold text-[var(--amber-text)]">{submitError}</p>
+          </div>
+        )}
+      </form>
+    </div>
+  );
+}
+
+// ─── Step 3: Success ──────────────────────────────────────────────────────────
+
+function SuccessStep() {
+  return (
+    <div className="border border-[var(--line)] bg-white p-8 text-center">
+      <p className="text-3xl font-bold tracking-[-0.04em] text-[var(--ink)]">Terima kasih.</p>
+      <p className="mx-auto mt-4 max-w-md text-base leading-7 text-[var(--slate)]">
+        Cadangan anda sudah kami terima dan akan disemak sebelum masuk ke peringkat pengundian komuniti.
+      </p>
+      <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <Link href="/dashboard" className="bg-[var(--ink)] px-6 py-4 text-sm font-bold text-[var(--mint)]">
+          Lihat calon yang dicadangkan
+        </Link>
+        <Link href="/#take-part" className="border border-[var(--line)] bg-white px-6 py-4 text-sm font-bold text-[var(--ink)]">
+          Hantar cadangan lain
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export function WakilKitaActionPanel() {
+  const [step, setStep] = useState<"ekyc" | "nominate" | "done">("ekyc");
+  const [verificationToken, setVerificationToken] = useState("");
 
   return (
     <section id="take-part" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
@@ -122,154 +411,33 @@ export function WakilKitaActionPanel() {
                 Melalui sistem eKYC yang disahkan, setiap individu yang sah boleh mencalon, memilih dan mengundi calon pilihan mereka secara terus di platform ini — tanpa perlu menjadi ahli parti atau ahli mana-mana organisasi politik.
               </p>
             </div>
-          </div>
-
-          <form
-            onSubmit={submitIntake}
-            className="border border-[var(--line)] bg-[var(--soft)] p-5 text-[var(--ink)] sm:p-6"
-          >
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-              Cadangan anda
-            </p>
-
-            <label className="mt-5 block text-sm font-bold" htmlFor="constituency">
-              Kawasan Parlimen anda <span className="text-[var(--amber-text)]">*</span>
-            </label>
-            <input
-              id="constituency"
-              value={constituency}
-              onChange={(event) => setConstituency(event.target.value)}
-              maxLength={80}
-              required
-              aria-describedby="constituency-help"
-              placeholder="Contoh: P105 Petaling Jaya"
-              className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
-            />
-            <p id="constituency-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Kawasan pertama yang dibuka ialah P105 Petaling Jaya. Jika anda berada di luar kawasan ini, nyatakan kawasan sebenar anda.
-            </p>
-
-            <label className="mt-4 block text-sm font-bold" htmlFor="person-name">
-              Nama orang yang anda cadangkan <span className="text-[var(--amber-text)]">*</span>
-            </label>
-            <input
-              id="person-name"
-              value={personName}
-              onChange={(event) => setPersonName(event.target.value)}
-              maxLength={80}
-              required
-              aria-describedby="person-name-help"
-              placeholder="Nama penuh atau nama yang dikenali umum"
-              className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
-            />
-            <p id="person-name-help" className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Gunakan nama yang boleh dikenali dengan jelas. Jangan masukkan nombor telefon, alamat, atau nombor IC orang tersebut.
-            </p>
-
-            <label className="mt-4 block text-sm font-bold" htmlFor="priority-area">
-              Kenapa mereka wajar dipertimbangkan?
-            </label>
-            <select
-              id="priority-area"
-              value={issue}
-              onChange={(event) => setIssue(event.target.value)}
-              className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm font-bold outline-none focus:border-[var(--civic)]"
-            >
-              {defaultIssues.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </select>
-
-            <label className="mt-4 block text-sm font-bold" htmlFor="reason">
-              Sebab cadangan anda <span className="text-[var(--amber-text)]">*</span>
-            </label>
-            <textarea
-              id="reason"
-              value={reason}
-              onChange={(event) => setReason(event.target.value)}
-              maxLength={420}
-              required
-              aria-describedby="reason-help reason-count"
-              rows={5}
-              placeholder="Contoh: Beliau sering membantu penduduk SS2 membuat susulan isu longkang dan parkir, menerangkan proses dengan jelas, dan mudah dihubungi oleh komuniti setempat."
-              className="mt-2 w-full resize-none border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
-            />
-            <div className="mt-1.5 flex items-center justify-between gap-4">
-              <p id="reason-help" className="text-xs font-semibold leading-5 text-[var(--slate)]">
-                Tulis secara khusus dan hormat. Ceritakan apa yang pernah mereka lakukan, siapa yang mengenali kerja mereka, atau isu PJ yang boleh mereka bantu. Elakkan tuduhan yang tidak disahkan.
-              </p>
-              <p
-                id="reason-count"
-                className="shrink-0 text-xs font-semibold tabular-nums text-[var(--slate)]"
-                aria-live="off"
-              >
-                {reasonMinReached && (
-                  <span className="mr-2 text-[var(--civic)]">Minimum cukup ·</span>
-                )}
-                {reasonLength} / 420
-              </p>
-            </div>
-
-            <label className="mt-4 block text-sm font-bold" htmlFor="contact">
-              Cara untuk kami hubungi anda jika perlu
-            </label>
-            <input
-              id="contact"
-              value={contact}
-              onChange={(event) => setContact(event.target.value)}
-              maxLength={120}
-              placeholder="Emel atau nombor telefon (pilihan)"
-              className="mt-2 w-full border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none focus:border-[var(--civic)]"
-            />
-            <p className="mt-2 text-xs font-semibold leading-5 text-[var(--slate)]">
-              Tidak wajib. Digunakan untuk semakan, pembetulan, atau pertanyaan lanjut sahaja. Tidak dipaparkan kepada umum.
-            </p>
-
-            <div className="mt-5 border border-[var(--line)] bg-white px-4 py-3">
-              <p
-                id="submit-readiness"
-                className="text-xs font-semibold leading-5 text-[var(--slate)]"
-                aria-live="polite"
-              >
-                {isReady
-                  ? "Cadangan ini sedia dihantar untuk semakan."
-                  : missingFields
-                    ? `Masih diperlukan: ${missingFields}.`
-                    : "Lengkapkan medan wajib untuk teruskan."}
-              </p>
-            </div>
-
-            <button
-              type="submit"
-              disabled={!isReady || isSubmitting}
-              aria-describedby="submit-readiness"
-              className="mt-3 w-full bg-[var(--civic)] px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:bg-[rgba(38,58,79,0.35)]"
-            >
-              {isSubmitting ? "Menghantar cadangan..." : "Hantar cadangan"}
-            </button>
-
-            {submitError && (
-              <div className="mt-4 border border-[var(--amber)] bg-white p-4" aria-live="assertive">
-                <p className="text-sm font-bold text-[var(--amber-text)]">{submitError}</p>
+            {step === "nominate" && (
+              <div className="mt-4 flex items-center gap-2 border border-green-300 bg-green-50 px-4 py-3">
+                <span className="text-base">✓</span>
+                <p className="text-sm font-bold text-green-700">
+                  Identiti disahkan. Sila isi cadangan anda.
+                </p>
               </div>
             )}
+          </div>
 
-            <div
-              className={`mt-4 border border-[var(--line)] bg-[rgba(38,58,79,0.05)] p-4 ${saved ? "" : "sr-only"}`}
-              aria-live="polite"
-            >
-              {saved && (
-                <div className="space-y-3">
-                  <p className="text-sm font-bold text-[var(--civic-dark)]">
-                    Terima kasih. Cadangan anda sudah kami terima dan akan disemak sebelum masuk ke peringkat pengundian komuniti.
-                  </p>
-                  <a href="/dashboard" className="inline-flex border border-[var(--line)] bg-white px-4 py-2 text-xs font-bold text-[var(--ink)]">
-                    Lihat calon yang dicadangkan
-                  </a>
-                </div>
-              )}
-            </div>
-          </form>
+          <div>
+            {step === "ekyc" && (
+              <EkycStep
+                onVerified={(token) => {
+                  setVerificationToken(token);
+                  setStep("nominate");
+                }}
+              />
+            )}
+            {step === "nominate" && (
+              <NominationStep
+                verificationToken={verificationToken}
+                onSuccess={() => setStep("done")}
+              />
+            )}
+            {step === "done" && <SuccessStep />}
+          </div>
         </div>
       </div>
     </section>
