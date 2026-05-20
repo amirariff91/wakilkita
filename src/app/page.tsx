@@ -111,7 +111,7 @@ function IntakeDeskPanel() {
 function ManifestoSection() {
   return (
     <section
-      className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10"
+      className="pb-4"
       aria-labelledby="manifesto-heading"
     >
       <div className="grid gap-0 border border-[var(--line)] bg-[var(--ink)] text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] lg:grid-cols-[0.38fr_0.62fr]">
@@ -309,6 +309,8 @@ export default function Home() {
         <section className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-5 py-6 sm:px-8 lg:px-10">
           <CivicNav />
 
+          <ManifestoSection />
+
           <div
             id="top"
             className="grid items-start gap-10 py-8 lg:grid-cols-[1.02fr_0.98fr] lg:py-14"
@@ -351,8 +353,6 @@ export default function Home() {
             <IntakeDeskPanel />
           </div>
         </section>
-
-        <ManifestoSection />
 
         <WakilKitaActionPanel />
         <WhatIsSection />
