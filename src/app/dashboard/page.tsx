@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { type CandidateDashboardEntry } from "@/lib/review";
+import { ConstituencyProfile } from "@/app/ConstituencyProfile";
 
 type CandidateResponse = {
   ok?: boolean;
@@ -157,6 +158,9 @@ export default function DashboardPage() {
               </div>
             </div>
           </section>
+
+          {/* Constituency profile — always shown */}
+          <ConstituencyProfile />
 
           <section className="pb-16" aria-labelledby="senarai-calon">
             <div className="mb-4 flex flex-col gap-3 border-y border-[var(--line)] bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
