@@ -3,70 +3,69 @@ import { CivicFooter, CivicNav } from "./civic-content";
 import { P105LineMotif } from "./WakilKitaMark";
 
 const boundaryChips = [
-  "Private civic intake",
-  "Independent from public bodies",
-  "Independent of parties",
-  "Review queue",
-  "IC/eKYC separate from public data",
+  "Nominate your rep",
+  "eKYC required",
+  "1 week nomination window",
+  "Then live polling",
 ];
 
 const intakeFacts = [
   {
     label: "Open now",
     value: "P105 Petaling Jaya",
-    note: "Nomination, endorsement, and local issue submissions are open",
+    note: "Nominate one person to represent Petaling Jaya",
   },
   {
     label: "Accepting",
-    value: "Nominations + endorsements",
-    note: "Submit one trusted person, one issue, and a factual reason",
+    value: "Verified nominations",
+    note: "Nomination and voting both require eKYC",
   },
   {
-    label: "Routed to",
-    value: "Review dashboard",
-    note: "Each submission appears in a private review queue before any public use",
+    label: "Then",
+    value: "Live polling",
+    note: "After 7 days, verified users can vote in the live poll",
   },
 ];
 
 const reviewSteps = [
   {
     n: "1",
-    title: "Record the submission",
-    body: "Your nomination, endorsement, or issue is saved into the dashboard queue for review. No email handoff is used.",
+    title: "Verify identity",
+    body: "A user must pass eKYC before a nomination or vote can count.",
   },
   {
     n: "2",
-    title: "Check constituency scope",
-    body: "We confirm the name, issue, or claim belongs to P105 Petaling Jaya.",
+    title: "Nominate your rep",
+    body: "For the first week, verified P105 users submit one representative nomination and one clear reason.",
   },
   {
     n: "3",
-    title: "Remove unsafe or private details",
-    body: "Addresses, IC numbers, private allegations, and unnecessary personal data are removed before any public use.",
+    title: "Open live polling",
+    body: "After 7 days, approved nominees move into a live poll for verified users.",
   },
   {
     n: "4",
-    title: "Contact before public profile",
-    body: "Named people are contacted and may request correction or removal before any public profile is considered.",
+    title: "Show clean results",
+    body: "Votes can be shown publicly, but identity data, IC, and raw verification records stay private.",
   },
 ];
 
 const privacyBlocks = [
   {
-    heading: "Contact details stay private during review",
-    body: "Your reply contact is used only to follow up on your submission. It is not published, not shared with named persons, and not visible publicly.",
+    heading: "eKYC gates nomination and voting",
+    body: "Only verified users can nominate or vote. Verification data is kept separate from public poll data.",
   },
   {
-    heading: "Dashboard first, public later",
-    body: "Submissions appear in a review dashboard first. Public pages should show only approved, consent-safe information.",
+    heading: "One week to nominate",
+    body: "The first phase is nomination only. After the first week, nominations close and live polling opens.",
   },
   {
-    heading: "No participant lists sold or shared",
-    body: "WakilKita does not sell, share, or transfer submission records to parties, employers, representative offices, or campaign teams.",
+    heading: "No public voter list",
+    body: "Poll totals can be public, but voter identities and verification details are not shown or shared.",
   },
   {
-    heading: "No public totals in this phase",
-    body: "Public counts, rankings, and popularity indicators stay closed until the verification method is clear.",
+    heading: "Simple public promise",
+    body: "Nominate first, vote later, verify both times, and keep private identity data out of public pages.",
   },
 ];
 
@@ -99,7 +98,7 @@ function IntakeDeskPanel() {
       </div>
       <div className="border-t border-[var(--line)] px-6 py-4">
         <p className="text-sm leading-6 text-[var(--slate)]">
-          When you submit, the item appears in the dashboard queue. It still needs review, consent checks, and privacy screening before anything public appears.
+          First week: verified users nominate. After that: verified users vote in a live poll. Nothing needs to be more complicated than that.
         </p>
       </div>
       <div className="px-6 pb-4 text-[var(--civic)]">
@@ -111,16 +110,16 @@ function IntakeDeskPanel() {
 
 function WhatIsSection() {
   const isItems = [
-    "P105 civic nomination and issue intake, manually reviewed",
-    "A way to nominate, endorse, claim, or submit a local priority",
-    "Independent from parties, public bodies, and representative offices",
-    "Review first — nothing public without checks",
+    "A simple P105 representative nomination flow",
+    "eKYC required before nominating",
+    "Live polling starts after one week",
+    "eKYC required before voting",
   ];
 
   const isNotItems = [
     "Not a public authority service",
-    "Not public IC/eKYC collection",
-    "Not a public participant list, rank list, or count",
+    "Not an election or SPR process",
+    "Not a public IC, voter, or participant list",
   ];
 
   return (
@@ -194,10 +193,10 @@ function ReviewJourneySection() {
             id="review-journey-heading"
             className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--ink)] sm:text-3xl"
           >
-            First we review. Then we act carefully.
+            Nominate for one week. Then vote live.
           </h2>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--slate)]">
-            Submitting does not create an instant public profile or count. We review details, remove sensitive information, and contact named people before anything public appears.
+            Keep the product clear: eKYC first, one nomination per verified user, then a verified live poll after the nomination window closes.
           </p>
         </div>
         <ol className="px-6 py-6 sm:px-7">
@@ -234,16 +233,16 @@ function PrivacyModelSection() {
     >
       <div className="mx-auto max-w-4xl px-5 sm:px-8 lg:px-10">
         <p className="text-xs font-bold uppercase tracking-[0.08em] text-[var(--civic)]">
-          Privacy model
+          Simple rules
         </p>
         <h2
           id="privacy-heading"
           className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--ink)] sm:text-4xl"
         >
-          Plain rules before anything public.
+          Verify people. Keep identity private.
         </h2>
         <p className="mt-4 text-base leading-7 text-[var(--slate)]">
-          Trust starts with simple rules: manual review, no IC/eKYC in public submissions, no public participant lists, and no public counts until verification is ready.
+          Trust starts with a simple rule: nomination and voting require eKYC, but IC and verification records never become public poll content.
         </p>
         <div className="mt-8 divide-y divide-[var(--line)] border border-[var(--line)] bg-white">
           {privacyBlocks.map(({ heading, body }) => (
@@ -284,23 +283,23 @@ export default function Home() {
                 ))}
               </div>
               <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-[var(--ink)] sm:text-5xl lg:text-6xl">
-                Nominate or endorse a Petaling Jaya representative. Every submission is reviewed before anything public appears.
+                Nominate your Petaling Jaya representative. After one week, live polling opens.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--slate)] sm:text-xl">
-                For P105 residents: submit a trusted local name, endorsement, profile claim, or local priority. The entry appears in a dashboard first; nothing becomes public without review and consent.
+                Simple: verified users nominate one rep, we review the list, then verified users vote in a live poll.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#take-part"
                   className="bg-[var(--ink)] px-6 py-4 text-center text-sm font-bold text-[var(--mint)] shadow-[0_1px_3px_rgba(0,0,0,0.12)]"
                 >
-                  Start nomination
+                  Nominate your rep
                 </a>
                 <a
-                  href="/petaling-jaya/aduan"
+                  href="#how-it-works"
                   className="border border-[var(--line)] bg-white px-6 py-4 text-center text-sm font-bold text-[var(--ink)]"
                 >
-                  Read aduan guide
+                  How polling works
                 </a>
               </div>
             </div>

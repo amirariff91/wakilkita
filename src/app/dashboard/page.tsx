@@ -152,7 +152,7 @@ export default function DashboardPage() {
               The intake queue contains named people, resident explanations, risk flags, and review state. It is not a public dashboard and it should not be indexed, copied, or shared.
             </p>
             <div className="mt-6 border border-[var(--line)] bg-[var(--soft)] p-4 text-sm font-medium leading-6 text-[var(--slate)]">
-              Contact details are hidden in this list. IC/eKYC is not collected here. A full production build still needs reviewer accounts, database-backed audit logs, deletion workflows, and separated identity checks.
+              Contact details are hidden in this list. eKYC is required before nominations and votes count, but IC and identity verification records must stay in a separate system.
             </div>
           </div>
 

@@ -1,8 +1,5 @@
 export const intakeTypes = [
   "Nominate a representative",
-  "Endorse a representative",
-  "Submit a constituency issue priority",
-  "Request to claim a representative profile",
 ] as const;
 
 export type IntakeType = (typeof intakeTypes)[number];
@@ -99,8 +96,9 @@ function containsIcNumber(value: string) {
   return /\b\d{6}-?\d{2}-?\d{4}\b/.test(value);
 }
 
-function needsConsent(intakeType: IntakeType) {
-  return intakeType !== "Submit a constituency issue priority";
+function needsConsent(intakeType?: IntakeType) {
+  void intakeType;
+  return true;
 }
 
 export function detectRiskFlags(entry: Pick<IntakeDraft, "intakeType" | "nameOrRole" | "reason" | "replyContact">) {
@@ -141,7 +139,7 @@ export function validateIntakePayload(payload: unknown): { draft?: IntakeDraft; 
 
   const rawText = Object.values(draft).join(" ");
   if (containsIcNumber(rawText)) {
-    issues.push({ field: "form", message: "Do not submit IC numbers here. Identity checks must stay separate from support and preference data." });
+    issues.push({ field: "form", message: "Do not submit IC numbers here. eKYC must happen in a separate verified identity flow." });
   }
 
   return {

@@ -1,8 +1,4 @@
-export type IntakeType =
-  | "Nominate a representative"
-  | "Endorse a representative"
-  | "Submit a constituency issue priority"
-  | "Request to claim a representative profile";
+export type IntakeType = "Nominate a representative";
 
 export type ReviewStatus = "submitted" | "needs-review" | "duplicate-check" | "consent-needed" | "approved" | "declined";
 
